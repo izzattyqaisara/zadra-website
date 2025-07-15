@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zadra Ingénieurs Sdn. Bhd.</title>
+  <style>
+    :root {
+      --primary-color: #0a3d62;
+      --accent-color: #f39c12;
+      --light-bg: #f8f9fa;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--light-bg);
+      color: #333;
+    }
+
+    header {
+      background-color: var(--primary-color);
+      color: white;
+      padding: 1.5rem 1rem;
+      text-align: center;
+    }
+
+    nav {
+      background-color: #06314e;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      padding: 1rem;
+      display: block;
+    }
+
+    nav a:hover {
+      background-color: var(--accent-color);
+    }
+
+    .container {
+      padding: 2rem 1rem;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    section {
+      margin-bottom: 2rem;
+    }
+
+    h2 {
+      color: var(--primary-color);
+      margin-bottom: 1rem;
+    }
+
+    .flex-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .card {
+      flex: 1 1 45%;
+      background: white;
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    footer {
+      background-color: var(--primary-color);
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .flex-grid {
+        flex-direction: column;
+      }
+
+      .card {
+        flex: 1 1 100%;
+      }
+
+      nav a {
+        padding: 0.75rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Zadra Ingénieurs Sdn. Bhd.</h1>
+    <p>Engineering Excellence in Sarawak</p>
+  </header>
+
+  <nav>
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#projects">Projects</a>
+    <a href="#careers">Careers</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <div class="container">
+    <section id="about">
+      <h2>About Us</h2>
+      <p>Zadra Ingénieurs Sdn. Bhd. is a Sarawak-based engineering company established in 2013. We specialize in construction, civil and structural engineering, and project supervision for both government and private sectors.</p>
+    </section>
+
+    <section id="services">
+      <h2>Our Services</h2>
+      <div class="flex-grid">
+        <div class="card">
+          <h3>Engineering Design</h3>
+          <p>Expert design and planning for infrastructure and building projects.</p>
+        </div>
+        <div class="card">
+          <h3>Project Supervision</h3>
+          <p>Site inspections, quality control, and technical consultancy.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <h2>Recent Projects</h2>
+      <ul>
+        <li>Belaga Bridge Reinforcement Project – 2024</li>
+        <li>Mukah Waterworks Supervision – 2023</li>
+      </ul>
+    </section>
+
+    <section id="careers">
+      <h2>Careers</h2>
+      <p>We’re hiring civil engineers, site supervisors, and interns. Send your CV to <strong>careers@zadra.my</strong></p>
+    </section>
+
+    <section id="contact">
+      <h2>Contact Us</h2>
+      <p>Email: info@zadra.my</p>
+      <p>Phone: +60 82-123456</p>
+      <p>Location: Kuching, Sarawak, Malaysia</p>
+    </section>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Zadra Ingénieurs Sdn. Bhd. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
