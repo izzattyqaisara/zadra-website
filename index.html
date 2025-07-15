@@ -2,24 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Zadra Ingénieurs Sdn. Bhd.</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary-color: #ffffff; /* Dark Brown */
-      --accent-color: #a5a5a5;  /* Light Brown */
-      --light-bg: #3d5467;      /* White Background */
-      --text-color: #ffc759;    /* Dark Grey Text */
-      --box-bg: #ffffff;        /* White Box */
-    }
-
-    body.dark-mode {
-      --primary-color: #ffffff;      /* White Text */
-      --accent-color: #3a506b;       /* Gold Accent */
-      --light-bg: #1c2541;           /* Black Background */
-      --text-color: #ffffff;         /* White Text */
-      --box-bg: #ffffff;             /* Dark Box */
+      --primary-color: #172121;
+      --accent-color: #444554;
+      --light-bg: #f4f1ec;
+      --dark-color: #000000;
+      --highlight: #c9a849;
     }
 
     * {
@@ -35,73 +27,79 @@
 
     body {
       background-color: var(--light-bg);
-      color: var(--text-color);
+      color: var(--dark-color);
+      line-height: 1.6;
     }
 
     nav {
-      background: transparent;
-      position: fixed;
-      width: 100%;
+      background: var(--primary-color);
+      color: white;
+      position: sticky;
       top: 0;
-      z-index: 100;
+      z-index: 999;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1rem 2rem;
-      transition: background 0.3s ease;
+      padding: 1rem 1.5rem;
+      flex-wrap: wrap;
     }
 
     .nav-logo {
-      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
       font-weight: bold;
-      color: var(--primary-color);
-      cursor: pointer;
+      color: white;
       text-decoration: none;
+      font-size: 1.2rem;
+    }
+
+    .nav-logo img {
+      height: 40px;
+      width: auto;
     }
 
     nav a {
-      color: var(--primary-color);
-      margin-left: 1.5rem;
+      color: white;
+      margin-left: 1.2rem;
       text-decoration: none;
       font-weight: 500;
+      font-size: 0.95rem;
     }
 
     .nav-btn {
       background: var(--accent-color);
       padding: 0.5rem 1rem;
-      border-radius: 4px;
-      color: white;
-    }
-
-    nav.scrolled {
-      background: var(--light-bg);
+      border-radius: 5px;
     }
 
     .hero {
-      height: 100vh;
+      height: 90vh;
       background: url('images/banner.jpg') center/cover no-repeat;
       position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .hero::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: rgba(0, 0, 0, 0.5);
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 1;
     }
 
     .hero-content {
       position: relative;
       z-index: 2;
       text-align: center;
-      top: 50%;
-      transform: translateY(-50%);
       color: white;
       padding: 0 1rem;
     }
 
     .hero-content h1 {
-      font-size: 3rem;
+      font-size: 2.5rem;
       margin-bottom: 1rem;
     }
 
@@ -117,7 +115,7 @@
     }
 
     .btn:hover {
-      background-color: #b2bcaa;
+      background-color: #b4874c;
       transform: translateY(-2px);
     }
 
@@ -134,38 +132,6 @@
 
     section {
       padding: 4rem 1rem;
-      background: var(--light-bg);
-    }
-
-    h2, h3 {
-      color: var(--primary-color);
-    }
-
-    .section-box {
-      background: var(--box-bg);
-      border: 1px solid #ddd;
-      border-radius: 10px;
-      padding: 2rem;
-      margin-bottom: 2rem;
-      transition: box-shadow 0.3s ease;
-    }
-
-    .section-box:hover {
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
-
-    /* Toggle Button (Optional) */
-    #theme-toggle {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      padding: 0.6rem 1rem;
-      background: var(--accent-color);
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      z-index: 999;
     }
   </style>
   <script>
@@ -178,25 +144,24 @@
         });
       }, { threshold: 0.1 });
 
-      document.querySelectorAll(".fade-in").forEach(el => observer.observe(el));
-
-      // Theme toggle button
-      const toggleBtn = document.getElementById("theme-toggle");
-      toggleBtn.addEventListener("click", () => {
-        document.body.classList.toggle("dark-mode");
+      document.querySelectorAll(".fade-in").forEach(el => {
+        observer.observe(el);
       });
     });
   </script>
 </head>
 <body>
 
-   <button id="theme-toggle">Toggle Theme</button>
-
   <nav>
-    <a href="#about" class="nav-logo">Zadra Ingénieurs</a>
+    <a href="#about" class="nav-logo" style="display: flex; align-items: center; gap: 0.5rem; text-decoration: none;">
+  <img src="images/logo.jpeg" alt="Zadra Logo" style="height: 40px; width: auto;">
+  <span style="color: white; font-weight: bold;">Zadra Ingénieurs</span>
+</a>
+
     <div>
       <a href="#services">Services</a>
       <a href="#projects">Projects</a>
+      <a href="#director">Director</a>
       <a href="#team">Team</a>
       <a href="#careers">Careers</a>
       <a href="#contact" class="nav-btn">Contact Us</a>
@@ -212,7 +177,7 @@
     </div>
   </section>
 
-  <section id="about" class="fade-in" style="padding: 4rem 1rem; background: #0b132b;">
+  <section id="about" class="fade-in" style="padding: 4rem 1rem; background: #fff;">
   <div style="max-width: 1000px; margin: auto;">
     <h2 style="color: var(--primary-color); margin-bottom: 2rem; text-align: center;">About Us</h2>
     <div style="display: flex; flex-direction: column; gap: 1.5rem; font-size: 1.05rem; line-height: 1.7;">
@@ -255,72 +220,280 @@
   </div>
 </section>
 
-  <section id="services" class="fade-in" style="padding: 4rem 1rem; background: #0b132b;">
+ <section id="services" class="fade-in" style="background: #fff; padding: 4rem 1rem;">
   <div style="max-width: 1200px; margin: auto; text-align: center;">
-    <h2 style="color: var(--primary-color); margin-bottom: 2rem;">Our Services</h2>
+    <h2 style="color: var(--primary-color); margin-bottom: 2rem;">Our Core Services</h2>
     
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(500px, 1fr)); gap: 2rem;">
-
-      <div style="background: var(--light-bg); border: 1px solid #ddd; border-radius: 10px; padding: 2rem; text-align: left;">
-        <h3 style="color: var(--accent-color); margin-bottom: 1rem;">1. Design</h3>
-        <ul style="padding-left: 1.2rem;">
-          <li>BIM Modelling of Structure</li>
-          <li>BIM Modelling of Infrastructure (Road & Highways)</li>
-          <li>Development Studies & Forecasts</li>
-          <li>Technical Feasibility Studies</li>
-          <li>Conceptual & Preliminary Design</li>
-          <li>Airport Master Plan</li>
-          <li>Design Development</li>
-          <li>Preliminary Design & Costing</li>
-          <li>Detail Design & Specifications</li>
-          <li>Project Reporting</li>
-        </ul>
+    <div style="display: flex; flex-wrap: wrap; gap: 2rem; justify-content: center;">
+      <!-- Service Box 1 -->
+      <div class="service-box">
+        <h3 onclick="toggleService(this)">1. Design</h3>
+        <div class="service-details">
+          <ul>
+            <li>BIM Modelling of Structure</li>
+            <li>BIM Modelling of Infrastructure (Road & Highways)</li>
+            <li>Development Studies & Forecasts</li>
+            <li>Technical Feasibility Studies</li>
+            <li>Conceptual & Preliminary Design</li>
+            <li>Airport Master Plan</li>
+            <li>Design Development</li>
+            <li>Preliminary Design & Costing</li>
+            <li>Detail Design & Specifications</li>
+            <li>Project Reporting</li>
+          </ul>
+        </div>
       </div>
 
-      <div style="background: var(--light-bg); border: 1px solid #ddd; border-radius: 10px; padding: 2rem; text-align: left;">
-        <h3 style="color: var(--accent-color); margin-bottom: 1rem;">2. Contract Administration</h3>
-        <ul style="padding-left: 1.2rem;">
-          <li>Preparation of Bills of Quantities, Cost Estimates & Schedules</li>
-          <li>Preparation of Tender Document</li>
-          <li>Pre-qualification of Contractors</li>
-          <li>Evaluation of Tenders</li>
-          <li>Preparation of Contract Documents and Specifications</li>
-          <li>Preparation of All Necessary Forms for Contract Administration</li>
-        </ul>
+      <!-- Service Box 2 -->
+      <div class="service-box">
+        <h3 onclick="toggleService(this)">2. Contract Administration</h3>
+        <div class="service-details">
+          <ul>
+            <li>Preparation of Bills of Quantities, Cost Estimates & Schedules</li>
+            <li>Preparation of Tender Document</li>
+            <li>Pre-qualification of Contractors</li>
+            <li>Evaluation of Tenders</li>
+            <li>Preparation of Contract Document and Specifications</li>
+            <li>Preparation of all necessary forms for Contract Administration</li>
+          </ul>
+        </div>
       </div>
 
-      <div style="background: var(--light-bg); border: 1px solid #ddd; border-radius: 10px; padding: 2rem; text-align: left;">
-        <h3 style="color: var(--accent-color); margin-bottom: 1rem;">3. Contract Management</h3>
-        <ul style="padding-left: 1.2rem;">
-          <li>Construction Coordination and Supervision</li>
-          <li>Contract Management & Administration</li>
-          <li>Contract Coordination</li>
-          <li>Preparation of Periodic Reports and Completion Report</li>
-          <li>Work Supervision and Quality Control</li>
-          <li>Measurements, Inspection & Testing of Materials</li>
-          <li>Certification of Periodic Payment to Contractors</li>
-        </ul>
+      <!-- Service Box 3 -->
+      <div class="service-box">
+        <h3 onclick="toggleService(this)">3. Contract Management</h3>
+        <div class="service-details">
+          <ul>
+            <li>Construction Coordination and Supervision</li>
+            <li>Contract Management & Administration</li>
+            <li>Contract Coordination</li>
+            <li>Preparation of Periodic Reports and Completion Report</li>
+            <li>Work Supervision and Quality Control</li>
+            <li>Measurements, Inspection & Testing of Materials</li>
+            <li>Certification of Periodic Payment to Contractors</li>
+          </ul>
+        </div>
       </div>
 
-      <div style="background: var(--light-bg); border: 1px solid #ddd; border-radius: 10px; padding: 2rem; text-align: left;">
-        <h3 style="color: var(--accent-color); margin-bottom: 1rem;">4. Post Construction</h3>
-        <ul style="padding-left: 1.2rem;">
-          <li>Producing Completion Reports</li>
-          <li>Periodic Inspection & Monitoring of Defect Liability Period</li>
-          <li>Performance Monitoring</li>
-        </ul>
+      <!-- Service Box 4 -->
+      <div class="service-box">
+        <h3 onclick="toggleService(this)">4. Post Construction</h3>
+        <div class="service-details">
+          <ul>
+            <li>Producing Completion Reports</li>
+            <li>Periodic Inspection & Monitoring of Defect Liability Period</li>
+            <li>Performance Monitoring</li>
+          </ul>
+        </div>
       </div>
-
     </div>
   </div>
 </section>
+
+<style>
+  .service-box {
+    flex: 1 1 45%;
+    background: var(--light-bg);
+    border-left: 4px solid var(--accent-color);
+    padding: 1.5rem;
+    border-radius: 8px;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .service-box h3 {
+    margin-bottom: 0.5rem;
+    color: var(--primary-color);
+    font-size: 1.2rem;
+    transition: color 0.3s ease;
+  }
+
+  .service-box:hover h3 {
+    color: var(--accent-color);
+  }
+
+  .service-details {
+    display: none;
+    padding-top: 1rem;
+  }
+
+  .service-details ul {
+    list-style: disc;
+    padding-left: 1.2rem;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 768px) {
+    .service-box {
+      flex: 1 1 100%;
+    }
+  }
+</style>
+
+<script>
+  function toggleService(header) {
+    const details = header.nextElementSibling;
+    const isVisible = details.style.display === "block";
+    document.querySelectorAll(".service-details").forEach(el => el.style.display = "none");
+    details.style.display = isVisible ? "none" : "block";
+  }
+</script>
+
+<section id="projects" class="fade-in" style="padding: 4rem 1rem; background: #fff;">
+  <div style="max-width: 1100px; margin: auto;">
+    <h2 style="color: var(--primary-color); text-align: center; margin-bottom: 2rem;">Our Projects</h2>
+
+    <!-- Project Category Toggle -->
+    <div style="display: flex; justify-content: center; gap: 1rem; margin-bottom: 4rem;">
+      <button onclick="toggleCategory('previous-projects')" class="btn">Previous Projects</button>
+      <button onclick="toggleCategory('current-projects')" class="btn">Current Projects</button>
+    </div>
+
+    <!-- Previous Projects -->
+    <div id="previous-projects" style="display: none;">
+      <h3 style="color: var(--accent-color); margin-bottom: 1rem;">Previous Projects</h3>
+      <div class="project-list">
+        <!-- List of previous projects -->
+        <div class="project">
+          <h4 onclick="toggleDetails(this)">Design and Build of Proposed Road from Jalan Stadium to Kampung Bunan Gega</h4>
+          <div class="details">
+            <p><strong>Client:</strong> Jurutera Jasa (Sarawak) Sdn Bhd</p>
+            <p><strong>Year:</strong> 2017</p>
+            <p><strong>Cost:</strong> RM15.3 million</p>
+          </div>
+        </div>
+        <div class="project">
+          <h4 onclick="toggleDetails(this)">Proposed Earthwork and Infrastructure Work at Sebuyau</h4>
+          <div class="details">
+            <p><strong>Client:</strong> Jurutera Minsar</p>
+            <p><strong>Year:</strong> 2018</p>
+            <p><strong>Cost:</strong> RM12.2 million</p>
+          </div>
+        </div>
+        <div class="project">
+          <h4 onclick="toggleDetails(this)">Proposed University Campus in Kota Samarahan</h4>
+          <div class="details">
+            <p><strong>Client:</strong> Jurutera Perunding Zamrud</p>
+            <p><strong>Year:</strong> 2016</p>
+            <p><strong>Cost:</strong> RM80 million</p>
+          </div>
+        </div>
+        <div class="project">
+          <h4 onclick="toggleDetails(this)">Samalaju Industrial Park Phase 1</h4>
+          <div class="details">
+            <p><strong>Client:</strong> Samalaju Properties Sdn Bhd</p>
+            <p><strong>Year:</strong> 2015</p>
+            <p><strong>Cost:</strong> RM230 million</p>
+          </div>
+        </div>
+        <div class="project">
+          <h4 onclick="toggleDetails(this)">Proposed Balingian Coal Fired Power Plant Access Road</h4>
+          <div class="details">
+            <p><strong>Client:</strong> Sarawak Energy Berhad</p>
+            <p><strong>Year:</strong> 2013</p>
+            <p><strong>Cost:</strong> RM60 million</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Current Projects -->
+    <div id="current-projects" style="display: none;">
+      <h3 style="color: var(--accent-color); margin-bottom: 1rem;">Current Projects</h3>
+      <div class="project-list">
+        <!-- List of current projects -->
+        <div class="project"><h4 onclick="toggleDetails(this)">Widening and Upgrading of Jalan Datuk Temenggong Jugah</h4>
+          <div class="details"><p><strong>Client:</strong> JKR Sarawak</p><p><strong>Year:</strong> 2024</p><p><strong>Cost:</strong> RM46 million</p></div></div>
+
+        <div class="project"><h4 onclick="toggleDetails(this)">Design of Dual Carriageway Road at Samariang</h4>
+          <div class="details"><p><strong>Client:</strong> CMS Land</p><p><strong>Year:</strong> 2023</p><p><strong>Cost:</strong> RM25 million</p></div></div>
+
+        <div class="project"><h4 onclick="toggleDetails(this)">Drainage Masterplan for Mukah Division</h4>
+          <div class="details"><p><strong>Client:</strong> DID Sarawak</p><p><strong>Year:</strong> 2023</p><p><strong>Cost:</strong> RM3 million</p></div></div>
+
+        <div class="project"><h4 onclick="toggleDetails(this)">Drainage Improvement Works in Kota Samarahan</h4>
+          <div class="details"><p><strong>Client:</strong> Local Council Samarahan</p><p><strong>Year:</strong> 2022</p><p><strong>Cost:</strong> RM7 million</p></div></div>
+
+        <div class="project"><h4 onclick="toggleDetails(this)">Development of Engineering Hub for University Sarawak Malaysia</h4>
+          <div class="details"><p><strong>Client:</strong> UNIMAS</p><p><strong>Year:</strong> 2022</p><p><strong>Cost:</strong> RM120 million</p></div></div>
+
+        <div class="project"><h4 onclick="toggleDetails(this)">Sewerage Infrastructure Project in Kuching</h4>
+          <div class="details"><p><strong>Client:</strong> Sewerage Services Department</p><p><strong>Year:</strong> 2022</p><p><strong>Cost:</strong> RM65 million</p></div></div>
+
+        <div class="project"><h4 onclick="toggleDetails(this)">Kuching Sentral Road Link Project</h4>
+          <div class="details"><p><strong>Client:</strong> Ministry of Infrastructure Sarawak</p><p><strong>Year:</strong> 2023</p><p><strong>Cost:</strong> RM40 million</p></div></div>
+
+        <div class="project"><h4 onclick="toggleDetails(this)">Industrial Park Infrastructure Planning in Bintulu</h4>
+          <div class="details"><p><strong>Client:</strong> Sarawak Economic Development Corp</p><p><strong>Year:</strong> 2023</p><p><strong>Cost:</strong> RM85 million</p></div></div>
+
+        <div class="project"><h4 onclick="toggleDetails(this)">Drainage Masterplan for Lawas Town</h4>
+          <div class="details"><p><strong>Client:</strong> DID Sarawak</p><p><strong>Year:</strong> 2023</p><p><strong>Cost:</strong> RM5.5 million</p></div></div>
+
+        <div class="project"><h4 onclick="toggleDetails(this)">Stormwater Management System Design for Pending Area</h4>
+          <div class="details"><p><strong>Client:</strong> Private Developer</p><p><strong>Year:</strong> 2024</p><p><strong>Cost:</strong> RM18 million</p></div></div>
+
+        <div class="project"><h4 onclick="toggleDetails(this)">Reinforced Slope Stabilization at Jalan Matang</h4>
+          <div class="details"><p><strong>Client:</strong> JKR Sarawak</p><p><strong>Year:</strong> 2024</p><p><strong>Cost:</strong> RM11 million</p></div></div>
+
+        <div class="project"><h4 onclick="toggleDetails(this)">Consultancy for Samarahan Expressway Phase 2</h4>
+          <div class="details"><p><strong>Client:</strong> Ministry of Transport Sarawak</p><p><strong>Year:</strong> 2024</p><p><strong>Cost:</strong> RM90 million</p></div></div>
+
+        <div class="project"><h4 onclick="toggleDetails(this)">Infrastructure Layout for Batu Kawa Light Industrial Zone</h4>
+          <div class="details"><p><strong>Client:</strong> Local Authority</p><p><strong>Year:</strong> 2024</p><p><strong>Cost:</strong> RM22 million</p></div></div>
+
+        <div class="project"><h4 onclick="toggleDetails(this)">Coastal Flood Mitigation Study in Sematan</h4>
+          <div class="details"><p><strong>Client:</strong> DID Sarawak</p><p><strong>Year:</strong> 2023</p><p><strong>Cost:</strong> RM6 million</p></div></div>
+
+        <div class="project"><h4 onclick="toggleDetails(this)">Road Rehabilitation Program in Miri</h4>
+          <div class="details"><p><strong>Client:</strong> JKR Sarawak</p><p><strong>Year:</strong> 2024</p><p><strong>Cost:</strong> RM38 million</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  function toggleCategory(categoryId) {
+    document.getElementById("previous-projects").style.display = "none";
+    document.getElementById("current-projects").style.display = "none";
+    document.getElementById(categoryId).style.display = "block";
+  }
+
+  function toggleDetails(header) {
+    const details = header.nextElementSibling;
+    const isVisible = details.style.display === "block";
+    details.style.display = isVisible ? "none" : "block";
+  }
+
+  document.querySelectorAll('.details').forEach(el => el.style.display = 'none');
+</script>
+
+<style>
+  .project h4 {
+    cursor: pointer;
+    color: var(--primary-color);
+    background: var(--light-bg);
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+    border-left: 4px solid var(--accent-color);
+  }
+  .project h4:hover {
+    background-color: #eee;
+  }
+  .project .details {
+    background: #f9f9f9;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    border-left: 2px solid var(--accent-color);
+  }
+</style>
 
   <section id="director" class="fade-in" style="background: var(--light-bg);">
     <div style="max-width: 1000px; margin: auto; text-align: center;">
       <h2 style="color: var(--primary-color); margin-bottom: 1.5rem;">Getting to Know Our Director</h2>
       <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 2rem; justify-content: center;">
         <div style="flex: 1 1 300px;">
-          <img src="images/director.jpg" alt="Managing Director" style="width: 100%; border-radius: 8px; max-width: 250px;">
+          <img src="images/director.jpeg" alt="Managing Director" style="width: 100%; border-radius: 8px; max-width: 250px;">
         </div>
         <div style="flex: 1 1 600px; text-align: left;">
           <h3>Ir. Ts. Hj. Zamhuri</h3>
@@ -331,54 +504,54 @@
     </div>
   </section>
 
-  <section id="team" class="fade-in" style="padding: 4rem 1rem; background: #0b132b;">
+  <section id="team" class="fade-in" style="padding: 4rem 1rem; background: var(--light-bg);">
   <div style="max-width: 1200px; margin: auto; text-align: center;">
     <h2 style="color: var(--primary-color); margin-bottom: 2rem;">Meet Our Team</h2>
     <div style="display: flex; flex-wrap: wrap; gap: 2rem; justify-content: center;">
-      
+
       <!-- Managing Director -->
-      <div style="flex: 1 1 250px; background: #3a506b; padding: 1.5rem; border-radius: 8px;">
+      <div style="flex: 1 1 250px; background: white; padding: 1.5rem; border-radius: 8px;">
         <h3>Ir. Ts. Hj Zamhuri Hj Drahman</h3>
         <p>Managing Director</p>
       </div>
 
       <!-- Design Engineers -->
-      <div style="flex: 1 1 250px; background: #3a506b; padding: 1.5rem; border-radius: 8px;">
+      <div style="flex: 1 1 250px; background: white; padding: 1.5rem; border-radius: 8px;">
         <h3>Nur Jasmin Azri</h3>
         <p>Design Engineer / BIM Modeller</p>
       </div>
 
-      <div style="flex: 1 1 250px; background: #3a506b; padding: 1.5rem; border-radius: 8px;">
+      <div style="flex: 1 1 250px; background: white; padding: 1.5rem; border-radius: 8px;">
         <h3>Mohamad Iqmal Rafaie</h3>
         <p>Design Engineer</p>
       </div>
 
-      <div style="flex: 1 1 250px; background: #3a506b; padding: 1.5rem; border-radius: 8px;">
+      <div style="flex: 1 1 250px; background: white; padding: 1.5rem; border-radius: 8px;">
         <h3>Nureen Syahmina Aqilah</h3>
         <p>Design Engineer / BIM Modeller</p>
       </div>
 
-      <div style="flex: 1 1 250px; background: #3a506b; padding: 1.5rem; border-radius: 8px;">
+      <div style="flex: 1 1 250px; background: white; padding: 1.5rem; border-radius: 8px;">
         <h3>Nazaitul Awizah</h3>
         <p>Design Engineer / BIM Modeller</p>
       </div>
 
-      <div style="flex: 1 1 250px; background: #3a506b; padding: 1.5rem; border-radius: 8px;">
+      <div style="flex: 1 1 250px; background: white; padding: 1.5rem; border-radius: 8px;">
         <h3>Rachel Honeychurch</h3>
         <p>Design Engineer</p>
       </div>
 
-      <div style="flex: 1 1 250px; background: #3a506b; padding: 1.5rem; border-radius: 8px;">
+      <div style="flex: 1 1 250px; background: white; padding: 1.5rem; border-radius: 8px;">
         <h3>Zam Ishraf Dannish</h3>
         <p>Civil Designer / BIM Modeller</p>
       </div>
 
-      <div style="flex: 1 1 250px; background: #3a506b; padding: 1.5rem; border-radius: 8px;">
+      <div style="flex: 1 1 250px; background: white; padding: 1.5rem; border-radius: 8px;">
         <h3>Azirah</h3>
         <p>Draughtsperson</p>
       </div>
 
-      <div style="flex: 1 1 250px; background: #3a506b; padding: 1.5rem; border-radius: 8px;">
+      <div style="flex: 1 1 250px; background: white; padding: 1.5rem; border-radius: 8px;">
         <h3>Mohd Shahruni</h3>
         <p>Civil Engineer</p>
       </div>
@@ -402,7 +575,7 @@
     </div>
   </section>
 
-  <section id="contact" class="fade-in" style="background: #0b132b;">
+  <section id="contact" class="fade-in" style="background: #fff;">
     <div style="max-width: 1200px; margin: auto; display: flex; flex-wrap: wrap; gap: 2rem;">
       <div style="flex: 1 1 500px;">
         <h2 style="color: var(--primary-color); margin-bottom: 1rem;">Get in Touch</h2>
