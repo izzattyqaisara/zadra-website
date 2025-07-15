@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -163,3 +164,266 @@
 
 </body>
 </html>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zadra Ingénieurs Sdn. Bhd.</title>
+  <style>
+    :root {
+      --primary-color: #5e4634;
+      --accent-color: #c9a066;
+      --light-bg: #f4f1ec;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--light-bg);
+      color: #2f2f2f;
+      line-height: 1.6;
+    }
+
+    nav {
+      background: transparent;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      transition: background 0.3s ease;
+    }
+
+    .nav-logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #fff;
+    }
+
+    nav a {
+      color: #fff;
+      margin-left: 1.5rem;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .nav-btn {
+      background: var(--accent-color);
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      color: white;
+    }
+
+    nav.scrolled {
+      background: var(--primary-color);
+    }
+
+    .hero {
+      height: 100vh;
+      background: url('images/banner.jpg') center/cover no-repeat;
+      position: relative;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      top: 50%;
+      transform: translateY(-50%);
+      color: white;
+      padding: 0 1rem;
+    }
+
+    .hero-content h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .btn {
+      background-color: var(--accent-color);
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      display: inline-block;
+      margin: 0.5rem;
+    }
+
+    .btn:hover {
+      background-color: #b4874c;
+      transform: translateY(-2px);
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    section {
+      padding: 4rem 1rem;
+    }
+  </style>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      }, { threshold: 0.1 });
+
+      document.querySelectorAll(".fade-in").forEach(el => {
+        observer.observe(el);
+      });
+    });
+  </script>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-logo">Zadra Ingénieurs</div>
+    <div>
+      <a href="#services">Services</a>
+      <a href="#projects">Projects</a>
+      <a href="#director">Director</a>
+      <a href="#team">Team</a>
+      <a href="#careers">Careers</a>
+      <a href="#contact" class="nav-btn">Contact Us</a>
+    </div>
+  </nav>
+
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <h1>Engineering Solutions for a Better Tomorrow</h1>
+      <p>Delivering trusted civil & structural consultancy since 2006.</p>
+      <a href="#services" class="btn">Explore Services</a>
+      <a href="#contact" class="btn">Get in Touch</a>
+    </div>
+  </section>
+
+  <section id="services" class="fade-in">
+    <div style="max-width: 1200px; margin: auto; text-align: center;">
+      <h2 style="color: var(--primary-color); margin-bottom: 2rem;">Our Core Services</h2>
+      <div style="display: flex; flex-wrap: wrap; gap: 2rem; justify-content: center;">
+        <div style="flex: 1 1 250px; background: var(--light-bg); padding: 2rem; border-radius: 8px;">
+          <h3>Civil & Structural Design</h3>
+          <p>Planning and engineering robust infrastructure tailored to each project’s needs.</p>
+        </div>
+        <div style="flex: 1 1 250px; background: var(--light-bg); padding: 2rem; border-radius: 8px;">
+          <h3>Project Supervision</h3>
+          <p>Dedicated on-site support ensuring quality, safety and compliance.</p>
+        </div>
+        <div style="flex: 1 1 250px; background: var(--light-bg); padding: 2rem; border-radius: 8px;">
+          <h3>Contract Administration</h3>
+          <p>Efficient contract execution with clear coordination between all parties.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects" class="fade-in">
+    <div style="max-width: 1200px; margin: auto; text-align: center;">
+      <h2 style="color: var(--primary-color); margin-bottom: 2rem;">Featured Projects</h2>
+      <div style="display: flex; flex-wrap: wrap; gap: 2rem; justify-content: center;">
+        <div style="flex: 1 1 300px; background: var(--light-bg); padding: 1.5rem; border-radius: 8px;">
+          <h3>Belaga Bridge Reinforcement</h3>
+          <p>Structural enhancement works for high-load capacity (2024)</p>
+        </div>
+        <div style="flex: 1 1 300px; background: var(--light-bg); padding: 1.5rem; border-radius: 8px;">
+          <h3>Mukah Waterworks Supervision</h3>
+          <p>Site management and supervision of municipal upgrades (2023)</p>
+        </div>
+        <div style="flex: 1 1 300px; background: var(--light-bg); padding: 1.5rem; border-radius: 8px;">
+          <h3>Coastal Road Network Package</h3>
+          <p>Ongoing road development and engineering consultancy</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="director" class="fade-in" style="background: #fff;">
+    <div style="max-width: 1000px; margin: auto; text-align: center;">
+      <h2 style="color: var(--primary-color); margin-bottom: 1.5rem;">Getting to Know Our Director</h2>
+      <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 2rem; justify-content: center;">
+        <div style="flex: 1 1 300px;">
+          <img src="images/director.jpg" alt="Managing Director" style="width: 100%; border-radius: 8px; max-width: 250px;">
+        </div>
+        <div style="flex: 1 1 600px; text-align: left;">
+          <h3>Ir. Ts. Hj. Zamhuri</h3>
+          <p>Ir. Ts. Hj. Zamhuri is the founding Managing Director of Zadra Ingénieurs Sdn. Bhd., with over 25 years of experience in civil and structural engineering. Under his leadership, the company has successfully delivered a wide range of infrastructure projects across Sarawak and Malaysia.</p>
+          <p>He holds certifications as a Professional Engineer (P.Eng) and Technologist Specialist (Ts.) and is well-respected for his hands-on project oversight, technical integrity, and passion for mentoring young engineers.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="team" class="fade-in" style="background: var(--light-bg); text-align: center;">
+    <h2 style="color: var(--primary-color);">Our Team</h2>
+    <p>Meet the professionals behind our successful projects.</p>
+  </section>
+
+  <section id="careers" class="fade-in" style="background: var(--light-bg);">
+    <div style="max-width: 1000px; margin: auto; text-align: center;">
+      <h2 style="color: var(--primary-color); margin-bottom: 2rem;">Careers</h2>
+      <p>We are always looking for passionate and dedicated professionals to join our growing team.</p>
+      <div style="margin-top: 2rem;">
+        <h3>Open Positions</h3>
+        <ul style="list-style: none; padding: 0;">
+          <li><strong>Civil Engineer</strong> – Experience in infrastructure & drainage works</li>
+          <li><strong>Site Supervisor</strong> – On-site management and reporting</li>
+          <li><strong>Internship</strong> – Students in civil or structural engineering</li>
+        </ul>
+        <p style="margin-top: 1rem;">📩 Send your resume to <strong>careers@zadra.my</strong></p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="fade-in" style="background: #fff;">
+    <div style="max-width: 1200px; margin: auto; display: flex; flex-wrap: wrap; gap: 2rem;">
+      <div style="flex: 1 1 500px;">
+        <h2 style="color: var(--primary-color); margin-bottom: 1rem;">Get in Touch</h2>
+        <form style="display: flex; flex-direction: column; gap: 1rem;">
+          <input type="text" placeholder="Your Name" style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 4px;">
+          <input type="email" placeholder="Your Email" style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 4px;">
+          <textarea rows="5" placeholder="Your Message" style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 4px;"></textarea>
+          <button type="submit" style="padding: 0.75rem; background: var(--accent-color); color: white; border: none; border-radius: 4px; cursor: pointer;">Send Message</button>
+        </form>
+      </div>
+      <div style="flex: 1 1 500px;">
+        <iframe src="https://www.google.com/maps?q=Samarahan, Sarawak, Malaysia&output=embed" style="width: 100%; height: 100%; min-height: 300px; border: none; border-radius: 8px;"></iframe>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>
+>>>>>>> e2c05be (Upload full website layout with sections and images)
