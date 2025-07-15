@@ -1,170 +1,3 @@
-<<<<<<< HEAD
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Zadra Ingénieurs Sdn. Bhd.</title>
-  <style>
-    :root {
-      --primary-color: #0a3d62;
-      --accent-color: #f39c12;
-      --light-bg: #f8f9fa;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-    }
-
-    body {
-      background-color: var(--light-bg);
-      color: #333;
-    }
-
-    header {
-      background-color: var(--primary-color);
-      color: white;
-      padding: 1.5rem 1rem;
-      text-align: center;
-    }
-
-    nav {
-      background-color: #06314e;
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    nav a {
-      color: white;
-      text-decoration: none;
-      padding: 1rem;
-      display: block;
-    }
-
-    nav a:hover {
-      background-color: var(--accent-color);
-    }
-
-    .container {
-      padding: 2rem 1rem;
-      max-width: 1000px;
-      margin: auto;
-    }
-
-    section {
-      margin-bottom: 2rem;
-    }
-
-    h2 {
-      color: var(--primary-color);
-      margin-bottom: 1rem;
-    }
-
-    .flex-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-
-    .card {
-      flex: 1 1 45%;
-      background: white;
-      padding: 1rem;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-
-    footer {
-      background-color: var(--primary-color);
-      color: white;
-      text-align: center;
-      padding: 1rem;
-      margin-top: 2rem;
-    }
-
-    /* Responsive Design */
-    @media (max-width: 768px) {
-      .flex-grid {
-        flex-direction: column;
-      }
-
-      .card {
-        flex: 1 1 100%;
-      }
-
-      nav a {
-        padding: 0.75rem;
-      }
-    }
-  </style>
-</head>
-<body>
-
-  <header>
-    <h1>Zadra Ingénieurs Sdn. Bhd.</h1>
-    <p>Engineering Excellence in Sarawak</p>
-  </header>
-
-  <nav>
-    <a href="#about">About</a>
-    <a href="#services">Services</a>
-    <a href="#projects">Projects</a>
-    <a href="#careers">Careers</a>
-    <a href="#contact">Contact</a>
-  </nav>
-
-  <div class="container">
-    <section id="about">
-      <h2>About Us</h2>
-      <p>Zadra Ingénieurs Sdn. Bhd. is a Sarawak-based engineering company established in 2013. We specialize in construction, civil and structural engineering, and project supervision for both government and private sectors.</p>
-    </section>
-
-    <section id="services">
-      <h2>Our Services</h2>
-      <div class="flex-grid">
-        <div class="card">
-          <h3>Engineering Design</h3>
-          <p>Expert design and planning for infrastructure and building projects.</p>
-        </div>
-        <div class="card">
-          <h3>Project Supervision</h3>
-          <p>Site inspections, quality control, and technical consultancy.</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="projects">
-      <h2>Recent Projects</h2>
-      <ul>
-        <li>Belaga Bridge Reinforcement Project – 2024</li>
-        <li>Mukah Waterworks Supervision – 2023</li>
-      </ul>
-    </section>
-
-    <section id="careers">
-      <h2>Careers</h2>
-      <p>We’re hiring civil engineers, site supervisors, and interns. Send your CV to <strong>careers@zadra.my</strong></p>
-    </section>
-
-    <section id="contact">
-      <h2>Contact Us</h2>
-      <p>Email: info@zadra.my</p>
-      <p>Phone: +60 82-123456</p>
-      <p>Location: Kuching, Sarawak, Malaysia</p>
-    </section>
-  </div>
-
-  <footer>
-    <p>&copy; 2025 Zadra Ingénieurs Sdn. Bhd. All rights reserved.</p>
-  </footer>
-
-</body>
-</html>
-=======
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -290,6 +123,38 @@
     section {
       padding: 4rem 1rem;
     }
+
+    .team-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+    }
+
+    .team-member {
+      background: #fff;
+      border-radius: 8px;
+      padding: 1rem;
+      text-align: center;
+      max-width: 250px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }
+
+    .team-member img {
+      border-radius: 50%;
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      margin-bottom: 1rem;
+    }
+
+    footer {
+      background-color: var(--primary-color);
+      color: white;
+      text-align: center;
+      padding: 1.5rem 1rem;
+      margin-top: 2rem;
+    }
   </style>
   <script>
     document.addEventListener("DOMContentLoaded", () => {
@@ -350,7 +215,7 @@
     </div>
   </section>
 
-  <section id="projects" class="fade-in">
+  <section id="projects" class="fade-in" style="background: #fff;">
     <div style="max-width: 1200px; margin: auto; text-align: center;">
       <h2 style="color: var(--primary-color); margin-bottom: 2rem;">Featured Projects</h2>
       <div style="display: flex; flex-wrap: wrap; gap: 2rem; justify-content: center;">
@@ -370,40 +235,53 @@
     </div>
   </section>
 
-  <section id="director" class="fade-in" style="background: #fff;">
+  <section id="director" class="fade-in" style="background: var(--light-bg);">
     <div style="max-width: 1000px; margin: auto; text-align: center;">
-      <h2 style="color: var(--primary-color); margin-bottom: 1.5rem;">Getting to Know Our Director</h2>
+      <h2 style="color: var(--primary-color); margin-bottom: 2rem;">Getting to Know Our Director</h2>
       <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 2rem; justify-content: center;">
-        <div style="flex: 1 1 300px;">
-          <img src="images/director.jpg" alt="Managing Director" style="width: 100%; border-radius: 8px; max-width: 250px;">
-        </div>
-        <div style="flex: 1 1 600px; text-align: left;">
+        <img src="images/director.jpg" alt="Director" style="max-width: 250px; border-radius: 8px;">
+        <div style="max-width: 600px; text-align: left;">
           <h3>Ir. Ts. Hj. Zamhuri</h3>
-          <p>Ir. Ts. Hj. Zamhuri is the founding Managing Director of Zadra Ingénieurs Sdn. Bhd., with over 25 years of experience in civil and structural engineering. Under his leadership, the company has successfully delivered a wide range of infrastructure projects across Sarawak and Malaysia.</p>
-          <p>He holds certifications as a Professional Engineer (P.Eng) and Technologist Specialist (Ts.) and is well-respected for his hands-on project oversight, technical integrity, and passion for mentoring young engineers.</p>
+          <p>Ir. Ts. Hj. Zamhuri is the founding Managing Director of Zadra Ingénieurs Sdn. Bhd., with over 25 years of experience in civil and structural engineering. He is a certified Professional Engineer and Technologist Specialist.</p>
+          <p>He is respected for his integrity, technical precision, and leadership in infrastructure development across Sarawak and beyond.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="team" class="fade-in" style="background: var(--light-bg); text-align: center;">
-    <h2 style="color: var(--primary-color);">Our Team</h2>
-    <p>Meet the professionals behind our successful projects.</p>
+  <section id="team" class="fade-in" style="background: #fff;">
+    <div style="max-width: 1200px; margin: auto; text-align: center;">
+      <h2 style="color: var(--primary-color); margin-bottom: 2rem;">Our Team</h2>
+      <div class="team-grid">
+        <div class="team-member">
+          <img src="images/team1.jpg" alt="Team Member 1">
+          <h4>Nur Afiqah</h4>
+          <p>Senior Civil Engineer</p>
+        </div>
+        <div class="team-member">
+          <img src="images/team2.jpg" alt="Team Member 2">
+          <h4>Mohd Firdaus</h4>
+          <p>Structural Consultant</p>
+        </div>
+        <div class="team-member">
+          <img src="images/team3.jpg" alt="Team Member 3">
+          <h4>Adeline Wong</h4>
+          <p>Project Coordinator</p>
+        </div>
+      </div>
+    </div>
   </section>
 
   <section id="careers" class="fade-in" style="background: var(--light-bg);">
     <div style="max-width: 1000px; margin: auto; text-align: center;">
       <h2 style="color: var(--primary-color); margin-bottom: 2rem;">Careers</h2>
       <p>We are always looking for passionate and dedicated professionals to join our growing team.</p>
-      <div style="margin-top: 2rem;">
-        <h3>Open Positions</h3>
-        <ul style="list-style: none; padding: 0;">
-          <li><strong>Civil Engineer</strong> – Experience in infrastructure & drainage works</li>
-          <li><strong>Site Supervisor</strong> – On-site management and reporting</li>
-          <li><strong>Internship</strong> – Students in civil or structural engineering</li>
-        </ul>
-        <p style="margin-top: 1rem;">📩 Send your resume to <strong>careers@zadra.my</strong></p>
-      </div>
+      <ul style="list-style: none; padding: 0; margin-top: 2rem;">
+        <li><strong>Civil Engineer</strong> – Infrastructure & drainage works</li>
+        <li><strong>Site Supervisor</strong> – On-site management & reporting</li>
+        <li><strong>Internship</strong> – Civil or structural engineering students</li>
+      </ul>
+      <p style="margin-top: 1rem;">📩 Send your resume to <strong>careers@zadra.my</strong></p>
     </div>
   </section>
 
@@ -415,15 +293,18 @@
           <input type="text" placeholder="Your Name" style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 4px;">
           <input type="email" placeholder="Your Email" style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 4px;">
           <textarea rows="5" placeholder="Your Message" style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 4px;"></textarea>
-          <button type="submit" style="padding: 0.75rem; background: var(--accent-color); color: white; border: none; border-radius: 4px; cursor: pointer;">Send Message</button>
+          <button type="submit" style="padding: 0.75rem; background: var(--accent-color); color: white; border: none; border-radius: 4px;">Send Message</button>
         </form>
       </div>
       <div style="flex: 1 1 500px;">
-        <iframe src="https://www.google.com/maps?q=Samarahan, Sarawak, Malaysia&output=embed" style="width: 100%; height: 100%; min-height: 300px; border: none; border-radius: 8px;"></iframe>
+        <iframe src="https://www.google.com/maps?q=Samarahan, Sarawak, Malaysia&output=embed" style="width: 100%; height: 300px; border: none; border-radius: 8px;"></iframe>
       </div>
     </div>
   </section>
 
+  <footer>
+    <p>&copy; 2025 Zadra Ingénieurs Sdn. Bhd. All rights reserved.</p>
+  </footer>
+
 </body>
 </html>
->>>>>>> e2c05be (Upload full website layout with sections and images)
