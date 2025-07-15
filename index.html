@@ -91,6 +91,7 @@
     .hero-content h1 {
       font-size: 3rem;
       margin-bottom: 1rem;
+      font-family: 'Georgia', serif;
     }
 
     .btn {
@@ -122,38 +123,6 @@
 
     section {
       padding: 4rem 1rem;
-    }
-
-    .team-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2rem;
-      justify-content: center;
-    }
-
-    .team-member {
-      background: #fff;
-      border-radius: 8px;
-      padding: 1rem;
-      text-align: center;
-      max-width: 250px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.05);
-    }
-
-    .team-member img {
-      border-radius: 50%;
-      width: 120px;
-      height: 120px;
-      object-fit: cover;
-      margin-bottom: 1rem;
-    }
-
-    footer {
-      background-color: var(--primary-color);
-      color: white;
-      text-align: center;
-      padding: 1.5rem 1rem;
-      margin-top: 2rem;
     }
   </style>
   <script>
@@ -195,7 +164,7 @@
     </div>
   </section>
 
-  <section id="services" class="fade-in">
+  <section id="services" class="fade-in" style="background: #fff;">
     <div style="max-width: 1200px; margin: auto; text-align: center;">
       <h2 style="color: var(--primary-color); margin-bottom: 2rem;">Our Core Services</h2>
       <div style="display: flex; flex-wrap: wrap; gap: 2rem; justify-content: center;">
@@ -215,35 +184,17 @@
     </div>
   </section>
 
-  <section id="projects" class="fade-in" style="background: #fff;">
-    <div style="max-width: 1200px; margin: auto; text-align: center;">
-      <h2 style="color: var(--primary-color); margin-bottom: 2rem;">Featured Projects</h2>
-      <div style="display: flex; flex-wrap: wrap; gap: 2rem; justify-content: center;">
-        <div style="flex: 1 1 300px; background: var(--light-bg); padding: 1.5rem; border-radius: 8px;">
-          <h3>Belaga Bridge Reinforcement</h3>
-          <p>Structural enhancement works for high-load capacity (2024)</p>
-        </div>
-        <div style="flex: 1 1 300px; background: var(--light-bg); padding: 1.5rem; border-radius: 8px;">
-          <h3>Mukah Waterworks Supervision</h3>
-          <p>Site management and supervision of municipal upgrades (2023)</p>
-        </div>
-        <div style="flex: 1 1 300px; background: var(--light-bg); padding: 1.5rem; border-radius: 8px;">
-          <h3>Coastal Road Network Package</h3>
-          <p>Ongoing road development and engineering consultancy</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <section id="director" class="fade-in" style="background: var(--light-bg);">
     <div style="max-width: 1000px; margin: auto; text-align: center;">
-      <h2 style="color: var(--primary-color); margin-bottom: 2rem;">Getting to Know Our Director</h2>
+      <h2 style="color: var(--primary-color); margin-bottom: 1.5rem;">Getting to Know Our Director</h2>
       <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 2rem; justify-content: center;">
-        <img src="images/director.jpg" alt="Director" style="max-width: 250px; border-radius: 8px;">
-        <div style="max-width: 600px; text-align: left;">
+        <div style="flex: 1 1 300px;">
+          <img src="images/director.jpg" alt="Managing Director" style="width: 100%; border-radius: 8px; max-width: 250px;">
+        </div>
+        <div style="flex: 1 1 600px; text-align: left;">
           <h3>Ir. Ts. Hj. Zamhuri</h3>
-          <p>Ir. Ts. Hj. Zamhuri is the founding Managing Director of Zadra Ingénieurs Sdn. Bhd., with over 25 years of experience in civil and structural engineering. He is a certified Professional Engineer and Technologist Specialist.</p>
-          <p>He is respected for his integrity, technical precision, and leadership in infrastructure development across Sarawak and beyond.</p>
+          <p>Ir. Ts. Hj. Zamhuri is the founding Managing Director of Zadra Ingénieurs Sdn. Bhd., with over 25 years of experience in civil and structural engineering. Under his leadership, the company has successfully delivered a wide range of infrastructure projects across Sarawak and Malaysia.</p>
+          <p>He holds certifications as a Professional Engineer (P.Eng) and Technologist Specialist (Ts.) and is well-respected for his hands-on project oversight, technical integrity, and passion for mentoring young engineers.</p>
         </div>
       </div>
     </div>
@@ -251,24 +202,8 @@
 
   <section id="team" class="fade-in" style="background: #fff;">
     <div style="max-width: 1200px; margin: auto; text-align: center;">
-      <h2 style="color: var(--primary-color); margin-bottom: 2rem;">Our Team</h2>
-      <div class="team-grid">
-        <div class="team-member">
-          <img src="images/team1.jpg" alt="Team Member 1">
-          <h4>Nur Afiqah</h4>
-          <p>Senior Civil Engineer</p>
-        </div>
-        <div class="team-member">
-          <img src="images/team2.jpg" alt="Team Member 2">
-          <h4>Mohd Firdaus</h4>
-          <p>Structural Consultant</p>
-        </div>
-        <div class="team-member">
-          <img src="images/team3.jpg" alt="Team Member 3">
-          <h4>Adeline Wong</h4>
-          <p>Project Coordinator</p>
-        </div>
-      </div>
+      <h2 style="color: var(--primary-color); margin-bottom: 2rem;">Meet Our Team</h2>
+      <p>Our team of experienced engineers, supervisors, and project managers work together to ensure the highest standards for our clients.</p>
     </div>
   </section>
 
@@ -276,12 +211,15 @@
     <div style="max-width: 1000px; margin: auto; text-align: center;">
       <h2 style="color: var(--primary-color); margin-bottom: 2rem;">Careers</h2>
       <p>We are always looking for passionate and dedicated professionals to join our growing team.</p>
-      <ul style="list-style: none; padding: 0; margin-top: 2rem;">
-        <li><strong>Civil Engineer</strong> – Infrastructure & drainage works</li>
-        <li><strong>Site Supervisor</strong> – On-site management & reporting</li>
-        <li><strong>Internship</strong> – Civil or structural engineering students</li>
-      </ul>
-      <p style="margin-top: 1rem;">📩 Send your resume to <strong>careers@zadra.my</strong></p>
+      <div style="margin-top: 2rem;">
+        <h3>Open Positions</h3>
+        <ul style="list-style: none; padding: 0;">
+          <li><strong>Civil Engineer</strong> – Experience in infrastructure & drainage works</li>
+          <li><strong>Site Supervisor</strong> – On-site management and reporting</li>
+          <li><strong>Internship</strong> – Students in civil or structural engineering</li>
+        </ul>
+        <p style="margin-top: 1rem;">📩 Send your resume to <strong>careers@zadra.my</strong></p>
+      </div>
     </div>
   </section>
 
@@ -293,18 +231,14 @@
           <input type="text" placeholder="Your Name" style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 4px;">
           <input type="email" placeholder="Your Email" style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 4px;">
           <textarea rows="5" placeholder="Your Message" style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 4px;"></textarea>
-          <button type="submit" style="padding: 0.75rem; background: var(--accent-color); color: white; border: none; border-radius: 4px;">Send Message</button>
+          <button type="submit" style="padding: 0.75rem; background: var(--accent-color); color: white; border: none; border-radius: 4px; cursor: pointer;">Send Message</button>
         </form>
       </div>
       <div style="flex: 1 1 500px;">
-        <iframe src="https://www.google.com/maps?q=Samarahan, Sarawak, Malaysia&output=embed" style="width: 100%; height: 300px; border: none; border-radius: 8px;"></iframe>
+        <iframe src="https://www.google.com/maps?q=Samarahan, Sarawak, Malaysia&output=embed" style="width: 100%; height: 100%; min-height: 300px; border: none; border-radius: 8px;"></iframe>
       </div>
     </div>
   </section>
-
-  <footer>
-    <p>&copy; 2025 Zadra Ingénieurs Sdn. Bhd. All rights reserved.</p>
-  </footer>
 
 </body>
 </html>
