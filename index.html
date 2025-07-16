@@ -133,7 +133,76 @@
     section {
       padding: 4rem 1rem;
     }
-  </style>
+    
+  .fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .slide-up {
+    opacity: 0;
+    transform: translateY(60px);
+    transition: all 0.8s ease-out;
+  }
+
+  .slide-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .zoom-in {
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.8s ease-out;
+  }
+
+  .zoom-in.visible {
+    opacity: 1;
+    transform: scale(1);
+  }
+  .nav-toggle {
+  display: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: white;
+}
+
+.nav-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .nav-toggle {
+    display: block;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    background-color: var(--primary-color);
+    padding-top: 1rem;
+  }
+
+  .nav-links.show {
+    display: flex;
+  }
+
+  .nav-links a {
+    margin: 0.5rem 1rem;
+  }
+}
+
+</style>
+
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       const observer = new IntersectionObserver((entries) => {
@@ -144,7 +213,7 @@
         });
       }, { threshold: 0.1 });
 
-      document.querySelectorAll(".fade-in").forEach(el => {
+      document.querySelectorAll(".fade-in, .slide-up, .zoom-in").forEach(el => {
         observer.observe(el);
       });
     });
@@ -153,20 +222,20 @@
 <body>
 
   <nav>
-    <a href="#about" class="nav-logo" style="display: flex; align-items: center; gap: 0.5rem; text-decoration: none;">
-  <img src="images/logo.jpeg" alt="Zadra Logo" style="height: 40px; width: auto;">
-  <span style="color: white; font-weight: bold;">Zadra Ingénieurs</span>
-</a>
-
-    <div>
-      <a href="#services">Services</a>
-      <a href="#projects">Projects</a>
-      <a href="#director">Director</a>
-      <a href="#team">Team</a>
-      <a href="#careers">Careers</a>
-      <a href="#contact">Contact Us</a>
-    </div>
-  </nav>
+  <a href="#about" class="nav-logo">
+    <img src="images/logo.jpeg" alt="Zadra Logo">
+    <span>Zadra Ingénieurs</span>
+  </a>
+  <div class="nav-toggle" onclick="toggleMenu()">&#9776;</div>
+  <div class="nav-links" id="navLinks">
+    <a href="#services">Services</a>
+    <a href="#projects">Projects</a>
+    <a href="#director">Director</a>
+    <a href="#team">Team</a>
+    <a href="#careers">Careers</a>
+    <a href="#contact" class="nav-btn">Contact</a>
+  </div>
+</nav>
 
   <section class="hero" id="home">
     <div class="hero-content">
@@ -592,5 +661,11 @@
     </div>
   </section>
 
+  <script>
+    function toggleMenu() {
+      const navLinks = document.getElementById('navLinks');
+      navLinks.classList.toggle('show');
+     }
+  </script>
 </body>
 </html>
