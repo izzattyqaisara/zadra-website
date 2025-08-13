@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact — Zadra Ingénieurs</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css"/><script defer src="main.js"></script>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo" aria-label="Zadra Home">
+    <img src="images/logo.png" alt="Zadra Ingénieurs Logo">
+  </a>
+
+  <div class="nav-toggle" onclick="toggleMenu()" aria-label="Toggle menu">&#9776;</div>
+
+  <div class="nav-links" id="navLinks">
+    <!-- About + dropdown -->
+    <div class="nav-item has-submenu">
+      <a href="about.html" class="submenu-toggle" aria-haspopup="true" aria-expanded="false">
+        About
+        <span class="caret" aria-hidden="true">▾</span>
+      </a>
+      <div class="submenu" role="menu">
+        <a href="about.html" role="menuitem">Overview</a> 
+        <a href="vision-mission.html" role="menuitem">Vision & Mission</a>
+        <a href="services.html" role="menuitem">Services</a>
+      </div>
+    </div>
+
+    <a href="projects.html">Projects</a>
+    <a href="director.html">Director</a>
+    <a href="team.html">Team</a>
+    <a href="careers.html">Careers</a>
+    <a href="contact.html" class="nav-btn">Contact</a>
+  </div>
+</nav>
+
+<section class="fade-in" style="background:#fff; padding:4rem 1rem;">
+  <div style="max-width:1200px; margin:auto; display:flex; flex-wrap:wrap; gap:2rem;">
+    <div style="flex:1 1 500px;">
+      <h2 style="color:var(--primary-color); margin-bottom:1rem;">Get in Touch</h2>
+
+<!-- CONTACT FORM (Formspree) -->
+<form id="contactForm"
+      action="https://formspree.io/f/xnnzwkaj"  
+      method="POST"
+      class="contact-form"
+      novalidate>
+
+  <input type="text" name="name" placeholder="Your Name" required autocomplete="name">
+  <input type="email" name="email" placeholder="Your Email" required autocomplete="email">
+  <textarea rows="5" name="message" placeholder="Your Message" required></textarea>
+
+  <!-- optional meta -->
+  <input type="hidden" name="_subject" value="Website Contact — Zadra Ingénieurs">
+  <!-- spam honeypot (kept visually hidden) -->
+  <input type="text" name="website" autocomplete="off" tabindex="-1" style="position:absolute; left:-9999px;">
+
+  <button type="submit" id="contactSubmit">Send Message</button>
+
+  <!-- inline status message -->
+  <p id="formStatus" class="form-status" aria-live="polite"></p>
+</form>
+
+    
+    </div>
+    <div style="flex:1 1 500px;">
+    <iframe
+      src="https://www.google.com/maps?q=1.5198988160193154, 110.37823809110937&z=18&output=embed"
+      style="width: 100%; height: 380px; border: 0; border-radius: 8px;"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+      </div>
+    </div>
+  </section>
+</body>
+</html>
+<section class="contact-info">
+  <h2>Contact Us</h2>
+  <p>
+    Sublot 16, Parcel 10419-4-3, 3rd Floor,<br>
+    Tabuan Stutong Commercial Centre,<br>
+    Jalan Setia Raja, 93350 Kuching, Sarawak
+  </p>
+  <p>
+    <strong>T:</strong> <a href="tel:+6082362002">082-36 2002</a><br>
+    <strong>F:</strong> 082-36 4004<br>
+    <strong>E:</strong> <a href="mailto:zadrac007@gmail.com">zadraingenieurs@gmail.com</a>
+  </p>
+</section>
+

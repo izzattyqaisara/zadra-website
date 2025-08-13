@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Director — Zadra Ingénieurs</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css"/><script defer src="main.js"></script>
+</head>
+<body>
+  <!-- NAV -->
+  <nav>
+  <a href="index.html" class="nav-logo" aria-label="Zadra Home">
+    <img src="images/logo.png" alt="Zadra Ingénieurs Logo">
+  </a>
+
+  <div class="nav-toggle" onclick="toggleMenu()" aria-label="Toggle menu">&#9776;</div>
+
+  <div class="nav-links" id="navLinks">
+    <!-- About + dropdown -->
+    <div class="nav-item has-submenu">
+      <a href="about.html" class="submenu-toggle" aria-haspopup="true" aria-expanded="false">
+        About
+        <span class="caret" aria-hidden="true">▾</span>
+      </a>
+      <div class="submenu" role="menu">
+        <a href="about.html" role="menuitem">Overview</a> 
+        <a href="vision-mission.html" role="menuitem">Vision & Mission</a>
+        <a href="services.html" role="menuitem">Services</a>
+      </div>
+    </div>
+
+    <a href="projects.html">Projects</a>
+    <a href="director.html">Director</a>
+    <a href="team.html">Team</a>
+    <a href="careers.html">Careers</a>
+    <a href="contact.html" class="nav-btn">Contact</a>
+  </div>
+</nav>
+  <!-- DIRECTOR (stacked parts with scroll-snap; reuses About classes) -->
+  <main class="about-snap">
+
+    <!-- Part 1: Profile -->
+    <section class="about-block fade-in">
+      <div class="about-container grid-2 director-grid">
+        <div class="director-portrait">
+          <img src="images/director.jpeg" alt="Ir. Ts. Hj. Zamhuri" />
+        </div>
+        <div>
+          <h1>Ir. Ts. Hj. Zamhuri bin Hj. Drahman</h1>
+          <p class="lead">
+            Managing Director of Zadra Ingénieurs with 25+ years’ experience in civil and structural engineering.
+            Recognised for hands-on leadership, technical integrity, and a passion for mentoring young engineers
+            to deliver infrastructure that balances functionality, economy and aesthetics.
+          </p>
+          <ul class="bullets">
+            <li><strong>Role:</strong> Managing Director</li>
+            <li><strong>Experience:</strong> 25+ years, Sarawak & Malaysia</li>
+            <li><strong>Focus:</strong> Airports, highways, public infrastructure, education & religious buildings</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Part 2: Professional Registration -->
+    <section class="about-block alt fade-in">
+      <div class="about-container">
+        <h2>Professional Registration</h2>
+        <div class="about-grid">
+          <ul class="bullets">
+            <li>Professional Engineer (BEM)</li>
+            <li>Professional Technologist (MBOT)</li>
+            <li>ASEAN Chartered Professional Engineer (ACPE)</li>
+          </ul>
+          <ul class="bullets">
+            <li>Associate ASEAN Engineer (AAE)</li>
+            <li>Senior Member, IEM (SMIEM)</li>
+            <li>Qualified Person, SPA; Member, MAE</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Part 3: Education -->
+    <section class="about-block fade-in">
+      <div class="about-container">
+        <h2>Education</h2>
+        <div class="about-grid">
+          <ul class="bullets">
+            <li>Master of Engineering (Civil), UNIMAS</li>
+            <li>B.Eng (Hons) Civil, UTM</li>
+            <li>GDBA – Airport Engineering, National University of Singapore</li>
+          </ul>
+          <ul class="bullets">
+            <li>Diploma in Computer Technology, INFOMATICS</li>
+            <li>Diploma in Civil Engineering, UTM</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Part 4: Awards & Leadership -->
+    <section class="about-block alt fade-in">
+      <div class="about-container grid-2">
+        <div>
+          <h2>Awards</h2>
+          <ul class="bullets">
+            <li>Anugerah Usahawan Jaya Platinum (2022)</li>
+            <li>Emerging Consulting Engineer (C&S) (2023)</li>
+          </ul>
+        </div>
+        <div>
+          <h2>Leadership & Approach</h2>
+          <p class="lead">
+            Champions collaborative design and BIM-enabled workflows to ensure quality, buildability and lifecycle value.
+            Mentors the team to uphold engineering ethics, safety and sustainability across all projects.
+          </p>
+          <a class="btn" href="team.html">View the Team</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</body>
+</html>

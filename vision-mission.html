@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Vision & Mission — Zadra Ingénieurs</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css"/><script defer src="main.js"></script>
+</head>
+<body>
+  <nav>
+  <a href="index.html" class="nav-logo" aria-label="Zadra Home">
+    <img src="images/logo.png" alt="Zadra Ingénieurs Logo">
+  </a>
+
+  <div class="nav-toggle" onclick="toggleMenu()" aria-label="Toggle menu">&#9776;</div>
+
+  <div class="nav-links" id="navLinks">
+    <!-- About + dropdown -->
+    <div class="nav-item has-submenu">
+      <a href="about.html" class="submenu-toggle" aria-haspopup="true" aria-expanded="false">
+        About
+        <span class="caret" aria-hidden="true">▾</span>
+      </a>
+      <div class="submenu" role="menu">
+        <a href="about.html" role="menuitem">Overview</a> 
+        <a href="vision-mission.html" role="menuitem">Vision & Mission</a>
+        <a href="services.html" role="menuitem">Services</a>
+      </div>
+    </div>
+
+    <a href="projects.html">Projects</a>
+    <a href="director.html">Director</a>
+    <a href="team.html">Team</a>
+    <a href="careers.html">Careers</a>
+    <a href="contact.html" class="nav-btn">Contact</a>
+  </div>
+</nav>
+
+  <section class="fade-in" style="padding:4rem 1rem; background:var(--light-bg);">
+    <div style="max-width:1000px; margin:auto;">
+      <h2 style="color:var(--primary-color); margin-bottom:2rem; text-align:center;">Our Vision & Mission</h2>
+      <div style="display:flex; flex-direction:column; gap:2rem;">
+        <div>
+          <h3 style="color:var(--accent-color); margin-bottom:0.5rem;">Vision</h3>
+          <p style="font-size:1.05rem; line-height:1.7;">To be a leading civil and structural engineering consultancy recognized for quality, innovation, and sustainable solutions that shape the future of infrastructure.</p>
+        </div>
+        <div>
+          <h3 style="color:var(--accent-color); margin-bottom:0.5rem;">Mission</h3>
+          <ul style="list-style:disc; padding-left:1.5rem; font-size:1.05rem; line-height:1.7;">
+            <li>Deliver efficient and high-quality engineering solutions tailored to our clients' needs.</li>
+            <li>Build long-term partnerships based on trust, integrity, and excellence.</li>
+            <li>Continuously improve through innovation, technology, and professional development.</li>
+            <li>Promote sustainable practices and contribute positively to communities and the environment.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+</html>

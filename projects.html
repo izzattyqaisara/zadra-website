@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Projects — Zadra Ingénieurs</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css"/><script defer src="main.js"></script>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo" aria-label="Zadra Home">
+    <img src="images/logo.png" alt="Zadra Ingénieurs Logo">
+  </a>
+
+  <div class="nav-toggle" onclick="toggleMenu()" aria-label="Toggle menu">&#9776;</div>
+
+  <div class="nav-links" id="navLinks">
+    <!-- About + dropdown -->
+    <div class="nav-item has-submenu">
+      <a href="about.html" class="submenu-toggle" aria-haspopup="true" aria-expanded="false">
+        About
+        <span class="caret" aria-hidden="true">▾</span>
+      </a>
+      <div class="submenu" role="menu">
+        <a href="about.html" role="menuitem">Overview</a> 
+        <a href="vision-mission.html" role="menuitem">Vision & Mission</a>
+        <a href="services.html" role="menuitem">Services</a>
+      </div>
+    </div>
+
+    <a href="projects.html">Projects</a>
+    <a href="director.html">Director</a>
+    <a href="team.html">Team</a>
+    <a href="careers.html">Careers</a>
+    <a href="contact.html" class="nav-btn">Contact</a>
+  </div>
+</nav>
+
+  <section id="projects" class="fade-in" style="padding:4rem 1rem; background:#fff;">
+    <div class="projects-split">
+      <!-- PREVIOUS -->
+      <div class="project-panel">
+        <h2>Previous Projects</h2>
+        <div class="filter-bar" data-side="previous">
+          <button class="filter active" data-category="all">All</button>
+          <button class="filter" data-category="schools">Schools & Institutions</button>
+          <button class="filter" data-category="transport">Airports / Roads / Bridges</button>
+          <button class="filter" data-category="buildings">Buildings & Infrastructure</button>
+          <button class="filter" data-category="religious">Religious Buildings</button>
+        </div>
+
+        <div class="project-list" id="previousList">
+          <article class="project-card" data-side="previous" data-category="schools" data-year="2021">
+            <h4>Cadangan Pembangunan 2-Tingkat Sekolah Rendah Tahfiz, Kuching</h4>
+            <p><strong>Client:</strong> HIKMAH</p><p><strong>Year:</strong> 2021</p><p><strong>Cost:</strong> RM17 Mil.</p>
+          </article>
+
+          <article class="project-card" data-side="previous" data-category="buildings" data-year="2020">
+            <h4>Cadangan Pusat Penjaja Tambirat, Kota Samarahan</h4>
+            <p><strong>Client:</strong> MPKS</p><p><strong>Year:</strong> 2020</p><p><strong>Cost:</strong> RM5 Mil.</p>
+          </article>
+
+          <article class="project-card" data-side="previous" data-category="religious" data-year="2019">
+            <h4>Cadangan Ubahsuai & Menaiktaraf Masjid Bahagian Serian</h4>
+            <p><strong>Client:</strong> MIS</p><p><strong>Year:</strong> 2019</p><p><strong>Cost:</strong> RM10 Mil.</p>
+          </article>
+
+          <article class="project-card" data-side="previous" data-category="religious" data-year="2018">
+            <h4>Merekabentuk & Membina Masjid Kpg Bakam, Miri</h4>
+            <p><strong>Client:</strong> MIS</p><p><strong>Year:</strong> 2018</p><p><strong>Cost:</strong> RM5 Mil.</p>
+          </article>
+
+          <article class="project-card" data-side="previous" data-category="buildings" data-year="2017">
+            <h4>Proposed Upgrading of Fairy & Wind Cave Nature Reserves, Bau</h4>
+            <p><strong>Client:</strong> SFC</p><p><strong>Year:</strong> 2017</p><p><strong>Cost:</strong> RM12 Mil.</p>
+          </article>
+
+          <article class="project-card" data-side="previous" data-category="buildings" data-year="2017">
+            <h4>Projek Pengubahsuaian Pusat Pemprosesan Biji Koko & Coklat, Kota Samarahan</h4>
+            <p><strong>Client:</strong> Lembaga Koko Malaysia</p><p><strong>Year:</strong> 2017</p><p><strong>Cost:</strong> RM5 Mil.</p>
+          </article>
+
+          <article class="project-card" data-side="previous" data-category="transport" data-year="2016">
+            <h4>Pan Borneo Highway — WPC03 Serian to Pantu Junction</h4>
+            <p><strong>Client:</strong> JKR</p><p><strong>Year:</strong> 2016</p><p><strong>Cost:</strong> RM90 Mil.</p>
+          </article>
+
+          <article class="project-card" data-side="previous" data-category="buildings" data-year="2016">
+            <h4>Cadangan Pemuliharaan & Menaiktaraf Kubu Lili, Betong</h4>
+            <p><strong>Client:</strong> JKR</p><p><strong>Year:</strong> 2016</p><p><strong>Cost:</strong> RM5 Mil.</p>
+          </article>
+
+          <article class="project-card" data-side="previous" data-category="transport" data-year="2015">
+            <h4>Pan Borneo Highway — Telok Melano to Sematan</h4>
+            <p><strong>Client:</strong> JKR</p><p><strong>Year:</strong> 2015</p><p><strong>Cost:</strong> RM70 Mil.</p>
+          </article>
+
+          <article class="project-card" data-side="previous" data-category="schools" data-year="2007">
+            <h4>Kompleks Kemudahan Sukan & Rekreasi — UNIMAS</h4>
+            <p><strong>Client:</strong> UNIMAS</p><p><strong>Year:</strong> 2007</p><p><strong>Cost:</strong> RM40 Mil.</p>
+          </article>
+
+          <article class="project-card" data-side="previous" data-category="transport" data-year="2007">
+            <h4>Detailed Design & Supervision Jalan Kpg Patrikan – SMK Merapok, Lawas</h4>
+            <p><strong>Client:</strong> DID</p><p><strong>Year:</strong> 2007</p><p><strong>Cost:</strong> RM20 Mil.</p>
+          </article>
+
+          <article class="project-card" data-side="previous" data-category="schools" data-year="2007">
+            <h4>Pembinaan, Penaiktarafan & Pembaikpulihan Sekolah & Asrama — Sarawak (Pakej A)</h4>
+            <p><strong>Client:</strong> KPM</p><p><strong>Year:</strong> 2007</p><p><strong>Cost:</strong> RM69 Mil.</p>
+          </article>
+        </div>
+      </div>
+
+      <!-- CURRENT -->
+      <div class="project-panel">
+        <h2>Current Projects</h2>
+        <div class="filter-bar" data-side="current">
+          <button class="filter active" data-category="all">All</button>
+          <button class="filter" data-category="schools">Schools & Institutions</button>
+          <button class="filter" data-category="transport">Airports / Roads / Bridges</button>
+          <button class="filter" data-category="buildings">Buildings & Infrastructure</button>
+          <button class="filter" data-category="religious">Religious Buildings</button>
+        </div>
+
+        <div class="project-list" id="currentList">
+          <article class="project-card" data-side="current" data-category="religious" data-year="2025">
+            <h4>Pembinaan Masjid Darul Ittihad, Kuching</h4>
+            <p><strong>Client:</strong> JAIS</p><p><strong>Year:</strong> 2025</p><p><strong>Cost:</strong> RM51 Mil.</p>
+          </article>
+
+          <article class="project-card" data-side="current" data-category="schools" data-year="2024">
+            <h4>Cadangan Pembangunan Projek Pendidikan Sekolah Menengah Islam Sarawak</h4>
+            <p><strong>Client:</strong> Yayasan Sarawak</p><p><strong>Year:</strong> 2024</p><p><strong>Cost:</strong> RM80 Mil.</p>
+          </article>
+
+          <article class="project-card" data-side="current" data-category="religious" data-year="2024">
+            <h4>Cadangan Pembangunan Masjid Sg. Bedaun, Jalan Santubong, Kuching</h4>
+            <p><strong>Client:</strong> PELITA</p><p><strong>Year:</strong> 2024</p><p><strong>Cost:</strong> RM27 Mil.</p>
+          </article>
+
+          <article class="project-card" data-side="current" data-category="buildings" data-year="2024">
+            <h4>Proposed 217 Units Double Storey Detached House, Jalan Sultan Tengah, Kuching</h4>
+            <p><strong>Client:</strong> PELITA</p><p><strong>Year:</strong> 2024</p><p><strong>Cost:</strong> RM30 Mil.</p>
+          </article>
+
+          <article class="project-card" data-side="current" data-category="buildings" data-year="2024">
+            <h4>Development of Mukah Waterfront, Mukah</h4>
+            <p><strong>Client:</strong> DID Sarawak</p><p><strong>Year:</strong> 2024</p><p><strong>Cost:</strong> RM64 Mil.</p>
+          </article>
+
+          <article class="project-card" data-side="current" data-category="buildings" data-year="2024">
+            <h4>Proposed New Mukah Integrated Market, Mukah</h4>
+            <p><strong>Client:</strong> MDDM</p><p><strong>Year:</strong> 2024</p><p><strong>Cost:</strong> RM40 Mil.</p>
+          </article>
+
+          <article class="project-card" data-side="current" data-category="schools" data-year="2024">
+            <h4>Kolej Teknologi Islam Hikmah, Tadika Hikmah & Sekolah Menengah Tahfiz Hikmah — Kuching</h4>
+            <p><strong>Client:</strong> UDA</p><p><strong>Year:</strong> 2024</p><p><strong>Cost:</strong> RM40 Mil.</p>
+          </article>
+
+          <article class="project-card" data-side="current" data-category="schools" data-year="2024">
+            <h4>Pembinaan Tambahan 14 Unit Rumah Guru, SMK Tinjar, Miri</h4>
+            <p><strong>Client:</strong> JKR</p><p><strong>Year:</strong> 2024</p><p><strong>Cost:</strong> RM14 Mil.</p>
+          </article>
+
+          <article class="project-card" data-side="current" data-category="transport" data-year="2020">
+            <h4>Projek Jalan Kpg. Lubuk Samsu, Kpg. Sabang, Kpg. Semanggal, Kpg. Sg. Labi & Kpg. Tanjung — Simunjan</h4>
+            <p><strong>Client:</strong> JKR</p><p><strong>Year:</strong> 2020</p><p><strong>Cost:</strong> RM64 Mil.</p>
+          </article>
+
+          <article class="project-card" data-side="current" data-category="buildings" data-year="2020">
+            <h4>Projek Pembangunan Ibu Pejabat Polis Daerah (IPD) Belaga</h4>
+            <p><strong>Client:</strong> JKR</p><p><strong>Year:</strong> 2020</p><p><strong>Cost:</strong> RM80 Mil.</p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+</html>

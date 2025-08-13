@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About — Zadra Ingénieurs</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css"/><script defer src="main.js"></script>
+</head>
+<body>
+  <!-- NAV -->
+  <nav>
+  <a href="index.html" class="nav-logo" aria-label="Zadra Home">
+    <img src="images/logo.png" alt="Zadra Ingénieurs Logo">
+  </a>
+
+  <div class="nav-toggle" onclick="toggleMenu()" aria-label="Toggle menu">&#9776;</div>
+
+  <div class="nav-links" id="navLinks">
+    <!-- About + dropdown -->
+    <div class="nav-item has-submenu">
+      <a href="about.html" class="submenu-toggle" aria-haspopup="true" aria-expanded="false">
+        About
+        <span class="caret" aria-hidden="true">▾</span>
+      </a>
+      <div class="submenu" role="menu">
+        <a href="about.html" role="menuitem">Overview</a> 
+        <a href="vision-mission.html" role="menuitem">Vision & Mission</a>
+        <a href="services.html" role="menuitem">Services</a>
+      </div>
+    </div>
+
+    <a href="projects.html">Projects</a>
+    <a href="director.html">Director</a>
+    <a href="team.html">Team</a>
+    <a href="careers.html">Careers</a>
+    <a href="contact.html" class="nav-btn">Contact</a>
+  </div>
+</nav>
+
+  <!-- ABOUT (stacked parts with scroll-snap) -->
+  <main class="about-snap">
+    <!-- Part 1: Overview -->
+    <section class="about-block fade-in">
+      <div class="about-container">
+        <h1>About Zadra Ingénieurs Sdn Bhd</h1>
+        <p class="lead">
+          Zadra Ingénieurs Sdn Bhd (formerly Zadra Consultant) is a Kuching-based Civil & Structural Engineering
+          consultancy, established on <strong>12 December 2006</strong>. We partner closely with clients as part of
+          the design team, balancing <em>functionality</em>, <em>economy</em>, and <em>aesthetics</em> to deliver
+          robust, cost-effective solutions.
+        </p>
+        <ul class="bullets">
+          <li><strong>Location:</strong> Kuching, Sarawak</li>
+          <li><strong>Focus:</strong> Civil & Structural engineering consultancy</li>
+          <li><strong>Approach:</strong> Team collaboration, BIM-enabled workflows, value engineering</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Part 2: Core Expertise -->
+    <section class="about-block alt fade-in">
+      <div class="about-container grid-2">
+        <div>
+          <h2>Core Expertise</h2>
+          <ul class="bullets">
+            <li>Project master planning & feasibility</li>
+            <li>Detailed design (civil, structural & infrastructure)</li>
+            <li>Contract administration & tender support</li>
+            <li>Construction supervision & quality control</li>
+          </ul>
+        </div>
+        <div>
+          <h2>Sectors & Specialisation</h2>
+          <ul class="bullets">
+            <li>Airports: runways, taxiways, aprons; hangars & general aviation</li>
+            <li>Roads, highways, bridges & drainage/irrigation</li>
+            <li>Sewerage & public infrastructure</li>
+            <li>Educational & institutional buildings</li>
+            <li>Industrial & land development, sand filling works</li>
+            <li>Jetties & wharfs</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Part 3: Design Services -->
+    <section class="about-block fade-in">
+      <div class="about-container grid-2">
+        <div>
+          <h2>Design Services</h2>
+          <ul class="bullets">
+            <li>Structural analysis & design (reinforced concrete & steel)</li>
+            <li>Hydraulic/drainage design & flood management</li>
+            <li>Sewerage network & treatment interfacing</li>
+            <li>Airside/landside airport infrastructure planning</li>
+            <li>Road geometry, pavement & earthworks</li>
+          </ul>
+        </div>
+        <div>
+          <h2>How We Deliver</h2>
+          <ul class="bullets">
+            <li>BIM-enabled coordination & clash resolution</li>
+            <li>Modern tools, codes & best practices</li>
+            <li>Cost, programme & risk-conscious solutions</li>
+            <li>Clear reporting & stakeholder communication</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Part 4: Team at a Glance -->
+    <section class="about-block alt fade-in">
+      <div class="about-container grid-2">
+        <div>
+          <h2>Team at a Glance</h2>
+          <ul class="bullets">
+            <li>Total staff: <strong>15</strong></li>
+            <li>Design Engineers: <strong>5</strong></li>
+            <li>Resident Engineers: <strong>2</strong></li>
+            <li>Sub-Professionals: <strong>4</strong></li>
+            <li>Clerical/Admin: <strong>4</strong></li>
+          </ul>
+        </div>
+        <div>
+          <h2>Leadership</h2>
+          <p>Led by <strong>Ir. Ts. Hj. Zamhuri</strong> with 25+ years of experience, focusing on quality, mentorship and client partnership.</p>
+          <a class="btn" href="director.html">Meet the Director</a>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Team — Zadra Ingénieurs</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css"/><script defer src="main.js"></script>
+</head>
+<body>
+
+  <!-- NAV -->
+
+ <nav>
+  <a href="index.html" class="nav-logo" aria-label="Zadra Home">
+    <img src="images/logo.png" alt="Zadra Ingénieurs Logo">
+  </a>
+
+  <div class="nav-toggle" onclick="toggleMenu()" aria-label="Toggle menu">&#9776;</div>
+
+  <div class="nav-links" id="navLinks">
+    <!-- About + dropdown -->
+    <div class="nav-item has-submenu">
+      <a href="about.html" class="submenu-toggle" aria-haspopup="true" aria-expanded="false">
+        About
+        <span class="caret" aria-hidden="true">▾</span>
+      </a>
+      <div class="submenu" role="menu">
+        <a href="about.html" role="menuitem">Overview</a> 
+        <a href="vision-mission.html" role="menuitem">Vision & Mission</a>
+        <a href="services.html" role="menuitem">Services</a>
+      </div>
+    </div>
+
+    <a href="projects.html">Projects</a>
+    <a href="director.html">Director</a>
+    <a href="team.html">Team</a>
+    <a href="careers.html">Careers</a>
+    <a href="contact.html" class="nav-btn">Contact</a>
+  </div>
+</nav>
+
+<!-- ============== TECHNICAL TEAM ============== -->
+<section class="team-section fade-in" id="tech-org">
+  <h2 class="team-title">Technical Team</h2>
+
+  <div class="team-row center">
+    <div class="team-card sq">
+      <img src="images/director.jpeg" alt="Ir. Ts. Hj Zamhuri">
+      <h3>Ir. Ts. Hj Zamhuri</h3>
+      <p>Managing Director<br>BIM Modeller</p>
+    </div>
+  </div>
+
+  <div class="connector-vertical"></div>
+
+  <div class="team-row center">
+    <div class="team-card sq">
+      <img src="images/jasmin.jpeg" alt="Nor Jasmin Azri">
+      <h3>Nor Jasmin Azri</h3>
+      <p>Operation Manager<br>BIM Modeller</p>
+    </div>
+  </div>
+
+  <div class="connector-vertical mid-to-row"></div>
+
+  <div class="team-row row-scroll">
+    <div class="team-card sq">
+      <img src="images/iqmal.jpeg" alt="Iqmal Rafaie">
+      <h3>Iqmal Rafaie</h3>
+      <p>Design Engineer (Structure)</p>
+    </div>
+    <div class="team-card sq">
+      <img src="images/nazaitul.jpeg" alt="Nazaitul Awizah">
+      <h3>Nazaitul Awizah</h3>
+      <p>Design Engineer (Civil)<br>BIM Modeller</p>
+    </div>
+    <div class="team-card sq">
+      <img src="images/nureen.jpeg" alt="Nureen Syahmina">
+      <h3>Nureen Syahmina</h3>
+      <p>Design Engineer (Civil)</p>
+    </div>
+    <div class="team-card sq">
+      <img src="images/dannish.jpeg" alt="Ishraf Dannish">
+      <h3>Ishraf Dannish</h3>
+      <p>Design Engineer (Geotechnical)<br>BIM Modeller</p>
+    </div>
+    <div class="team-card sq">
+      <img src="images/rachel.jpeg" alt="Rachel Honeychurch">
+      <h3>Rachel Honeychurch</h3>
+      <p>Design Engineer (Structure)</p>
+    </div>
+  </div>
+
+  <div class="connector-vertical row-to-bottom"></div>
+
+  <div class="team-row center">
+    <div class="team-card sq">
+      <img src="images/placeholder.jpg" alt="Azirah">
+      <h3>Azirah</h3>
+      <p>Draughtsperson</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============== ADMIN TEAM ============== -->
+<section class="team-section fade-in" id="admin-org">
+  <h2 class="team-title">Admin Team</h2>
+
+  <div class="team-row center">
+    <div class="team-card sq">
+      <img src="images/placeholder.jpg" alt="Ir. Ts. Hj Zamhuri">
+      <h3>Ir. Ts. Hj Zamhuri</h3>
+      <p>Managing Director</p>
+    </div>
+  </div>
+
+  
+  <div class="connector-vertical"></div>
+
+  <div class="team-row row-two">
+    <div class="team-card sq">
+      <img src="images/placeholder.jpg" alt="Izzatty Qaisara">
+      <h3>Izzatty Qaisara</h3>
+      <p>IT/Admin Exec.</p>
+    </div>
+    <div class="team-card sq" id="admin-liza">
+      <img src="images/placeholder.jpg" alt="Norliza Liu">
+      <h3>Norliza Liu</h3>
+      <p>Admin Exec.</p>
+    </div>
+  </div>
+
+  <div class="connector-vertical liza-to-tier3"></div>
+
+  <div class="team-row row-under-liza">
+    <div class="team-card sq">
+      <img src="images/dyg.jpeg" alt="Dyg Nur Mardhiah">
+      <h3>Dyg Nur Mardhiah</h3>
+      <p>Admin Exec.</p>
+    </div>
+    <div class="team-card sq">
+      <img src="images/placeholder.jpg" alt="Najihah Azzahira">
+      <h3>Najihah Azzahira</h3>
+      <p>Admin Exec.</p>
+    </div>
+    <div class="team-card sq">
+      <img src="images/listra.jpeg" alt="Najihah Azzahira">
+      <h3>Listra</h3>
+      <p>Admin Exec.</p>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
