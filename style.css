@@ -622,5 +622,22 @@ nav.scrolled .nav-logo img{ height:70px; margin-top:0; }
 .form-status.ok { color: #1b7e2f; }
 .form-status.error { color: #b00020; }
 
+/* Mobile menu dropdown alignment fix */
+@media (max-width: 768px) {
+  nav ul ul {
+    position: static; /* Makes dropdown stack vertically in mobile */
+    display: block;
+    width: 100%; /* Full width */
+    padding-left: 1rem; /* Small indent so it's readable */
+    background-color: #111; /* Match header background */
+  }
+
+  nav ul ul li a {
+    display: block;
+    padding: 10px 15px; /* Tap-friendly */
+    font-size: 1rem; /* Keep text readable */
+    white-space: normal; /* Allow text wrapping */
+  }
+}
 
 
