@@ -622,22 +622,48 @@ nav.scrolled .nav-logo img{ height:70px; margin-top:0; }
 .form-status.ok { color: #1b7e2f; }
 .form-status.error { color: #b00020; }
 
-/* Mobile menu dropdown alignment fix */
-@media (max-width: 768px) {
-  nav ul ul {
-    position: static; /* Makes dropdown stack vertically in mobile */
+/* ---- MOBILE NAV FIX: make panel start below header and fill width ---- */
+@media (max-width: 768px){
+  /* lock header on top */
+  nav{ position: sticky; top: 0; z-index: 1002; }
+
+  /* off-canvas style panel under the header */
+  .nav-links{
+    position: fixed;
+    top: var(--nav-h, 64px);   /* updated at runtime; fallback 64px */
+    left: 0; right: 0;
+    display: none;             /* hidden until .show */
+    flex-direction: column;
+    gap: .25rem;
+    padding: 12px 16px 18px;
+    background: var(--primary-color);
+    z-index: 1001;
+    max-height: calc(100vh - var(--nav-h, 64px));
+    overflow-y: auto;
+  }
+  .nav-links.show{ display: flex; }
+
+  /* each link is full width, tap-friendly */
+  .nav-links a,
+  .nav-item > a.submenu-toggle{
     display: block;
-    width: 100%; /* Full width */
-    padding-left: 1rem; /* Small indent so it's readable */
-    background-color: #111; /* Match header background */
+    width: 100%;
+    padding: 12px 14px;
+    color: #fff;
   }
 
-  nav ul ul li a {
-    display: block;
-    padding: 10px 15px; /* Tap-friendly */
-    font-size: 1rem; /* Keep text readable */
-    white-space: normal; /* Allow text wrapping */
+  /* dropdown lives INSIDE the panel in mobile */
+  .submenu{
+    position: static;          /* no absolute popout on mobile */
+    display: none;
+    background: transparent;
+    box-shadow: none;
+    padding: 0 0 6px 10px;     /* small indent */
   }
+  .has-submenu.open .submenu{ display: block; }
+
+  /* nicer body scroll behavior when menu is open */
+  body.menu-open{ overflow: hidden; }
 }
 
 

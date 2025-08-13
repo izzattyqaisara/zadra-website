@@ -220,5 +220,44 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
+// Compute header height for mobile panel offset
+document.addEventListener('DOMContentLoaded', () => {
+  const nav = document.querySelector('nav');
+  if (nav) {
+    const setH = () => {
+      document.documentElement.style.setProperty('--nav-h', nav.offsetHeight + 'px');
+    };
+    setH();
+    window.addEventListener('resize', setH);
+  }
+});
+
+// Burger toggle
+function toggleMenu(){
+  const navLinks = document.getElementById('navLinks');
+  if (!navLinks) return;
+  navLinks.classList.toggle('show');
+  document.body.classList.toggle('menu-open', navLinks.classList.contains('show'));
+  // close any open submenus when closing the panel
+  if (!navLinks.classList.contains('show')) {
+    document.querySelectorAll('.has-submenu.open').forEach(p => p.classList.remove('open'));
+  }
+}
+
+// Mobile: tap “About” to open/close its submenu
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.has-submenu > a.submenu-toggle').forEach((toggle) => {
+    toggle.addEventListener('click', (e) => {
+      const navLinks = document.getElementById('navLinks');
+      const parent = toggle.closest('.has-submenu');
+      // Only hijack on mobile (when panel is open)
+      if (navLinks && navLinks.classList.contains('show') && parent) {
+        e.preventDefault();
+        parent.classList.toggle('open');
+      }
+    });
+  });
+});
+
 
 
