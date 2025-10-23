@@ -229,16 +229,16 @@
     /* ===== Authoritative projects (CURRENT + PREVIOUS) ===== */
     const authoritative = [
       // CURRENT
-      { id:"cur01", title:"Darul Ittihad Mosque, Kuching", type:"Religious", client:"JAIS", year:2025, cost:"RM 51M", location:"Kuching, Sarawak", status:"Ongoing", images:["images/ittihad.jpg"] },
-      { id:"cur02", title:"Sarawak Islamic Secondary School Development", type:"Education", client:"Yayasan Sarawak", year:2024, cost:"RM 80M", location:"Sarawak", status:"Ongoing", images:["images/sissd.jpg"] },
-      { id:"cur03", title:"Sungai Bedaun Mosque, Santubong (Kuching)", type:"Religious", client:"PELITA", year:2024, cost:"RM 27M", location:"Santubong, Kuching", status:"Ongoing", images:["images/bedaun.jpg"] },
-      { id:"cur04", title:"217 Double-Storey Detached Houses, Jln Sultan Tengah", type:"Residential", client:"PELITA", year:2024, cost:"RM 30M", location:"Kuching, Sarawak", status:"Ongoing", images:["images/detached.jpg"] },
-      { id:"cur05", title:"Mukah Waterfront Development", type:"Landscape", client:"DID Sarawak", year:2024, cost:"RM 64M", location:"Mukah, Sarawak", status:"Ongoing", images:["images/mukahwf.jpg"] },
-      { id:"cur06", title:"Mukah Integrated Market (New)", type:"Commercial", client:"MDDM", year:2024, cost:"RM 40M", location:"Mukah, Sarawak", status:"Ongoing", images:["images/mukahmarket.jpeg"] },
-      { id:"cur07", title:"HIKMAH Islamic Tech College, KG & Tahfiz Secondary", type:"Education", client:"UDA", year:2024, cost:"RM 40M", location:"Kuching, Sarawak", status:"Ongoing", images:["images/hikmahtahfiz.jpg"] },
-      { id:"cur08", title:"SMK Tinjar: 14 Teachers’ Quarters", type:"Education", client:"JKR", year:2024, cost:"RM 14M", location:"Miri, Sarawak", status:"Ongoing", images:["images/quarters.jpg"] },
-      { id:"cur09", title:"Simunjan Rural Roads (Lubuk Samsu, Sabang, Semanggal, Sg Labi, Tanjung)", type:"Civil", client:"JKR", year:2020, cost:"RM 64M", location:"Simunjan, Sarawak", status:"Ongoing", images:["images/ruralroads.jpeg"] },
-      { id:"cur10", title:"Belaga District Police HQ (IPD)", type:"Institutional", client:"JKR", year:2020, cost:"RM 80M", location:"Belaga, Sarawak", status:"Ongoing", images:["images/policedistrict.jpg"] },
+      { id:"cur01", title:"Darul Ittihad Mosque, Kuching", type:"Religious", client:"JAIS", year:2025, location:"Kuching, Sarawak", status:"Ongoing", images:["images/ittihad.jpg"] },
+      { id:"cur02", title:"Sarawak Islamic Secondary School Development", type:"Education", client:"Yayasan Sarawak", year:2024, location:"Sarawak", status:"Ongoing", images:["images/sissd.jpg"] },
+      { id:"cur03", title:"Sungai Bedaun Mosque, Santubong (Kuching)", type:"Religious", client:"PELITA", year:2024, location:"Santubong, Kuching", status:"Ongoing", images:["images/bedaun.jpg"] },
+      { id:"cur04", title:"217 Double-Storey Detached Houses, Jln Sultan Tengah", type:"Residential", client:"PELITA", year:2024, location:"Kuching, Sarawak", status:"Ongoing", images:["images/detached.jpg"] },
+      { id:"cur05", title:"Mukah Waterfront Development", type:"Landscape", client:"DID Sarawak", year:2024, location:"Mukah, Sarawak", status:"Ongoing", images:["images/mukahwf.jpg"] },
+      { id:"cur06", title:"Mukah Integrated Market (New)", type:"Commercial", client:"MDDM", year:2024, location:"Mukah, Sarawak", status:"Ongoing", images:["images/mukahmarket.jpeg"] },
+      { id:"cur07", title:"HIKMAH Islamic Tech College, KG & Tahfiz Secondary", type:"Education", client:"UDA", year:2024, location:"Kuching, Sarawak", status:"Ongoing", images:["images/hikmahtahfiz.jpg"] },
+      { id:"cur08", title:"SMK Tinjar: 14 Teachers’ Quarters", type:"Education", client:"JKR", year:2024, location:"Miri, Sarawak", status:"Ongoing", images:["images/quarters.jpg"] },
+      { id:"cur09", title:"Simunjan Rural Roads (Lubuk Samsu, Sabang, Semanggal, Sg Labi, Tanjung)", type:"Civil", client:"JKR", year:2020, location:"Simunjan, Sarawak", status:"Ongoing", images:["images/ruralroads.jpeg"] },
+      { id:"cur10", title:"Belaga District Police HQ (IPD)", type:"Institutional", client:"JKR", year:2020, location:"Belaga, Sarawak", status:"Ongoing", images:["images/policedistrict.jpg"] },
 
       // PREVIOUS
       { id:"prev01", title:"Tahfiz Primary School (2-Storey), Kuching", type:"Education", client:"HIKMAH", year:2021, cost:"RM 17M", location:"Kuching, Sarawak", status:"Completed", images:["images/tahfizprimary.jpg"] },
@@ -258,12 +258,11 @@
     /* ===== Extra items you provided ===== */
     const extras = [
       // current
-      { title:'Rumah Wakaf Miri', year:'2025', client:'', cost:'', location:'Miri, Sarawak', status:'Ongoing', type:'Residential', images:[] },
-      { title:'Rumah Wakaf Kuching', year:'2025', client:'', cost:'', location:'Kuching, Sarawak', status:'Ongoing', type:'Residential', images:[] },
-      { title:'Masjid An-Naim, Lutong Miri', year:'2025', client:'', cost:'', location:'Lutong, Miri', status:'Ongoing', type:'Religious', images:[] },
-      { title:'Cadangan Pembangunan Masjid Terapung Kampung Limpaku Pinang', year:'2025', client:'', cost:'6 Mil', location:'', status:'Ongoing', type:'Religious', images:[] },
-      { title:'Permanent Raise Up at Durin Bridge', year:'', client:'', cost:'', location:'Durin, Sarawak', status:'Ongoing', type:'Infrastructure', images:[] },
-      { title:'Cadangan kerja-kerja penambahbaikan landskap dan infrastruktur, Sibu Town District', year:'2025', client:'', cost:'9 Mil', location:'Sibu, Sarawak', status:'Ongoing', type:'Landscape', images:[] },
+      { title:'Rumah Wakaf Miri', year:'2025', client:'', location:'Miri, Sarawak', status:'Ongoing', type:'Residential', images:[] },
+      { title:'Rumah Wakaf Kuching', year:'2025', client:'', location:'Kuching, Sarawak', status:'Ongoing', type:'Residential', images:[] },
+      { title:'Cadangan Pembangunan Masjid Terapung Kampung Limpaku Pinang', year:'2025', client:'', location:'', status:'Ongoing', type:'Religious', images:[] },
+      { title:'Permanent Raise Up at Durin Bridge', year:'', client:'', location:'Durin, Sarawak', status:'Ongoing', type:'Infrastructure', images:[] },
+      { title:'Cadangan kerja-kerja penambahbaikan landskap dan infrastruktur, Sibu Town District', year:'2025', client:'', location:'Sibu, Sarawak', status:'Ongoing', type:'Landscape', images:[] },
 
       // previous
       { title:'Projek peningkatan kemudahan pelancongan – Taman Negara Niah, Miri', year:'2016', client:'', cost:'3.4M', location:'Miri, Sarawak', status:'Completed', type:'Landscape', images:[] },
