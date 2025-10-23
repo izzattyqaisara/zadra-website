@@ -1,133 +1,251 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>About — Zadra Ingénieurs</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css"/><script defer src="main.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — Overview | Zadra Ingénieurs</title>
+  <meta name="description" content="Overview of Zadra Ingénieurs Sdn. Bhd. — Civil & Structural engineering consultancy based in Sarawak." />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    :root{
+      --bg:#f7f4f1;            /* warm paper base */
+      --ink:#2a1e1a;           /* body text */
+      --primary:#7b4b2a;       /* brand brown */
+      --primary-2:#9b6944;     /* lighter brand */
+      --card:#ffffff;          /* cards */
+      --muted:#7a6a61;         /* muted text */
+      --ring:rgba(123,75,42,.25);
+      --shadow:0 10px 30px rgba(0,0,0,.07), 0 4px 10px rgba(0,0,0,.05);
+      --radius:20px;
+
+      /* shared gradient tones (matches Director/Team/Careers hero) */
+      --cream-1:#efe3d7;
+      --cream-2:#f7f4f1;
+      --line:#eee2da;
+    }
+
+    *{box-sizing:border-box}
+    html,body{margin:0;background:var(--bg);color:var(--ink);
+      font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Noto Sans,Ubuntu,Cantarell,Helvetica Neue,Arial}
+    body{padding-top:72px} /* space for fixed nav if used */
+
+    /* Containers */
+    .container{max-width:1200px;margin:0 auto;padding:0 20px}
+    .stack{margin-top:34px}
+    .grid{display:grid;gap:clamp(16px,3vw,24px)}
+    .grid-2-lean{grid-template-columns:2fr 1fr}
+    @media (max-width:1000px){.grid-2-lean{grid-template-columns:1fr}}
+
+    /* Buttons */
+    .btn{display:inline-block;text-decoration:none;border-radius:12px;padding:12px 16px;font-weight:800;box-shadow:var(--shadow);border:1px solid var(--line);background:#fff;color:var(--primary)}
+    .btn:hover{transform:translateY(-1px)}
+    .btn.outline{background:#fff;border:1px solid #e9ded5;color:var(--primary)}
+    .btn + .btn{margin-left:10px}
+
+    /* Hero */
+    .about-hero{
+      background:linear-gradient(180deg,var(--cream-1) 0%, var(--cream-2) 100%);
+      border-bottom:1px solid #ecdccc;
+      padding:clamp(48px,6vw,96px) 0;
+    }
+    .hero-wrap{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(320px,1fr));
+      gap:clamp(20px,4vw,48px);
+      align-items:center;
+      justify-items:stretch;
+    }
+    @media (max-width:900px){.hero-wrap{grid-template-columns:1fr}}
+
+    .hero-copy .eyebrow{
+      display:inline-block;font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+      color:var(--primary);background:#f3e7de;border-radius:999px;padding:6px 12px;font-weight:700
+    }
+    .hero-copy h1{margin:14px 0 6px;font-weight:800;line-height:1.1;font-size:clamp(28px,3.4vw,44px)}
+    .hero-copy .sub{color:var(--muted);font-size:clamp(15px,1.4vw,18px);margin:8px 0 16px}
+    .cta{display:flex;gap:10px;flex-wrap:wrap}
+
+    /* KPI tiles (right side of hero) */
+    .kpi-grid{display:grid;grid-template-columns:repeat(2,minmax(140px,1fr));gap:14px}
+    .kpi{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;text-align:center;box-shadow:var(--shadow)}
+    .kpi .n{font-size:30px;font-weight:900;line-height:1}
+    .kpi .l{color:var(--muted);margin-top:4px}
+    .kpi-note{grid-column:1/-1;font-weight:700;color:var(--primary-2)}
+
+    /* Cards */
+    .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px}
+    .card.accent{background:linear-gradient(135deg,#fff,#fff8f2)}
+    .bullets{margin:0 0 0 18px}
+    .pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+    .pill{background:#faf6f2;border:1px solid var(--line);border-radius:999px;padding:6px 10px;font-weight:600;color:var(--primary);font-size:13px}
+
+    /* Trust band */
+    .trust-band{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+    .trust-band .muted{color:var(--muted);font-weight:700}
+    .trust-band ul{display:flex;flex-wrap:wrap;gap:12px;margin:0;padding:0;list-style:none}
+    .trust-band li{background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px 12px;box-shadow:var(--shadow);font-weight:700}
+
+    /* Section titles */
+    .section-title{margin:0 0 10px;font-size:22px}
+
+    /* Highlight cards */
+    .lift{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:16px;padding:14px;box-shadow:var(--shadow);background:#fff}
+    .lift:hover{transform:translateY(-1px)}
+    .card-title{margin:0 0 4px}
+    .muted{color:var(--muted)}
+
+    /* Leadership teaser */
+    .lead-teaser .lead-wrap{display:flex;gap:14px;align-items:center}
+    .avatar-lg{width:72px;height:72px;border-radius:16px;object-fit:cover;border:1px solid var(--line);box-shadow:var(--shadow)}
+
+    /* Footer */
+    .site-footer{margin:40px 0 20px;text-align:center;color:var(--muted)}
+  </style>
 </head>
 <body>
-  <!-- NAV -->
-  <nav>
-  <a href="index.html" class="nav-logo" aria-label="Zadra Home">
-    <img src="images/logo.png" alt="Zadra Ingénieurs Logo">
-  </a>
+  <div data-include="nav.html"></div>
 
-  <div class="nav-toggle" onclick="toggleMenu()" aria-label="Toggle menu">&#9776;</div>
-
-  <div class="nav-links" id="navLinks">
-    <!-- About + dropdown -->
-    <div class="nav-item has-submenu">
-      <a href="about.html" class="submenu-toggle" aria-haspopup="true" aria-expanded="false">
-        About
-        <span class="caret" aria-hidden="true">▾</span>
-      </a>
-      <div class="submenu" role="menu">
-        <a href="about.html" role="menuitem">Overview</a> 
-        <a href="vision-mission.html" role="menuitem">Vision & Mission</a>
-        <a href="services.html" role="menuitem">Services</a>
-      </div>
-    </div>
-
-    <a href="projects.html">Projects</a>
-    <a href="director.html">Director</a>
-    <a href="team.html">Team</a>
-    <a href="careers.html">Careers</a>
-    <a href="contact.html" class="nav-btn">Contact</a>
-  </div>
-</nav>
-
-  <!-- ABOUT (stacked parts with scroll-snap) -->
-  <main class="about-snap">
-    <!-- Part 1: Overview -->
-    <section class="about-block fade-in">
-      <div class="about-container">
-        <h1>About Zadra Ingénieurs Sdn Bhd</h1>
-        <p class="lead">
-          Zadra Ingénieurs Sdn Bhd (formerly Zadra Consultant) is a Kuching-based Civil & Structural Engineering
-          consultancy, established on <strong>12 December 2006</strong>. We partner closely with clients as part of
-          the design team, balancing <em>functionality</em>, <em>economy</em>, and <em>aesthetics</em> to deliver
-          robust, cost-effective solutions.
+  <!-- Modern hero (soft gradient + KPIs) -->
+  <section class="about-hero">
+    <div class="container hero-wrap">
+      <div class="hero-copy">
+        <p class="eyebrow">About</p>
+        <h1>Engineering Solutions for a Better Tomorrow.</h1>
+        <p class="sub">
+          We design practical Civil &amp; Structural solutions for public agencies and private developers
+          across Sarawak and Malaysia—balancing buildability, safety and lifecycle value.
         </p>
-        <ul class="bullets">
-          <li><strong>Location:</strong> Kuching, Sarawak</li>
-          <li><strong>Focus:</strong> Civil & Structural engineering consultancy</li>
-          <li><strong>Approach:</strong> Team collaboration, BIM-enabled workflows, value engineering</li>
+        <div class="cta">
+          <a class="btn" href="projects.html">View Projects</a>
+          <a class="btn outline" href="contact.html">Contact</a>
+        </div>
+      </div>
+
+      <aside class="kpi-grid">
+        <div class="kpi">
+          <div class="n">19</div>
+          <div class="l">Years</div>
+        </div>
+        <div class="kpi">
+          <div class="n">1+ Billion</div>
+          <div class="l">Project Values</div>
+        </div>
+        <div class="kpi">
+          <div class="n">10+</div>
+          <div class="l">Sectors</div>
+        </div>
+        <div class="kpi kpi-note">
+          Registered: BEM / MBOT • ACPE • AAE • IEM
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <main class="container">
+    <!-- Company brief (tidy two-column) -->
+    <section class="stack">
+      <div class="grid grid-2-lean">
+        <article class="card accent">
+          <h2>Company Brief</h2>
+          <p><strong>Zadra Ingénieurs Sdn. Bhd.</strong> (previously Zadra Consultant) was established in <strong>Kuching, Sarawak</strong> on <strong>12 December 2006</strong> to provide consultancy services in <strong>Civil &amp; Structural Engineering</strong>.</p>
+          <p>Our team brings broad experience across public infrastructure and building projects, with a reputation for <strong>integrity</strong> and <strong>quality of work</strong>.</p>
+          <p>Track record includes master planning, contract administration and supervision for <em>airports, hangars, general aviation, infrastructure, sand filling works, schools, institutional buildings, runways, taxiways &amp; parking aprons</em>.</p>
+          <p>We work collaboratively with clients as part of the design team—aiming for the optimum balance of <strong>functionality</strong>, <strong>economy</strong> and <strong>aesthetics</strong> using modern materials, sound engineering practice and up-to-date tools.</p>
+        </article>
+
+        <aside class="card">
+          <h2>What we do</h2>
+          <ul class="bullets">
+            <li>Civil &amp; Structural design from feasibility to detailed design</li>
+            <li>Peer review / independent check and QA/QC gateways</li>
+            <li>Contract administration &amp; site support</li>
+            <li>BIM coordination for clash detection and model-based quantities</li>
+          </ul>
+
+          <h3 class="mt16" style="margin-top:16px">Sectors</h3>
+          <div class="pills">
+            <span class="pill">Airports</span>
+            <span class="pill">Highways</span>
+            <span class="pill">Education</span>
+            <span class="pill">Religious</span>
+            <span class="pill">Civic</span>
+            <span class="pill">Markets</span>
+            <span class="pill">Landscape</span>
+            <span class="pill">Industrial</span>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Clients / trust strip -->
+    <section class="stack">
+      <div class="trust-band card">
+        <span class="muted">Trusted by</span>
+        <ul>
+          <li>JKR</li>
+          <li>UNIMAS</li>
+          <li>PELITA</li>
+          <li>JAIS</li>
+          <li>SFC</li>
+          <li>Yayasan Sarawak</li>
+          <li>MDDM</li>
+          <li>DID</li>
         </ul>
       </div>
     </section>
 
-    <!-- Part 2: Core Expertise -->
-    <section class="about-block alt fade-in">
-      <div class="about-container grid-2">
-        <div>
-          <h2>Core Expertise</h2>
-          <ul class="bullets">
-            <li>Project master planning & feasibility</li>
-            <li>Detailed design (civil, structural & infrastructure)</li>
-            <li>Contract administration & tender support</li>
-            <li>Construction supervision & quality control</li>
-          </ul>
-        </div>
-        <div>
-          <h2>Sectors & Specialisation</h2>
-          <ul class="bullets">
-            <li>Airports: runways, taxiways, aprons; hangars & general aviation</li>
-            <li>Roads, highways, bridges & drainage/irrigation</li>
-            <li>Sewerage & public infrastructure</li>
-            <li>Educational & institutional buildings</li>
-            <li>Industrial & land development, sand filling works</li>
-            <li>Jetties & wharfs</li>
-          </ul>
-        </div>
+    <!-- Recent highlights -->
+    <section class="stack">
+      <h2 class="section-title">Recent Highlights</h2>
+      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
+        <a class="card lift" href="projects.html">
+          <h3 class="card-title">Mukah Waterfront Development</h3>
+          <p class="muted">Landscape • 2024 • DID Sarawak</p>
+        </a>
+        <a class="card lift" href="projects.html">
+          <h3 class="card-title">SMK Tinjar Teachers’ Quarters</h3>
+          <p class="muted">Education • 2024 • JKR</p>
+        </a>
+        <a class="card lift" href="projects.html">
+          <h3 class="card-title">Pan Borneo WPC03: Serian–Pantu</h3>
+          <p class="muted">Infrastructure • 2016 • JKR</p>
+        </a>
       </div>
     </section>
 
-    <!-- Part 3: Design Services -->
-    <section class="about-block fade-in">
-      <div class="about-container grid-2">
-        <div>
-          <h2>Design Services</h2>
+    <!-- Awards -->
+    <section class="stack">
+      <div class="grid grid-2-lean">
+        <article class="card">
+          <h2>Awards</h2>
           <ul class="bullets">
-            <li>Structural analysis & design (reinforced concrete & steel)</li>
-            <li>Hydraulic/drainage design & flood management</li>
-            <li>Sewerage network & treatment interfacing</li>
-            <li>Airside/landside airport infrastructure planning</li>
-            <li>Road geometry, pavement & earthworks</li>
+            <li>Anugerah Usahawan Jaya Platinum (2022)</li>
+            <li>Emerging Consulting Engineer (C&amp;S) (2023)</li>
           </ul>
-        </div>
-        <div>
-          <h2>How We Deliver</h2>
-          <ul class="bullets">
-            <li>BIM-enabled coordination & clash resolution</li>
-            <li>Modern tools, codes & best practices</li>
-            <li>Cost, programme & risk-conscious solutions</li>
-            <li>Clear reporting & stakeholder communication</li>
-          </ul>
-        </div>
-      </div>
-    </section>
+        </article>
 
-    <!-- Part 4: Team at a Glance -->
-    <section class="about-block alt fade-in">
-      <div class="about-container grid-2">
-        <div>
-          <h2>Team at a Glance</h2>
-          <ul class="bullets">
-            <li>Total staff: <strong>15</strong></li>
-            <li>Design Engineers: <strong>5</strong></li>
-            <li>Resident Engineers: <strong>2</strong></li>
-            <li>Sub-Professionals: <strong>4</strong></li>
-            <li>Clerical/Admin: <strong>4</strong></li>
-          </ul>
-        </div>
-        <div>
-          <h2>Leadership</h2>
-          <p>Led by <strong>Ir. Ts. Hj. Zamhuri</strong> with 25+ years of experience, focusing on quality, mentorship and client partnership.</p>
-          <a class="btn" href="director.html">Meet the Director</a>
-        </div>
+        <article class="card lead-teaser">
+          <div class="lead-wrap">
+            <img src="images/director.jpeg" alt="Managing Director" class="avatar-lg"
+                 onerror="this.onerror=null;this.src='images/placeholder.jpg'">
+            <div>
+              <h2>Leadership</h2>
+              <p class="muted">Guided by practical experience across bridges, roads, buildings and civic assets.</p>
+              <a class="btn outline" href="director.html">Meet the Director</a>
+            </div>
+          </div>
+        </article>
       </div>
     </section>
   </main>
+
+  <footer class="site-footer">© <span id="year"></span> Zadra Ingénieurs Sdn. Bhd. All rights reserved.</footer>
+
+  <script type="module" src="importer.js"></script>
+  <script type="module" src="main.js"></script>
+  <script>
+    // simple year filler
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>

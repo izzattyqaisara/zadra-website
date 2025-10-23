@@ -1,15 +1,26 @@
-<nav>
-  <a href="#about" class="nav-logo">
-    <img src="images/logo.jpeg" alt="Zadra Logo">
-    <span>Zadra Ingénieurs</span>
-  </a>
-  <div class="nav-toggle" onclick="toggleMenu()">&#9776;</div>
-  <div class="nav-links" id="navLinks">
-    <a href="#services">Services</a>
-    <a href="#projects">Projects</a>
-    <a href="#director">Director</a>
-    <a href="#team">Team</a>
-    <a href="#careers">Careers</a>
-    <a href="#contact" class="nav-btn">Contact</a>
+<header class="site-header">
+  <div class="container nav-row">
+    <a class="brand brand-only" href="index.html" aria-label="Zadra home">
+      <img class="brand-logo" src="images/logo.png" alt="Zadra logo">
+    </a>
+
+    <nav class="menu" aria-label="Main navigation">
+      <a href="index.html">Home</a>
+
+      <div class="dropdown">
+        <button class="dropbtn" aria-haspopup="true" aria-expanded="false">About</button>
+        <div class="dropmenu" role="menu">
+          <a href="about.html" role="menuitem">Overview</a>
+          <a href="vision-mission.html" role="menuitem">Vision &amp; Mission</a>
+          <a href="services.html" role="menuitem">Services</a>
+        </div>
+      </div>
+
+      <a href="projects.html">Projects</a>
+      <a href="director.html">Director</a>
+      <a href="team.html">Team</a>
+      <a href="careers.html">Careers</a>
+      <a href="contact.html">Contact</a>
+    </nav>
   </div>
-</nav>
+</header>

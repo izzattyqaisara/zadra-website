@@ -1,156 +1,347 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Team — Zadra Ingénieurs</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css"/><script defer src="main.js"></script>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    :root{
+      --bg:#f7f4f1; --ink:#2a1e1a;
+      --primary:#7b4b2a; --primary-2:#9b6944;
+      --card:#fff; --muted:#7a6a61;
+      --ring:rgba(123,75,42,.25);
+      --shadow:0 10px 30px rgba(0,0,0,.07), 0 4px 10px rgba(0,0,0,.05);
+      --radius:20px;
+      --line:#d7c7ba;               /* connector line color */
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;background:var(--bg);color:var(--ink);
+      font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Noto Sans,Ubuntu,Cantarell,Helvetica Neue,Arial}
+    body{padding-top:72px}
+
+    /* HERO (same vibe as Careers) */
+    .hero{
+      position:relative;overflow:hidden;
+      padding:clamp(48px,6vw,96px) 20px;display:flex;
+      /* added gradient to match other sections */
+      background:linear-gradient(180deg,#efe3d7 0%, #f7f4f1 100%);
+      border-bottom:1px solid #ecdccc;
+    }
+    .hero-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(2,minmax(320px,1fr));gap:clamp(20px,4vw,48px);align-items:center;justify-items:center;justify-content:center}
+    @media (max-width:900px){.hero-inner{grid-template-columns:1fr}}
+    .hero-card{background:linear-gradient(135deg,#fff,#fff8f2);border:1px solid #f0e8e2;border-radius:var(--radius);padding:clamp(20px,3vw,36px);box-shadow:var(--shadow)}
+    .eyebrow{display:inline-block;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--primary);background:#f3e7de;border-radius:999px;padding:6px 12px;font-weight:700}
+    h1{margin:14px 0 6px;font-weight:800;line-height:1.1;font-size:clamp(28px,3.4vw,44px)}
+    .lead{color:var(--muted);font-size:clamp(15px,1.4vw,18px);margin:8px 0 0}
+
+    .wrap{max-width:1200px;margin:0 auto;padding:0 20px 80px}
+    .section-title{margin:34px 0 10px;font-size:22px;text-align:center}
+
+    /* === ORG CHART === */
+    .chart{
+      background:var(--card);border:1px solid #eee2da;border-radius:20px;box-shadow:var(--shadow);
+      padding:20px 16px;margin-bottom:28px
+    }
+    .chart h3{margin:6px 0 20px;text-align:center}
+    .row{position:relative;display:flex;flex-wrap:wrap;gap:14px;justify-content:center}
+    .row + .row{margin-top:14px}
+
+    .person{
+      position:relative;width:260px;max-width:100%;
+      background:#fff;border:1px solid #efe4dc;border-radius:16px;box-shadow:var(--shadow);overflow:hidden;text-align:center
+    }
+    .ph{aspect-ratio:4/3;background:#f7ede4;display:flex;align-items:center;justify-content:center}
+    .ph img{width:100%;height:100%;object-fit:cover;display:block}
+    .info{padding:12px}
+    .name{font-weight:800}
+    .role{color:var(--muted);font-size:13px;line-height:1.3;margin-top:4px}
+
+    /* vertical stems under top/manager cards */
+    .stem-down{position:absolute;left:50%;transform:translateX(-0.5px);width:1px;background:var(--line)}
+    .row.top .person .stem-down{bottom:-14px;height:14px}
+    .row.manager .person .stem-down{bottom:-18px;height:18px}
+
+    /* staff rail (horizontal) with ticks up to each card */
+    .row.staff{padding-top:26px}
+    .row.staff::before{
+      content:"";position:absolute;left:3%;right:3%;top:8px;height:1px;background:var(--line)
+    }
+    .row.staff .person::before{
+      content:"";position:absolute;left:50%;top:-18px;transform:translateX(-0.5px);width:1px;height:18px;background:var(--line)
+    }
+
+    /* connector from staff rail down to the last card (if any) */
+    .row.tail{margin-top:18px}
+    .row.tail::before{
+      content:"";position:absolute;left:50%;top:-18px;transform:translateX(-0.5px);width:1px;height:18px;background:var(--line)
+    }
+
+    /* Gallery */
+    .gallery{background:var(--card);border:1px solid #eee2da;border-radius:20px;box-shadow:var(--shadow);padding:16px;margin-top:34px}
+    .viewer{position:relative;border-radius:16px;overflow:hidden;background:linear-gradient(180deg,#fff,#fff7f0);border:1px solid #f0e8e2}
+    .stage{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden}
+    .stage img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .35s ease}
+    .stage img.active{opacity:1}
+    .controls{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 4px}
+    .btn{appearance:none;border:1px solid #e6ddd6;background:#fff;padding:10px 14px;border-radius:12px;font-weight:700;color:var(--primary);cursor:pointer}
+    .btn:hover{transform:translateY(-1px)}
+    .dots{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+    .dot{width:8px;height:8px;border-radius:999px;background:#e6ddd6}
+    .dot.active{background:var(--primary)}
+    .thumbs{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(120px,1fr);gap:10px;overflow-x:auto;padding:6px 2px 2px;scroll-snap-type:x mandatory}
+    .thumb{position:relative;border-radius:12px;overflow:hidden;border:2px solid transparent;scroll-snap-align:center;cursor:pointer;min-height:80px;background:#f5eee7}
+    .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+    .thumb.active{border-color:var(--primary)}
+    .thumb::after{content:"";position:absolute;inset:0;box-shadow:inset 0 0 0 1px rgba(0,0,0,.06);border-radius:12px}
+  </style>
 </head>
 <body>
+  <!-- NAV INCLUDE -->
+  <div data-include="nav.html"></div>
+  <script type="module">import './importer.js';</script>
+  <script type="module">import './main.js';</script>
 
-  <!-- NAV -->
-
- <nav>
-  <a href="index.html" class="nav-logo" aria-label="Zadra Home">
-    <img src="images/logo.png" alt="Zadra Ingénieurs Logo">
-  </a>
-
-  <div class="nav-toggle" onclick="toggleMenu()" aria-label="Toggle menu">&#9776;</div>
-
-  <div class="nav-links" id="navLinks">
-    <!-- About + dropdown -->
-    <div class="nav-item has-submenu">
-      <a href="about.html" class="submenu-toggle" aria-haspopup="true" aria-expanded="false">
-        About
-        <span class="caret" aria-hidden="true">▾</span>
-      </a>
-      <div class="submenu" role="menu">
-        <a href="about.html" role="menuitem">Overview</a> 
-        <a href="vision-mission.html" role="menuitem">Vision & Mission</a>
-        <a href="services.html" role="menuitem">Services</a>
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="hero-card">
+        <span class="eyebrow">Our people</span>
+        <h1>Two teams. One standard.</h1>
+        <p class="lead">A clear structure that keeps quality high and collaboration friendly.</p>
+      </div>
+      <div class="hero-card">
+        <p class="lead">Browse the organisational charts below and a gallery of team moments.</p>
       </div>
     </div>
+  </header>
 
-    <a href="projects.html">Projects</a>
-    <a href="director.html">Director</a>
-    <a href="team.html">Team</a>
-    <a href="careers.html">Careers</a>
-    <a href="contact.html" class="nav-btn">Contact</a>
-  </div>
-</nav>
+  <main class="wrap">
+    <!-- ===== Technical Team ===== -->
+    <section class="chart">
+      <h3>Technical Team</h3>
 
-<!-- ============== TECHNICAL TEAM ============== -->
-<section class="team-section fade-in" id="tech-org">
-  <h2 class="team-title">Technical Team</h2>
+      <!-- top -->
+      <div class="row top">
+        <article class="person">
+          <span class="stem-down"></span>
+          <div class="ph"><img src="images/director%20new.jpg" alt="Ir. Ts. Hj Zamhuri" loading="lazy" onerror="this.style.display='none'"></div>
+          <div class="info">
+            <div class="name">Ir. Ts. Hj Zamhuri</div>
+            <div class="role">Managing Director<br/>BIM Modeller</div>
+          </div>
+        </article>
+      </div>
 
-  <div class="team-row center">
-    <div class="team-card sq">
-      <img src="images/director.jpeg" alt="Ir. Ts. Hj Zamhuri">
-      <h3>Ir. Ts. Hj Zamhuri</h3>
-      <p>Managing Director<br>BIM Modeller</p>
-    </div>
-  </div>
+      <!-- manager -->
+      <div class="row manager">
+        <article class="person">
+          <span class="stem-down"></span>
+          <div class="ph"><img src="images/jasmin.jpeg" alt="Nor Jasmin Azri" loading="lazy" onerror="this.style.display='none'"></div>
+          <div class="info">
+            <div class="name">Nur Jasmin Azri</div>
+            <div class="role">Operation Manager<br/>BIM Modeller</div>
+          </div>
+        </article>
+      </div>
 
-  <div class="connector-vertical"></div>
+      <!-- staff rail -->
+      <div class="row staff">
+        <article class="person">
+          <div class="ph"><img src="images/iqmal.jpeg" alt="Iqmal Iqfaic" loading="lazy" onerror="this.style.display='none'"></div>
+          <div class="info">
+            <div class="name">Iqmal Iqfaic</div>
+            <div class="role">Design Engineer (Structure)</div>
+          </div>
+        </article>
 
-  <div class="team-row center">
-    <div class="team-card sq">
-      <img src="images/jasmin.jpeg" alt="Nor Jasmin Azri">
-      <h3>Nor Jasmin Azri</h3>
-      <p>Operation Manager<br>BIM Modeller</p>
-    </div>
-  </div>
+        <article class="person">
+          <div class="ph"><img src="images/nazaitul.jpeg" alt="Nazaitul Awizah" loading="lazy" onerror="this.style.display='none'"></div>
+          <div class="info">
+            <div class="name">Nazaitul Awizah</div>
+            <div class="role">Design Engineer (Civil)<br/>BIM Modeller</div>
+          </div>
+        </article>
 
-  <div class="connector-vertical mid-to-row"></div>
+        <article class="person">
+          <div class="ph"><img src="images/nureen.jpeg" alt="Nureen Syahmina" loading="lazy" onerror="this.style.display='none'"></div>
+          <div class="info">
+            <div class="name">Nureen Syahmina</div>
+            <div class="role">Design Engineer (Civil)</div>
+          </div>
+        </article>
 
-  <div class="team-row row-scroll">
-    <div class="team-card sq">
-      <img src="images/iqmal.jpeg" alt="Iqmal Rafaie">
-      <h3>Iqmal Rafaie</h3>
-      <p>Design Engineer (Structure)</p>
-    </div>
-    <div class="team-card sq">
-      <img src="images/nazaitul.jpeg" alt="Nazaitul Awizah">
-      <h3>Nazaitul Awizah</h3>
-      <p>Design Engineer (Civil)<br>BIM Modeller</p>
-    </div>
-    <div class="team-card sq">
-      <img src="images/nureen.jpeg" alt="Nureen Syahmina">
-      <h3>Nureen Syahmina</h3>
-      <p>Design Engineer (Civil)</p>
-    </div>
-    <div class="team-card sq">
-      <img src="images/dannish.jpeg" alt="Ishraf Dannish">
-      <h3>Ishraf Dannish</h3>
-      <p>Design Engineer (Geotechnical)<br>BIM Modeller</p>
-    </div>
-    <div class="team-card sq">
-      <img src="images/rachel.jpeg" alt="Rachel Honeychurch">
-      <h3>Rachel Honeychurch</h3>
-      <p>Design Engineer (Structure)</p>
-    </div>
-  </div>
+        <article class="person">
+          <div class="ph"><img src="images/dannish.jpeg" alt="Ishraf Dannish" loading="lazy" onerror="this.style.display='none'"></div>
+          <div class="info">
+            <div class="name">Ishraf Dannish</div>
+            <div class="role">Design Engineer (Geotechnical)<br/>BIM Modeller</div>
+          </div>
+        </article>
 
-  <div class="connector-vertical row-to-bottom"></div>
+        <article class="person">
+          <div class="ph"><img src="images/rachel.jpeg" alt="Rachel Honeychurch" loading="lazy" onerror="this.style.display='none'"></div>
+          <div class="info">
+            <div class="name">Rachel Honeychurch</div>
+            <div class="role">Design Engineer (Structure)</div>
+          </div>
+        </article>
+      </div>
 
-  <div class="team-row center">
-    <div class="team-card sq">
-      <img src="images/placeholder.jpg" alt="Azirah">
-      <h3>Azirah</h3>
-      <p>Draughtsperson</p>
-    </div>
-  </div>
-</section>
+      <!-- tail to draughtsperson -->
+      <div class="row tail">
+        <article class="person">
+          <div class="ph"><img src="images/azirah.jpeg" alt="Azirah" loading="lazy" onerror="this.style.display='none'"></div>
+          <div class="info">
+            <div class="name">Azirah</div>
+            <div class="role">Draughtsperson</div>
+          </div>
+        </article>
+      </div>
+    </section>
 
+    <!-- ===== Admin Team ===== -->
+    <section class="chart">
+      <h3>Admin Team</h3>
 
-<!-- ============== ADMIN TEAM ============== -->
-<section class="team-section fade-in" id="admin-org">
-  <h2 class="team-title">Admin Team</h2>
+      <!-- top -->
+      <div class="row top">
+        <article class="person">
+          <span class="stem-down"></span>
+          <div class="ph"><img src="images/director%20new.jpg" alt="Ir. Ts. Hj Zamhuri" loading="lazy" onerror="this.style.display='none'"></div>
+          <div class="info">
+            <div class="name">Ir. Ts. Hj Zamhuri</div>
+            <div class="role">Managing Director</div>
+          </div>
+        </article>
+      </div>
 
-  <div class="team-row center">
-    <div class="team-card sq">
-      <img src="images/director.jpeg" alt="Ir. Ts. Hj Zamhuri">
-      <h3>Ir. Ts. Hj Zamhuri</h3>
-      <p>Managing Director</p>
-    </div>
-  </div>
+      <!-- managers -->
+      <div class="row manager">
+        <article class="person">
+          <span class="stem-down"></span>
+          <div class="ph"><img src="images/zety.jpeg" alt="Izzaty Qaisara" loading="lazy" onerror="this.style.display='none'"></div>
+          <div class="info">
+            <div class="name">Izzatty Qaisara</div>
+            <div class="role">IT Specialist</div>
+          </div>
+        </article>
 
-  
-  <div class="connector-vertical"></div>
+        <article class="person">
+          <span class="stem-down"></span>
+          <div class="ph"><img src="images/liza.jpeg" alt="Nortiza Liu" loading="lazy" onerror="this.style.display='none'"></div>
+          <div class="info">
+            <div class="name">Norliza Liu</div>
+            <div class="role">Admin Exec.</div>
+          </div>
+        </article>
+      </div>
 
-  <div class="team-row row-two">
-    <div class="team-card sq">
-      <img src="images/placeholder.jpg" alt="Izzatty Qaisara">
-      <h3>Izzatty Qaisara</h3>
-      <p>IT Specialist</p>
-    </div>
-    <div class="team-card sq" id="admin-liza">
-      <img src="images/placeholder.jpg" alt="Norliza Liu">
-      <h3>Norliza Liu</h3>
-      <p>Admin Exec.</p>
-    </div>
-  </div>
+      <!-- staff rail -->
+      <div class="row staff">
+        <article class="person">
+          <div class="ph"><img src="images/dyg.jpeg" alt="Dyg Nur Mardhiah" loading="lazy" onerror="this.style.display='none'"></div>
+          <div class="info">
+            <div class="name">Dyg Nur Mardhiah</div>
+            <div class="role">Admin Exec.</div>
+          </div>
+        </article>
 
-  <div class="connector-vertical liza-to-tier3"></div>
+        <article class="person">
+          <div class="ph"><img src="images/Najihah .jpg" alt="Najihah Azzahira" loading="lazy" onerror="this.style.display='none'"></div>
+          <div class="info">
+            <div class="name">Najihah Azzahira</div>
+            <div class="role">Admin Exec.</div>
+          </div>
+        </article>
 
-  <div class="team-row row-under-liza">
-    <div class="team-card sq">
-      <img src="images/dyg.jpeg" alt="Dyg Nur Mardhiah">
-      <h3>Dyg Nur Mardhiah</h3>
-      <p>Admin Exec.</p>
-    </div>
-    <div class="team-card sq">
-      <img src="images/Najihah .jpg" alt="Najihah Azzahira">
-      <h3>Najihah Azzahira</h3>
-      <p>Admin Exec.</p>
-    </div>
-    <div class="team-card sq">
-      <img src="images/listra.jpeg" alt="Najihah Azzahira">
-      <h3>Listra Jabah Anak Jimmy</h3>
-      <p>Admin Exec.</p>
-    </div>
-  </div>
-</section>
+        <article class="person">
+          <div class="ph"><img src="images/listra.jpeg" alt="Listra Jahah Anak Jimmy" loading="lazy" onerror="this.style.display='none'"></div>
+          <div class="info">
+            <div class="name">Listra Jahah Anak Jimmy</div>
+            <div class="role">Admin Exec.</div>
+          </div>
+        </article>
+      </div>
+    </section>
 
+    <!-- ===== Team Gallery (only Team-gallery-*.jpeg) ===== -->
+    <section class="gallery">
+      <h3 class="section-title" style="margin-top:0">Team Gallery</h3>
+      <div class="viewer">
+        <div class="stage" id="stage"></div>
+      </div>
+      <div class="controls">
+        <button class="btn" id="prevBtn" aria-label="Previous">← Prev</button>
+        <div class="dots" id="dots"></div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <button class="btn" id="playBtn" aria-label="Autoplay">▶︎ Play</button>
+          <button class="btn" id="nextBtn" aria-label="Next">Next →</button>
+        </div>
+      </div>
+      <div class="thumbs" id="thumbs"></div>
+    </section>
+  </main>
+
+  <script>
+    /* ===== Simple gallery using only Team-gallery-*.jpeg ===== */
+    const TEAM_IMAGES = [
+      'Team-gallery-1.jpeg',
+      'Team-gallery-2.jpeg',
+      'Team-gallery-3.jpeg',
+      'Team-gallery-4.jpeg',
+      'Team-gallery-5.jpeg'
+    ];
+    const stage  = document.getElementById('stage');
+    const dots   = document.getElementById('dots');
+    const thumbs = document.getElementById('thumbs');
+    const prevBtn= document.getElementById('prevBtn');
+    const nextBtn= document.getElementById('nextBtn');
+    const playBtn= document.getElementById('playBtn');
+
+    let current = 0, timer = null;
+
+    TEAM_IMAGES.forEach((name, i) => {
+      const img = document.createElement('img');
+      img.src = `images/${name}`; img.alt = `Team photo ${i+1}`; img.loading='lazy';
+      if(i===0) img.classList.add('active');
+      stage.appendChild(img);
+
+      const dot = document.createElement('div');
+      dot.className = 'dot' + (i===0?' active':'');
+      dot.addEventListener('click', ()=>go(i,true));
+      dots.appendChild(dot);
+
+      const th = document.createElement('div');
+      th.className='thumb' + (i===0?' active':'');
+      th.innerHTML = `<img src="images/${name}" alt="Thumb ${i+1}" loading="lazy">`;
+      th.addEventListener('click', ()=>go(i,true));
+      thumbs.appendChild(th);
+    });
+
+    const imgs = Array.from(stage.querySelectorAll('img'));
+    function setActive(idx){
+      imgs.forEach((im,i)=>im.classList.toggle('active', i===idx));
+      dots.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active', i===idx));
+      thumbs.querySelectorAll('.thumb').forEach((t,i)=>{
+        t.classList.toggle('active', i===idx);
+        if(i===idx) t.scrollIntoView({inline:'center',behavior:'smooth',block:'nearest'});
+      });
+    }
+    function go(idx, pause=false){ current=(idx+imgs.length)%imgs.length; setActive(current); if(pause) stop(); }
+    function next(){ go(current+1); }
+    function prev(){ go(current-1); }
+    function play(){ if(timer) return; playBtn.textContent='⏸ Pause'; timer=setInterval(next,3500); }
+    function stop(){ if(timer){clearInterval(timer); timer=null;} playBtn.textContent='▶︎ Play'; }
+
+    prevBtn.addEventListener('click',()=>{prev();stop();});
+    nextBtn.addEventListener('click',()=>{next();stop();});
+    playBtn.addEventListener('click',()=>timer?stop():play());
+    window.addEventListener('keydown',e=>{
+      if(e.key==='ArrowRight'){next();stop();}
+      if(e.key==='ArrowLeft'){prev();stop();}
+      if(e.key===' '){e.preventDefault(); timer?stop():play();}
+    });
+  </script>
 </body>
 </html>

@@ -1,48 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Zadra Ingénieurs Sdn. Bhd.</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css"/><script defer src="main.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Zadra Ingénieurs — Home</title>
+  <link rel="stylesheet" href="style.css" />
+  <meta name="description" content="Zadra Ingénieurs Sdn. Bhd. — Civil & Structural consulting engineers in Sarawak." />
 </head>
-<body>
-  <nav>
-  <a href="index.html" class="nav-logo" aria-label="Zadra Home">
-    <img src="images/logo.png" alt="Zadra Ingénieurs Logo">
-  </a>
+<body class="hero-page"><!-- keeps translucent header style -->
+  <!-- Shared navigation -->
+  <div data-include="nav.html"></div>
 
-  <div class="nav-toggle" onclick="toggleMenu()" aria-label="Toggle menu">&#9776;</div>
-
-  <div class="nav-links" id="navLinks">
-    <!-- About + dropdown -->
-    <div class="nav-item has-submenu">
-      <a href="about.html" class="submenu-toggle" aria-haspopup="true" aria-expanded="false">
-        About
-        <span class="caret" aria-hidden="true">▾</span>
-      </a>
-      <div class="submenu" role="menu">
-        <a href="about.html" role="menuitem">Overview</a>
-        <a href="vision-mission.html" role="menuitem">Vision & Mission</a>
-        <a href="services.html" role="menuitem">Services</a>
+  <!-- ===== STATIC HERO (no JS, uses your banner.jpg) ===== -->
+  <section
+    class="hero-cover"
+    style="background-image:
+      linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,.25)),
+      url('images/banner.jpg');">
+    <div class="hero-inner">
+      <p class="eyebrow">Civil &amp; Structural Consulting Engineers</p>
+      <h1>ZADRA INGENIEURS SDN. BHD.</h1>
+      <p class="sub">Engineering Solutions for a Better Tomorrow.</p>
+      <div class="cta">
+        <a class="btn" href="projects.html">View Projects</a>
+        <a class="btn outline" href="services.html">Our Services</a>
       </div>
     </div>
-
-    <a href="projects.html">Projects</a>
-    <a href="director.html">Director</a>
-    <a href="team.html">Team</a>
-    <a href="careers.html">Careers</a>
-    <a href="contact.html" class="nav-btn">Contact</a>
-  </div>
-</nav>
-
-  <section class="hero" id="home">
-    <div class="hero-content">
-      <h1>Engineering Solutions for a Better Tomorrow</h1>
-      <p>Delivering trusted civil & structural consultancy since 2006.</p>
-      <a href="services.html" class="btn">Explore Services</a>
-      <a href="contact.html" class="btn">Get in Touch</a>
-    </div>
   </section>
+
+  <main class="container">
+
+    <!-- ===== Services (4 cards) ===== -->
+    <section class="stack">
+      <h2 class="section-title">What We Do</h2>
+      <div class="svc-grid">
+        <a class="svc-card" href="services.html#design">
+          <h3>Design &amp; BIM Modelling</h3>
+          <p>Feasibility to detailed design with buildability and safety at the core.</p>
+        </a>
+        <a class="svc-card" href="services.html#contract-admin">
+          <h3>Contract Administration</h3>
+          <p>BoQs, estimates, tender documentation and evaluations.</p>
+        </a>
+        <a class="svc-card" href="services.html#contract-mgmt">
+          <h3>Contract Management</h3>
+          <p>Site coordination, QA/QC and periodic reporting.</p>
+        </a>
+        <a class="svc-card" href="services.html#post-construction">
+          <h3>Post-Construction Support</h3>
+          <p>Completion reports, DLP monitoring and performance reviews.</p>
+        </a>
+      </div>
+    </section>
+
+    <!-- ===== Featured Projects (uses your actual images) ===== -->
+    <section class="stack">
+      <h2 class="section-title">Featured Projects</h2>
+      <div class="proj-grid">
+        <a class="proj" href="projects.html">
+          <img src="images/masjid bakam.jpeg" alt="Masjid Bakam" />
+          <span class="label">Kampung Bakam Mosque</span>
+        </a>
+        <a class="proj" href="projects.html">
+          <img src="images/PB SPJ.jpeg" alt="Pan Borneo (SPJ)" />
+          <span class="label">Pan Borneo (SPJ)</span>
+        </a>
+        <a class="proj" href="projects.html">
+          <img src="images/masjid serian.jpeg" alt="Serian Mosque Upgrade" />
+          <span class="label">Serian Mosque Upgrade</span>
+        </a>
+        <a class="proj" href="projects.html">
+          <img src="images/projek koko.jpeg" alt="Cocoa Processing Centre" />
+          <span class="label">Cocoa Centre Refurbishment</span>
+        </a>
+        <a class="proj" href="projects.html">
+          <img src="images/fairy cave.jpeg" alt="Fairy Cave Nature Reserve" />
+          <span class="label">Fairy Cave Reserve</span>
+        </a>
+        <a class="proj" href="projects.html">
+          <img src="images/kubu lili.jpeg" alt="Fort Lily Conservation" />
+          <span class="label">Fort Lily Conservation</span>
+        </a>
+      </div>
+      <div class="center mt16">
+        <a class="btn outline" href="projects.html">Browse all projects</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">© <span id="year"></span> Zadra Ingénieurs Sdn. Bhd. All rights reserved.</footer>
+
+  <script type="module" src="importer.js"></script>
+  <script type="module" src="main.js"></script>
 </body>
 </html>

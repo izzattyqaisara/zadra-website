@@ -1,104 +1,244 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Services — Zadra Ingénieurs</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css"/><script defer src="main.js"></script>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    :root{
+      --bg:#f7f4f1; --ink:#2a1e1a;
+      --primary:#7b4b2a; --primary-2:#9b6944;
+      --card:#fff; --muted:#7a6a61;
+      --ring:rgba(123,75,42,.25);
+      --shadow:0 10px 30px rgba(0,0,0,.07), 0 4px 10px rgba(0,0,0,.05);
+      --radius:20px; --line:#eee2da;
+      --cream-1:#efe3d7; --cream-2:#f7f4f1;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;background:var(--bg);color:var(--ink);
+      font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Noto Sans,Ubuntu,Cantarell,Helvetica Neue,Arial}
+    body{padding-top:72px}
+    html{scroll-behavior:smooth}
+
+    .container{max-width:1200px;margin:0 auto;padding:0 20px}
+    .stack{margin-top:34px}
+
+    /* HERO */
+    .page-hero{
+      background:linear-gradient(180deg,var(--cream-1) 0%, var(--cream-2) 100%);
+      border-bottom:1px solid #ecdccc;
+      padding:clamp(48px,6vw,96px) 0;
+    }
+    .eyebrow{
+      display:inline-block;font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+      color:var(--primary);background:#f3e7de;border-radius:999px;padding:6px 12px;font-weight:700
+    }
+    h1{margin:14px 0 6px;font-weight:800;line-height:1.1;font-size:clamp(28px,3.4vw,44px)}
+    .muted{color:var(--muted)}
+
+    /* Section cards */
+    .svc{
+      background:#fff; border:1px solid var(--line); border-radius:24px; box-shadow:var(--shadow);
+      padding:24px; margin-top:18px;
+    }
+    .svc-header{display:flex; justify-content:space-between; align-items:flex-start; gap:16px}
+    .svc h2{margin:0 0 6px; font-size:clamp(22px,2.8vw,28px); font-weight:900}
+    .svc p.lead{margin:0; color:var(--muted)}
+    .svc-body{display:grid; grid-template-columns:1.2fr 1fr; gap:18px; margin-top:16px}
+    @media (max-width:900px){ .svc-body{grid-template-columns:1fr} }
+
+    .card{background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:16px}
+    .bullets{margin:0 0 0 18px}
+    .bullets li{margin:6px 0}
+
+    /* image placeholder */
+    .ph{
+      aspect-ratio: 16/10; border-radius:14px; background:#f7ede4; overflow:hidden;
+      border:1px solid #f0e8e2; box-shadow:var(--shadow)
+    }
+    .ph img{width:100%; height:100%; object-fit:cover; display:block}
+
+    footer.site-footer{text-align:center;color:var(--muted);margin:40px 0 20px}
+  </style>
 </head>
 <body>
- <nav>
-  <a href="index.html" class="nav-logo" aria-label="Zadra Home">
-    <img src="images/logo.png" alt="Zadra Ingénieurs Logo">
-  </a>
+  <!-- NAV INCLUDE -->
+  <div data-include="nav.html"></div>
+  <script type="module">import './importer.js';</script>
+  <script type="module">import './main.js';</script>
 
-  <div class="nav-toggle" onclick="toggleMenu()" aria-label="Toggle menu">&#9776;</div>
-
-  <div class="nav-links" id="navLinks">
-    <!-- About + dropdown -->
-    <div class="nav-item has-submenu">
-      <a href="about.html" class="submenu-toggle" aria-haspopup="true" aria-expanded="false">
-        About
-        <span class="caret" aria-hidden="true">▾</span>
-      </a>
-      <div class="submenu" role="menu">
-        <a href="about.html" role="menuitem">Overview</a> 
-        <a href="vision-mission.html" role="menuitem">Vision & Mission</a>
-        <a href="services.html" role="menuitem">Services</a>
-      </div>
-    </div>
-
-    <a href="projects.html">Projects</a>
-    <a href="director.html">Director</a>
-    <a href="team.html">Team</a>
-    <a href="careers.html">Careers</a>
-    <a href="contact.html" class="nav-btn">Contact</a>
-  </div>
-</nav>
-
-  <section id="services" class="fade-in" style="background:#fff; padding:4rem 1rem;">
-    <div style="max-width:1200px; margin:auto; text-align:center;">
-      <h2 style="color:var(--primary-color); margin-bottom:2rem;">Our Core Services</h2>
-
-      <div style="display:flex; flex-wrap:wrap; gap:2rem; justify-content:center;">
-        <div class="service-box">
-          <h3 onclick="toggleService(this)">1. Design</h3>
-          <div class="service-details">
-            <ul>
-              <li>BIM Modelling of Structure</li>
-              <li>BIM Modelling of Infrastructure (Road & Highways)</li>
-              <li>Development Studies & Forecasts</li>
-              <li>Technical Feasibility Studies</li>
-              <li>Conceptual & Preliminary Design</li>
-              <li>Airport Master Plan</li>
-              <li>Design Development</li>
-              <li>Preliminary Design & Costing</li>
-              <li>Detail Design & Specifications</li>
-              <li>Project Reporting</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="service-box">
-          <h3 onclick="toggleService(this)">2. Contract Administration</h3>
-          <div class="service-details">
-            <ul>
-              <li>BQ, Cost Estimates & Schedules</li>
-              <li>Tender Document Preparation</li>
-              <li>Pre-qualification of Contractors</li>
-              <li>Tender Evaluation</li>
-              <li>Contract Document & Specifications</li>
-              <li>All forms for Contract Administration</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="service-box">
-          <h3 onclick="toggleService(this)">3. Contract Management</h3>
-          <div class="service-details">
-            <ul>
-              <li>Construction Coordination & Supervision</li>
-              <li>Contract Management & Administration</li>
-              <li>Periodic Reports & Completion Report</li>
-              <li>Work Supervision & Quality Control</li>
-              <li>Inspection & Testing of Materials</li>
-              <li>Certification of Periodic Payments</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="service-box">
-          <h3 onclick="toggleService(this)">4. Post Construction</h3>
-          <div class="service-details">
-            <ul>
-              <li>Completion Reports</li>
-              <li>Defect Liability Period Monitoring</li>
-              <li>Performance Monitoring</li>
-            </ul>
-          </div>
-        </div>
-      </div>
+  <!-- HERO -->
+  <section class="page-hero">
+    <div class="container">
+      <p class="eyebrow">About</p>
+      <h1>Our Core Services</h1>
+      <p class="muted">Practical Civil &amp; Structural delivery from feasibility to post-construction.</p>
     </div>
   </section>
+
+  <main class="container stack">
+    <!-- Each service section -->
+    <section id="svc-cs" class="svc">
+      <header class="svc-header">
+        <div>
+          <h2>Civil &amp; Structural Design</h2>
+          <p class="lead">Feasibility through detailed design for buildings and public assets.</p>
+        </div>
+      </header>
+      <div class="svc-body">
+        <div class="card">
+          <ul class="bullets">
+            <li>Concept, preliminary and detailed design.</li>
+            <li>Structural analysis &amp; design notes (RC/steel/timber).</li>
+            <li>Foundations, retaining walls &amp; geotechnical interfaces.</li>
+            <li>Tender documentation &amp; BOQ.</li>
+          </ul>
+        </div>
+        <figure class="ph">
+          <img src="images/cns.jpeg" alt="Civil & Structural design" onerror="this.style.display='none'">
+        </figure>
+      </div>
+    </section>
+
+    <section id="svc-roads" class="svc">
+      <header class="svc-header">
+        <div>
+          <h2>Highways &amp; Roads</h2>
+          <p class="lead">Alignment, geometry and pavement design with safety &amp; staging.</p>
+        </div>
+      </header>
+      <div class="svc-body">
+        <div class="card">
+          <ul class="bullets">
+            <li>Horizontal/vertical alignment and earthworks.</li>
+            <li>Intersections, drainage &amp; road furniture.</li>
+            <li>Pavement structures and detailing.</li>
+            <li>Traffic management &amp; construction staging inputs.</li>
+          </ul>
+        </div>
+        <figure class="ph">
+          <img src="images/highway.jpeg" alt="Highways & Roads" onerror="this.style.display='none'">
+        </figure>
+      </div>
+    </section>
+
+    <section id="svc-bridges" class="svc">
+      <header class="svc-header">
+        <div>
+          <h2>Bridges &amp; Structures</h2>
+          <p class="lead">Buildable solutions for crossings and special structures.</p>
+        </div>
+      </header>
+      <div class="svc-body">
+        <div class="card">
+          <ul class="bullets">
+            <li>Superstructure and substructure design.</li>
+            <li>Temporary works &amp; construction sequencing.</li>
+            <li>Assessment, strengthening &amp; retrofits.</li>
+            <li>Shop-drawing review and RFIs.</li>
+          </ul>
+        </div>
+        <figure class="ph">
+          <img src="images/bridges.jpeg" alt="Bridges & Structures" onerror="this.style.display='none'">
+        </figure>
+      </div>
+    </section>
+
+    <section id="svc-airports" class="svc">
+      <header class="svc-header">
+        <div>
+          <h2>Airports &amp; Aviation</h2>
+          <p class="lead">Airside and landside works with operational considerations.</p>
+        </div>
+      </header>
+      <div class="svc-body">
+        <div class="card">
+          <ul class="bullets">
+            <li>Runway, taxiway and apron geometry &amp; grading.</li>
+            <li>Pavement evaluation and overlay design.</li>
+            <li>Drainage &amp; AGL interfaces.</li>
+            <li>Aircraft stand planning &amp; aprons.</li>
+          </ul>
+        </div>
+        <figure class="ph">
+          <img src="images/airport.jpeg" alt="Airports" onerror="this.style.display='none'">
+        </figure>
+      </div>
+    </section>
+
+    <section id="svc-water" class="svc">
+      <header class="svc-header">
+        <div>
+          <h2>Water &amp; Drainage</h2>
+          <p class="lead">Urban drainage, flood resilience and site utilities.</p>
+        </div>
+      </header>
+      <div class="svc-body">
+        <div class="card">
+          <ul class="bullets">
+            <li>Hydraulic/hydrologic design (MSMA).</li>
+            <li>Culverts, channels &amp; detention systems.</li>
+            <li>Potable/fire/wastewater layouts.</li>
+            <li>Erosion &amp; sediment control.</li>
+          </ul>
+        </div>
+        <figure class="ph">
+          <img src="images/water.jpeg" alt="Water & Drainage" onerror="this.style.display='none'">
+        </figure>
+      </div>
+    </section>
+
+    <section id="svc-supervision" class="svc">
+      <header class="svc-header">
+        <div>
+          <h2>Site Supervision &amp; Contract Administration</h2>
+          <p class="lead">Quality, safety and progress from kickoff to handover.</p>
+        </div>
+      </header>
+      <div class="svc-body">
+        <div class="card">
+          <ul class="bullets">
+            <li>RE/ARE, IOW &amp; clerk-of-works support.</li>
+            <li>Inspection/test plans &amp; QA/QC records.</li>
+            <li>Progress claims, VO &amp; site instructions.</li>
+            <li>Commissioning and handover dossiers.</li>
+          </ul>
+        </div>
+        <figure class="ph">
+          <img src="images/supervision.jpeg" alt="Site Supervision" onerror="this.style.display='none'">
+        </figure>
+      </div>
+    </section>
+
+    <section id="svc-bim" class="svc">
+      <header class="svc-header">
+        <div>
+          <h2>BIM Coordination</h2>
+          <p class="lead">Model-based coordination for clashes, quantities and submissions.</p>
+        </div>
+      </header>
+      <div class="svc-body">
+        <div class="card">
+          <ul class="bullets">
+            <li>Revit / Civil 3D model authoring.</li>
+            <li>Navisworks coordination &amp; clash reports.</li>
+            <li>LOD strategy &amp; drawing extractions.</li>
+            <li>Model-based quantities &amp; submissions.</li>
+          </ul>
+        </div>
+        <figure class="ph">
+          <img src="images/bim.jpeg" alt="BIM Coordination" onerror="this.style.display='none'">
+        </figure>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">© <span id="year"></span> Zadra Ingénieurs Sdn. Bhd. All rights reserved.</footer>
+
+  <script>
+    // footer year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>

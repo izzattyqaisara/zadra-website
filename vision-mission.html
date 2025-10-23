@@ -1,60 +1,260 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Vision & Mission — Zadra Ingénieurs</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css"/><script defer src="main.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — Vision & Mission | Zadra Ingénieurs</title>
+  <meta name="description" content="Vision, mission, values and milestones of Zadra Ingénieurs Sdn. Bhd." />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    :root{
+      --bg:#f7f4f1;
+      --ink:#2a1e1a;
+      --primary:#7b4b2a;
+      --primary-2:#9b6944;
+      --card:#fff;
+      --muted:#7a6a61;
+      --ring:rgba(123,75,42,.25);
+      --shadow:0 10px 30px rgba(0,0,0,.07),0 4px 10px rgba(0,0,0,.05);
+      --radius:20px;
+      --cream-1:#efe3d7;
+      --cream-2:#f7f4f1;
+      --line:#eee2da;
+
+      /* Headroom for the milestones timeline (tweak this if needed) */
+      --tl-headroom: 180px; /* try 160–220px depending on your taste */
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;background:var(--bg);color:var(--ink);
+      font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Noto Sans,Ubuntu,Cantarell,Helvetica Neue,Arial}
+    body{padding-top:72px}
+
+    .container{max-width:1200px;margin:0 auto;padding:0 20px}
+    .stack{margin-top:34px}
+    .grid{display:grid;gap:clamp(16px,3vw,24px)}
+    @media(min-width:700px){.grid{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}}
+
+    .btn{display:inline-block;text-decoration:none;border-radius:12px;padding:12px 16px;font-weight:800;box-shadow:var(--shadow);border:1px solid var(--line);background:#fff;color:var(--primary)}
+    .btn:hover{transform:translateY(-1px)}
+
+    /* HERO */
+    .about-hero{
+      background:linear-gradient(180deg,var(--cream-1) 0%,var(--cream-2) 100%);
+      border-bottom:1px solid #ecdccc;
+      padding:clamp(48px,6vw,96px) 0;
+    }
+    .hero-wrap{display:flex;flex-direction:column;gap:16px}
+    .eyebrow{display:inline-block;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--primary);background:#f3e7de;border-radius:999px;padding:6px 12px;font-weight:700}
+    h1{margin:14px 0 6px;font-weight:800;line-height:1.1;font-size:clamp(28px,3.4vw,44px)}
+    .sub{color:var(--muted);font-size:clamp(15px,1.4vw,18px);margin:8px 0 0}
+
+    /* Cards */
+    .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px}
+    .card.accent{background:linear-gradient(135deg,#fff,#fff8f2)}
+    .lead{font-size:18px;color:var(--ink)}
+    .section-title{margin:0 0 10px;font-size:22px}
+
+    /* ===== Milestones (old layout kept; headroom centralized) ===== */
+    .timeline-wrap{
+      position:relative;
+      z-index:2;              /* appear above previous section shadows */
+      overflow-x:auto;
+      overflow-y:visible;
+      background:#fff;
+      border-radius:20px;
+      box-shadow:var(--shadow);
+      border:1px solid var(--line);
+      padding:0 0 20px;       /* top space handled by roadmap headroom */
+    }
+    .roadmap{
+      position:relative;
+      display:flex;
+      gap:24px;
+      min-width:100%;
+      padding-top: var(--tl-headroom); /* ↓ push badges/cards down uniformly */
+    }
+    /* baseline aligned with headroom */
+    .roadmap::before{
+      content:"";
+      position:absolute;
+      left:0; right:0;
+      top: calc(var(--tl-headroom) + 40px);  /* baseline 40px below badges */
+      height:1px;
+      background:#e6ddd6;
+    }
+    .mile{position:relative;flex:0 0 auto}
+    .mile::before{
+      content:"";
+      position:absolute;
+      left:50%;
+      top: calc(var(--tl-headroom) + 40px);  /* stems meet the baseline */
+      transform:translateX(-0.5px);
+      width:1px; height:20px;
+      background:#e6ddd6;
+    }
+    .year-badge{
+      position:relative;
+      z-index:3;
+      display:inline-block;
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding:6px 12px;
+      font-weight:800;
+      color:var(--primary);
+      box-shadow:var(--shadow);
+    }
+    .mcard{
+      margin-top:32px;        /* distance below the badge */
+      min-width:260px;
+    }
+
+    /* reveal */
+    [data-animate]{opacity:0;transform:translateY(20px);transition:all .4s ease}
+    [data-animate].show{opacity:1;transform:translateY(0)}
+
+    .timeline-hint{text-align:center;color:var(--muted);font-size:14px;margin-top:6px}
+    .site-footer{text-align:center;color:var(--muted);margin:40px 0 20px}
+  </style>
 </head>
 <body>
-  <nav>
-  <a href="index.html" class="nav-logo" aria-label="Zadra Home">
-    <img src="images/logo.png" alt="Zadra Ingénieurs Logo">
-  </a>
+  <div data-include="nav.html"></div>
 
-  <div class="nav-toggle" onclick="toggleMenu()" aria-label="Toggle menu">&#9776;</div>
-
-  <div class="nav-links" id="navLinks">
-    <!-- About + dropdown -->
-    <div class="nav-item has-submenu">
-      <a href="about.html" class="submenu-toggle" aria-haspopup="true" aria-expanded="false">
-        About
-        <span class="caret" aria-hidden="true">▾</span>
-      </a>
-      <div class="submenu" role="menu">
-        <a href="about.html" role="menuitem">Overview</a> 
-        <a href="vision-mission.html" role="menuitem">Vision & Mission</a>
-        <a href="services.html" role="menuitem">Services</a>
-      </div>
-    </div>
-
-    <a href="projects.html">Projects</a>
-    <a href="director.html">Director</a>
-    <a href="team.html">Team</a>
-    <a href="careers.html">Careers</a>
-    <a href="contact.html" class="nav-btn">Contact</a>
-  </div>
-</nav>
-
-  <section class="fade-in" style="padding:4rem 1rem; background:var(--light-bg);">
-    <div style="max-width:1000px; margin:auto;">
-      <h2 style="color:var(--primary-color); margin-bottom:2rem; text-align:center;">Our Vision & Mission</h2>
-      <div style="display:flex; flex-direction:column; gap:2rem;">
-        <div>
-          <h3 style="color:var(--accent-color); margin-bottom:0.5rem;">Vision</h3>
-          <p style="font-size:1.05rem; line-height:1.7;">To be a leading civil and structural engineering consultancy recognized for quality, innovation, and sustainable solutions that shape the future of infrastructure.</p>
-        </div>
-        <div>
-          <h3 style="color:var(--accent-color); margin-bottom:0.5rem;">Mission</h3>
-          <ul style="list-style:disc; padding-left:1.5rem; font-size:1.05rem; line-height:1.7;">
-            <li>Deliver efficient and high-quality engineering solutions tailored to our clients' needs.</li>
-            <li>Build long-term partnerships based on trust, integrity, and excellence.</li>
-            <li>Continuously improve through innovation, technology, and professional development.</li>
-            <li>Promote sustainable practices and contribute positively to communities and the environment.</li>
-          </ul>
-        </div>
+  <!-- Hero -->
+  <section class="about-hero">
+    <div class="container hero-wrap">
+      <div class="hero-copy">
+        <p class="eyebrow">About</p>
+        <h1>Vision &amp; Mission</h1>
+        <p class="sub">
+          We aim to deliver buildable, safe and value-focused infrastructure that improves daily life —
+          powered by clear communication, practical engineering, and responsible design.
+        </p>
       </div>
     </div>
   </section>
+
+  <main class="container">
+    <!-- Vision -->
+    <section class="stack">
+      <div class="card accent">
+        <h2>Vision</h2>
+        <p class="lead">Deliver buildable infrastructure that improves daily life across Sarawak and Malaysia.</p>
+      </div>
+    </section>
+
+    <!-- Mission pillars -->
+    <section class="stack">
+      <h2 class="section-title">Mission</h2>
+      <div class="grid">
+        <article class="card"><h3>Buildability &amp; Safety</h3><p>Designs reflect site realities, sequencing and safe construction access.</p></article>
+        <article class="card"><h3>Lifecycle Value</h3><p>Value engineering with durability, maintainability and whole-life cost in mind.</p></article>
+        <article class="card"><h3>Local Capacity</h3><p>Mentoring young engineers and partnering with stakeholders on the ground.</p></article>
+        <article class="card"><h3>Sustainability</h3><p>Flood resilience, materials efficiency and low-disturbance construction.</p></article>
+      </div>
+    </section>
+
+    <!-- Innovation & BIM -->
+    <section class="stack">
+      <h2 class="section-title">Innovation &amp; BIM</h2>
+      <div class="card">
+        <p>BIM coordination enables clash detection, model-based quantities and smoother approvals. Typical tools include Revit, Civil 3D and Navisworks, aligned to project LOD requirements and QA/QC gateways.</p>
+      </div>
+    </section>
+
+    <!-- Milestones (old markup preserved) -->
+    <section class="stack">
+      <h2 class="section-title">Milestones</h2>
+      <div class="timeline-wrap">
+        <div class="roadmap" id="timeline" aria-label="Milestones timeline">
+          <article class="mile">
+            <span class="year-badge">2006</span>
+            <div class="mcard card" data-animate="fade-up">
+              <h3>Founded in Kuching</h3>
+              <p>Established (then as Zadra Consultant) to provide Civil &amp; Structural consultancy.</p>
+            </div>
+          </article>
+          <article class="mile">
+            <span class="year-badge">2015</span>
+            <div class="mcard card" data-animate="fade-up">
+              <h3>Pan Borneo: Telok Melano–Sematan</h3>
+              <p>Major highway delivery experience strengthens infrastructure credentials.</p>
+            </div>
+          </article>
+          <article class="mile">
+            <span class="year-badge">2016</span>
+            <div class="mcard card" data-animate="fade-up">
+              <h3>WPC03 Serian–Pantu + Fort Lily</h3>
+              <p>Highway package and heritage conservation delivered in parallel.</p>
+            </div>
+          </article>
+          <article class="mile">
+            <span class="year-badge">2017</span>
+            <div class="mcard card" data-animate="fade-up">
+              <h3>Fairy &amp; Wind Caves • Cocoa Centre</h3>
+              <p>Landscape upgrades and industrial refurbishment broaden sector coverage.</p>
+            </div>
+          </article>
+          <article class="mile">
+            <span class="year-badge">2020</span>
+            <div class="mcard card" data-animate="fade-up">
+              <h3>Belaga Police HQ &amp; Simunjan Roads</h3>
+              <p>Institutional and rural road programs underline public-sector trust.</p>
+            </div>
+          </article>
+          <article class="mile">
+            <span class="year-badge">2024</span>
+            <div class="mcard card" data-animate="fade-up">
+              <h3>Mukah Waterfront • Integrated Market</h3>
+              <p>Township-scale works with BIM coordination and staged delivery.</p>
+            </div>
+          </article>
+          <article class="mile">
+            <span class="year-badge">2025</span>
+            <div class="mcard card" data-animate="fade-up">
+              <h3>Darul Ittihad Mosque</h3>
+              <p>Religious facility with a focus on buildability, safety and lifecycle value.</p>
+            </div>
+          </article>
+        </div>
+        <div class="timeline-hint">← drag to explore →</div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="stack">
+      <div class="card">
+        <h3>See how these principles show up in our work</h3>
+        <a class="btn" href="projects.html">Browse Projects</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">© <span id="year"></span> Zadra Ingénieurs Sdn. Bhd. All rights reserved.</footer>
+
+  <script type="module" src="importer.js"></script>
+  <script type="module" src="main.js"></script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    (function(){
+      const els=document.querySelectorAll('[data-animate]');
+      if('IntersectionObserver' in window && els.length){
+        const io=new IntersectionObserver(es=>{
+          es.forEach(e=>e.isIntersecting?e.target.classList.add('show'):e.target.classList.remove('show'));
+        },{threshold:.2});
+        els.forEach(el=>io.observe(el));
+      }
+      const tl=document.getElementById('timeline');
+      if(tl){
+        tl.tabIndex=0;
+        tl.addEventListener('keydown',e=>{
+          const step=Math.min(480,tl.clientWidth*0.8);
+          if(e.key==='ArrowRight'){e.preventDefault();tl.scrollBy({left:step,behavior:'smooth'});}
+          if(e.key==='ArrowLeft'){e.preventDefault();tl.scrollBy({left:-step,behavior:'smooth'});}
+        });
+      }
+    })();
+  </script>
 </body>
 </html>

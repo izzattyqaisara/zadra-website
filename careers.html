@@ -1,55 +1,330 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Careers — Zadra Ingénieurs</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css"/><script defer src="main.js"></script>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    :root{
+      --bg:#f7f4f1;
+      --ink:#2a1e1a;
+      --primary:#7b4b2a;
+      --primary-2:#9b6944;
+      --accent:#d9b99b;
+      --card:#fff;
+      --muted:#7a6a61;
+      --ring:rgba(123,75,42,.25);
+      --shadow: 0 10px 30px rgba(0,0,0,.07), 0 4px 10px rgba(0,0,0,.05);
+      --radius:20px;
+    }
+    *{box-sizing:border-box}
+    html,body{
+      margin:0;
+      background:var(--bg);
+      color:var(--ink);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Noto Sans, Ubuntu, Cantarell, Helvetica Neue, Arial;
+    }
+    body{padding-top:72px} /* leave space for your fixed nav */
+
+    /* HERO */
+    .hero{
+      position:relative;overflow:hidden;
+      padding: clamp(48px, 6vw, 96px) 20px;display:flex;
+      background:linear-gradient(180deg,#efe3d7 0%, #f7f4f1 100%);
+      border-bottom:1px solid #ecdccc;
+    }
+    .hero-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(2, minmax(320px, 1fr));gap:clamp(20px, 4vw, 48px);align-items:center;justify-items:center;justify-content:center}
+    @media (max-width: 900px){.hero-inner{grid-template-columns:1fr}}
+    .hero-card{background:linear-gradient(135deg, #fff, #fff8f2);border:1px solid #f0e8e2;border-radius:var(--radius);padding:clamp(20px,3vw,36px);box-shadow:var(--shadow)}
+    .eyebrow{display:inline-block;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--primary);background:#f3e7de;border-radius:999px;padding:6px 12px;font-weight:700}
+    h1{margin:14px 0 6px;font-weight:800;line-height:1.1;font-size:clamp(28px, 3.4vw, 44px)}
+    .lead{color:var(--muted);font-size:clamp(15px,1.4vw,18px);margin:8px 0 0}
+    .hero-aside{position:relative}
+    .stat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;justify-items:center}
+    .stat{background:var(--card);border:1px solid #efe7e0;border-radius:16px;padding:18px 16px;box-shadow:var(--shadow)}
+    .stat b{display:block;font-size:26px}
+    .ribbon{position:absolute;inset:auto -30px -30px auto;transform:rotate(-8deg);background:var(--primary);color:#fff;padding:10px 18px;border-radius:14px;box-shadow:var(--shadow);font-weight:700}
+
+    /* LAYOUT */
+    .wrap{max-width:1200px;margin:0 auto;padding: 0 20px 80px}
+    .grid{display:grid;grid-template-columns:2fr 1fr;gap:clamp(18px,3.6vw,36px)}
+    @media (max-width: 1024px){.grid{grid-template-columns:1fr}}
+
+    /* FILTERS (non-sticky so it scrolls away) */
+    .filters{position:static; padding: 12px 0 0;}
+    .chip-row{display:flex;flex-wrap:wrap;gap:14px;margin:12px 0}
+    .chip{cursor:pointer;border:1px solid #e6ddd6;background:#fff;border-radius:999px;padding:10px 18px;font-weight:600;color:var(--primary);transition:all .2s}
+    .chip:hover{background:#f8f1ec}
+    .chip.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+
+    /* CARDS */
+    .section-title{margin:34px 0 8px;font-size:22px}
+    .jobs{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+    .card{position:relative;border-radius:18px;background:var(--card);border:1px solid #eee2da;box-shadow:var(--shadow);overflow:hidden;cursor:pointer}
+    .card:focus-within{outline:2px solid var(--ring)}
+    .card-head{padding:18px 18px 6px}
+    .badge{display:inline-flex;gap:6px;align-items:center;background:#f5ece5;border:1px dashed #e3d4c8;border-radius:999px;color:var(--primary-2);padding:6px 10px;font-weight:700;font-size:12px}
+    .role{margin:10px 0 6px;font-size:20px;font-weight:800}
+    .meta{display:flex;gap:10px;flex-wrap:wrap;color:#7d6a61;font-size:13px}
+    .meta span{display:inline-flex;gap:6px;align-items:center;background:#faf6f2;border:1px solid #efe4dc;border-radius:8px;padding:6px 8px}
+    .divider{height:1px;background:linear-gradient(90deg,transparent,#eee2da,transparent)}
+    .card-body{padding:14px 18px}
+    ul{margin:0 0 8px 18px}
+
+    /* SIDEBAR */
+    .side{position:sticky;top:100px}
+    .pane{background:var(--card);border:1px solid #eee2da;border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
+    .pane + .pane{margin-top:16px}
+    .cta{display:flex;gap:12px;flex-wrap:wrap}
+    .btn{appearance:none;border:0;padding:12px 16px;border-radius:12px;font-weight:800;cursor:pointer}
+    .btn.primary{background:var(--primary);color:#fff}
+    .btn.ghost{background:#fff;border:1px solid #e9ded5;color:var(--primary)}
+    .btn:hover{transform:translateY(-1px)}
+
+    /* CTA BANNER */
+    .cta-banner{margin:60px 0 0;background:linear-gradient(135deg, #f4e7db, #fff);border:1px solid #ecdccd;border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+    .cta-banner h3{margin:0}
+    .cta-banner .actions{display:flex;gap:10px}
+
+    .muted{color:var(--muted)}
+  </style>
 </head>
 <body>
-  <nav>
-  <a href="index.html" class="nav-logo" aria-label="Zadra Home">
-    <img src="images/logo.png" alt="Zadra Ingénieurs Logo">
-  </a>
+  <!-- NAV TABS INCLUDE -->
+  <div data-include="nav.html"></div>
+  <script type="module">import './importer.js';</script>
+  <script type="module">import './main.js';</script>
 
-  <div class="nav-toggle" onclick="toggleMenu()" aria-label="Toggle menu">&#9776;</div>
-
-  <div class="nav-links" id="navLinks">
-    <!-- About + dropdown -->
-    <div class="nav-item has-submenu">
-      <a href="about.html" class="submenu-toggle" aria-haspopup="true" aria-expanded="false">
-        About
-        <span class="caret" aria-hidden="true">▾</span>
-      </a>
-      <div class="submenu" role="menu">
-        <a href="about.html" role="menuitem">Overview</a> 
-        <a href="vision-mission.html" role="menuitem">Vision & Mission</a>
-        <a href="services.html" role="menuitem">Services</a>
+  <!-- ===== HERO ===== -->
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="hero-card">
+        <span class="eyebrow">We’re hiring</span>
+        <h1>Build infrastructure that matters.</h1>
+        <p class="lead">Join Zadra Ingénieurs to deliver smart, sustainable engineering. Explore roles below and talk to us if one fits you.</p>
       </div>
+      <aside class="hero-aside">
+        <div class="stat-grid">
+          <div class="stat"><b>10+ yrs</b><span class="muted">in Sarawak</span></div>
+          <div class="stat"><b>50+ projects</b><span class="muted">bridges, roads, buildings</span></div>
+          <div class="stat"><b>People-first</b><span class="muted">flexible & learning culture</span></div>
+          <div class="stat"><b>Quality</b><span class="muted">BEM standards</span></div>
+        </div>
+        <div class="ribbon">Now Open</div>
+      </aside>
+    </div>
+  </header>
+
+  <!-- ===== MAIN ===== -->
+  <main class="wrap">
+    <div class="grid">
+      <!-- LEFT: JOBS -->
+      <section>
+        <div class="filters">
+          <strong>Filter:</strong>
+          <div class="chip-row" id="chips">
+            <button class="chip active" data-filter="all">All</button>
+            <button class="chip" data-filter="design">Design</button>
+            <button class="chip" data-filter="site">Site</button>
+            <button class="chip" data-filter="bim">BIM</button>
+            <button class="chip" data-filter="intern">Internship</button>
+          </div>
+        </div>
+
+        <h2 class="section-title" id="open-roles">Open Roles</h2>
+        <div class="jobs" id="jobGrid">
+          <!-- 1 -->
+          <article class="card" data-tags="design" data-role="Design Engineer / Project Coordinator (Roads & Bridges)">
+            <div class="card-head">
+              <span class="badge">Kuching • Full-time</span>
+              <div class="role">Design Engineer / Project Coordinator (Roads & Bridges)</div>
+              <div class="meta">
+                <span>Graduate Engineer (BEM)</span>
+                <span>2–5 yrs exp</span>
+                <span>MX Road, Civil 3D</span>
+              </div>
+            </div>
+            <div class="divider"></div>
+            <div class="card-body">
+              <p class="muted">Lead civil design packages and coordinate with site teams, authorities and clients.</p>
+              <ul>
+                <li>Degree in Civil Eng; BEM Graduate membership.</li>
+                <li>2–5 years in civil/highway design or infrastructure coordination.</li>
+                <li>AutoCAD / Civil 3D / MX Road proficiency.</li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- 2 -->
+          <article class="card" data-tags="design" data-role="Design Engineer (Geotechnical)">
+            <div class="card-head">
+              <span class="badge">Kuching • Full-time</span>
+              <div class="role">Design Engineer (Geotechnical)</div>
+              <div class="meta">
+                <span>2–5 yrs exp</span>
+                <span>Slope/Foundations</span>
+                <span>Geotech software</span>
+              </div>
+            </div>
+            <div class="divider"></div>
+            <div class="card-body">
+              <p class="muted">Soil investigation, slope stability and foundation design with our structural & highway teams.</p>
+              <ul>
+                <li>Civil Eng degree; BEM Graduate membership.</li>
+                <li>Strong soil mechanics fundamentals.</li>
+                <li>Experience with GEO5/PLAXIS or similar is a plus.</li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- 3 -->
+          <article class="card" data-tags="bim" data-role="BIM Modeller">
+            <div class="card-head">
+              <span class="badge">Kuching • Full-time</span>
+              <div class="role">BIM Modeller</div>
+              <div class="meta">
+                <span>Civil/Arch</span>
+                <span>Revit / Civil 3D</span>
+                <span>Navisworks</span>
+              </div>
+            </div>
+            <div class="divider"></div>
+            <div class="card-body">
+              <p class="muted">Build coordinated 3D/4D models for infrastructure projects and support design reviews.</p>
+              <ul>
+                <li>Diploma/Degree with BIM certification preferred.</li>
+                <li>Revit/Civil 3D proficiency; Navisworks is a plus.</li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- 4 -->
+          <article class="card" data-tags="site" data-role="Resident Engineer / Assistant Resident Engineer">
+            <div class="card-head">
+              <span class="badge">Lawas / Limbang • Site-based</span>
+              <div class="role">Resident Engineer (RE) / Assistant Resident Engineer (ARE)</div>
+              <div class="meta">
+                <span>2–7 yrs exp</span>
+                <span>Supervision</span>
+                <span>Road/Bridge</span>
+              </div>
+            </div>
+            <div class="divider"></div>
+            <div class="card-body">
+              <p class="muted">Oversee construction quality and safety; manage contractor coordination and reporting.</p>
+              <ul>
+                <li>BEM Graduate/Professional Engineer (for RE) preferred.</li>
+                <li>Experience supervising infrastructure works.</li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- 5 -->
+          <article class="card" data-tags="site" data-role="Inspector-of-Works (Civil)">
+            <div class="card-head">
+              <span class="badge">Kuching / Sibu • Site-based</span>
+              <div class="role">Inspector-of-Works (Civil)</div>
+              <div class="meta">
+                <span>3–5 yrs exp</span>
+                <span>QA/QC</span>
+                <span>Highway/Structure</span>
+              </div>
+            </div>
+            <div class="divider"></div>
+            <div class="card-body">
+              <p class="muted">Carry out inspections, verify works against drawings/specs and assist the RE/ARE.</p>
+              <ul>
+                <li>Diploma/Certificate in Civil Eng; SPQM/SMQ is an advantage.</li>
+                <li>Familiar with lab/material testing.</li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- 6 -->
+          <article class="card" data-tags="intern" data-role="Engineering Intern (Civil/Structural)">
+            <div class="card-head">
+              <span class="badge">Kuching • Internship</span>
+              <div class="role">Engineering Intern (Civil/Structural)</div>
+              <div class="meta">
+                <span>12–24 weeks</span>
+                <span>Mentored</span>
+                <span>Office + Site</span>
+              </div>
+            </div>
+            <div class="divider"></div>
+            <div class="card-body">
+              <p class="muted">Hands-on exposure to design tools, site visits and submissions. Get real portfolio pieces.</p>
+              <ul>
+                <li>Currently pursuing Diploma/Degree in Civil/Structural.</li>
+                <li>Positive attitude and willingness to learn.</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- RIGHT: SIDEBAR (no “How to apply” pane) -->
+      <aside class="side">
+        <div class="pane">
+          <h3 style="margin:0 0 8px">Why join Zadra?</h3>
+          <p class="muted">We’re a tight, ambitious team focused on quality engineering and a kind culture.</p>
+          <ul>
+            <li>Meaningful local projects with real impact.</li>
+            <li>Mentorship by experienced P.Eng leads.</li>
+            <li>Training budget & certification support.</li>
+            <li>Flexible hours for site/office balance.</li>
+          </ul>
+          <div class="cta">
+            <a class="btn primary" href="contact.html">Talk to us</a>
+            <a class="btn ghost" href="#open-roles">See open roles</a>
+          </div>
+        </div>
+      </aside>
     </div>
 
-    <a href="projects.html">Projects</a>
-    <a href="director.html">Director</a>
-    <a href="team.html">Team</a>
-    <a href="careers.html">Careers</a>
-    <a href="contact.html" class="nav-btn">Contact</a>
-  </div>
-</nav>
-
-  <section class="fade-in" style="background:var(--light-bg); padding:4rem 1rem;">
-    <div style="max-width:1000px; margin:auto; text-align:center;">
-      <h2 style="color:var(--primary-color); margin-bottom:2rem;">Careers</h2>
-      <p>We are always looking for passionate and dedicated professionals to join our growing team.</p>
-      <div style="margin-top:2rem;">
-        <h3>Open Positions</h3>
-        <ul style="list-style:none; padding:0;">
-          <li><strong>Civil Engineer</strong> – Infrastructure & drainage works</li>
-          <li><strong>Site Supervisor</strong> – On-site management and reporting</li>
-          <li><strong>Internship</strong> – Students in civil or structural engineering</li>
-        </ul>
-        <p style="margin-top:1rem;">📩 Send your resume to <strong>careers@zadra.my</strong></p>
+    <!-- CTA banner -->
+    <div class="cta-banner">
+      <div>
+        <h3>Don’t see a perfect match?</h3>
+        <p class="muted" style="margin:6px 0 0">We’re always happy to meet thoughtful engineers. Drop us a note with what you’d like to build.</p>
+      </div>
+      <div class="actions">
+        <a class="btn primary" href="contact.html">Say hello</a>
+        <a class="btn ghost" href="contact.html?type=general">General enquiry</a>
       </div>
     </div>
-  </section>
+  </main>
+
+  <script>
+    // Filter chips
+    const chips = document.querySelectorAll('.chip');
+    const cards = document.querySelectorAll('.card');
+    chips.forEach(ch => ch.addEventListener('click', () => {
+      chips.forEach(c => c.classList.remove('active'));
+      ch.classList.add('active');
+      const f = ch.dataset.filter;
+      cards.forEach(card => {
+        const ok = f === 'all' || card.dataset.tags.includes(f);
+        card.style.display = ok ? '' : 'none';
+      });
+    }));
+
+    // Click anywhere on a card OR its header to go to Contacts with role prefilled
+    function goToContact(el){
+      const role = el.dataset.role || el.querySelector('.role')?.textContent.trim() || 'Engineering Role';
+      window.location.href = `contact.html?job=${encodeURIComponent(role)}`;
+    }
+    document.querySelectorAll('.card').forEach(card => {
+      card.addEventListener('click', () => goToContact(card));
+    });
+    document.querySelectorAll('.card-head').forEach(head => {
+      head.style.cursor = 'pointer';
+      head.addEventListener('click', (e) => {
+        e.stopPropagation();
+        goToContact(head.parentElement);
+      });
+    });
+  </script>
 </body>
 </html>

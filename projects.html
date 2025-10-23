@@ -1,181 +1,378 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Projects — Zadra Ingénieurs</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css"/><script defer src="main.js"></script>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    :root{
+      --bg:#f7f4f1; --ink:#2a1e1a;
+      --primary:#7b4b2a; --primary-2:#9b6944;
+      --card:#fff; --muted:#7a6a61;
+      --line:#eee2da; --ring:rgba(123,75,42,.25);
+      --shadow:0 10px 30px rgba(0,0,0,.07), 0 4px 10px rgba(0,0,0,.05);
+      --radius:20px;
+      --cream-1:#efe3d7; --cream-2:#f7f4f1;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;background:var(--bg);color:var(--ink);
+      font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Noto Sans,Ubuntu,Cantarell,Helvetica Neue,Arial}
+    /* keep padding so content doesn’t slide under fixed shared nav */
+    body{padding-top:72px}
+
+    .container{max-width:1200px;margin:0 auto;padding:0 20px}
+    .section-title{margin:0 0 8px;font-size:22px}
+    .section-subhead{margin:28px 0 10px;font-size:18px}
+    .muted{color:var(--muted)}
+
+    .page-hero{
+      background:linear-gradient(180deg,var(--cream-1) 0%, var(--cream-2) 100%);
+      border-bottom:1px solid #ecdccc;
+      padding:clamp(24px,4vw,48px) 0;
+      margin-bottom:18px;
+    }
+
+    /* NOTE: removed page-specific .site-nav CSS so shared nav styles apply */
+
+    /* Filters */
+    .filters{
+      display:flex;gap:10px;overflow:auto;
+      background:#fff;border:1px solid var(--line);border-radius:16px;
+      box-shadow:var(--shadow);
+      padding:10px;margin:12px 0 8px
+    }
+    .filters .chip{
+      cursor:pointer;border:1px solid #e6ddd6;background:#fff;color:var(--primary);
+      border-radius:999px;padding:10px 16px;font-weight:800;white-space:nowrap
+    }
+    .filters .chip.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+
+    /* Grid & Cards */
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+      gap:16px;
+      margin-bottom:18px;
+    }
+    .grid .card{
+      display:block;background:#fff;border:1px solid var(--line);
+      border-radius:16px; box-shadow:var(--shadow);
+      overflow:hidden; text-decoration:none; color:inherit; position:relative;
+      cursor:pointer;
+    }
+    .grid img{
+      width:100%; height:180px; object-fit:cover; display:block;
+    }
+    .grid .body{padding:12px}
+    .grid .title{font-weight:800;margin:0 0 4px}
+    .grid .tags{display:flex;flex-wrap:wrap;gap:6px;color:#7d6a61;font-size:13px}
+    .grid .tags span{background:#faf6f2;border:1px solid #efe4dc;border-radius:8px;padding:4px 6px}
+
+    /* (removed .project-badge CSS since badge is no longer used) */
+
+    /* Modal */
+    .modal{
+      position:fixed; inset:0; background:rgba(0,0,0,.35);
+      display:none; align-items:center; justify-content:center; padding:16px; z-index:200;
+    }
+    .modal[aria-hidden="false"]{display:flex}
+    .dialog{width:min(980px,100%); background:#fff;border:1px solid var(--line);
+      border-radius:18px; box-shadow:var(--shadow); overflow:hidden}
+    .dialog .top{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:10px; padding:12px 14px; border-bottom:1px solid #f0e8e2; background:#fff8f2
+    }
+    .dialog .top strong{font-size:18px}
+    .dialog .top .close{
+      appearance:none;border:1px solid #e6ddd6;background:#fff;border-radius:10px;
+      padding:8px 10px;font-weight:800;color:var(--primary);cursor:pointer
+    }
+    .dialog .content{display:grid;grid-template-columns:1.2fr .8fr;gap:12px;padding:12px}
+    @media(max-width:900px){.dialog .content{grid-template-columns:1fr}}
+    .slider{position:relative;border:1px solid #f0e8e2;border-radius:14px;overflow:hidden;background:#000;min-height:120px}
+    #slideImg{display:block;width:100%;height:420px;object-fit:contain;background:#000}
+    .nav{position:absolute;inset:auto 0 0 0;display:flex;justify-content:space-between;padding:8px}
+    .nav button{appearance:none;border:0;background:rgba(255,255,255,.9);border-radius:8px;padding:8px 12px;font-weight:800;cursor:pointer}
+
+    .tags{display:flex;flex-wrap:wrap;gap:8px;align-content:flex-start}
+    .tags span{background:#faf6f2;border:1px solid #efe4dc;border-radius:8px;padding:6px 8px;font-weight:600;color:var(--primary);font-size:13px}
+
+    .site-footer{text-align:center;color:var(--muted);margin:40px 0 20px}
+  </style>
 </head>
 <body>
-<nav>
-  <a href="index.html" class="nav-logo" aria-label="Zadra Home">
-    <img src="images/logo.png" alt="Zadra Ingénieurs Logo">
-  </a>
 
-  <div class="nav-toggle" onclick="toggleMenu()" aria-label="Toggle menu">&#9776;</div>
+  <!-- SHARED NAV -->
+  <div data-include="nav.html" data-active="projects"></div>
+  <script type="module">import './importer.js';</script>
 
-  <div class="nav-links" id="navLinks">
-    <!-- About + dropdown -->
-    <div class="nav-item has-submenu">
-      <a href="about.html" class="submenu-toggle" aria-haspopup="true" aria-expanded="false">
-        About
-        <span class="caret" aria-hidden="true">▾</span>
-      </a>
-      <div class="submenu" role="menu">
-        <a href="about.html" role="menuitem">Overview</a> 
-        <a href="vision-mission.html" role="menuitem">Vision & Mission</a>
-        <a href="services.html" role="menuitem">Services</a>
+  <section class="page-hero"><div class="container"></div></section>
+
+  <main class="container">
+    <h2 class="section-title">Projects</h2>
+    <p class="muted">Filter by type and click a card to open slideshow.</p>
+
+    <div class="filters" id="filters"></div>
+
+    <h3 class="section-subhead">Ongoing <span class="count" id="countOngoing"></span></h3>
+    <div class="grid" id="gridOngoing"></div>
+
+    <h3 class="section-subhead">Completed <span class="count" id="countCompleted"></span></h3>
+    <div class="grid" id="gridCompleted"></div>
+  </main>
+
+  <!-- Modal -->
+  <div class="modal" id="modal" aria-hidden="true">
+    <div class="dialog">
+      <div class="top">
+        <strong id="modalTitle">Project Title</strong>
+        <button class="close" id="closeModal" aria-label="Close">Close ✕</button>
+      </div>
+      <div class="content">
+        <div class="slider" id="sliderBox">
+          <img id="slideImg" alt="Project image">
+          <div class="nav" id="sliderNav">
+            <button id="prevBtn" aria-label="Previous">‹</button>
+            <button id="nextBtn" aria-label="Next">›</button>
+          </div>
+        </div>
+        <div class="tags">
+          <span id="clientTag">Client: –</span>
+          <span id="yearTag">Year: –</span>
+          <span id="costTag">Cost: –</span>
+          <span id="locationTag">Location: –</span>
+          <span id="statusTag">Status: –</span>
+        </div>
       </div>
     </div>
-
-    <a href="projects.html">Projects</a>
-    <a href="director.html">Director</a>
-    <a href="team.html">Team</a>
-    <a href="careers.html">Careers</a>
-    <a href="contact.html" class="nav-btn">Contact</a>
   </div>
-</nav>
 
-  <section id="projects" class="fade-in" style="padding:4rem 1rem; background:#fff;">
-    <div class="projects-split">
-      <!-- PREVIOUS -->
-      <div class="project-panel">
-        <h2>Previous Projects</h2>
-        <div class="filter-bar" data-side="previous">
-          <button class="filter active" data-category="all">All</button>
-          <button class="filter" data-category="schools">Schools & Institutions</button>
-          <button class="filter" data-category="transport">Airports / Roads / Bridges</button>
-          <button class="filter" data-category="buildings">Buildings & Infrastructure</button>
-          <button class="filter" data-category="religious">Religious Buildings</button>
+  <footer class="site-footer">© <span id="year"></span> Zadra Ingénieurs Sdn. Bhd. All rights reserved.</footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    /* ===== Filters (four + All) ===== */
+    const FILTERS = [
+      {key:'all',            label:'All'},
+      {key:'infrastructure', label:'Infrastructure'},
+      {key:'institutional',  label:'Institutional'},
+      {key:'buildings',      label:'Buildings'},
+      {key:'religious',      label:'Religious'}
+    ];
+
+    /* ===== Authoritative projects (CURRENT + PREVIOUS) ===== */
+    const authoritative = [
+      // CURRENT
+      { id:"cur01", title:"Darul Ittihad Mosque, Kuching", type:"Religious", client:"JAIS", year:2025, cost:"RM 51M", location:"Kuching, Sarawak", status:"Ongoing", images:["images/ittihad.jpg"] },
+      { id:"cur02", title:"Sarawak Islamic Secondary School Development", type:"Education", client:"Yayasan Sarawak", year:2024, cost:"RM 80M", location:"Sarawak", status:"Ongoing", images:["images/sissd.jpg"] },
+      { id:"cur03", title:"Sungai Bedaun Mosque, Santubong (Kuching)", type:"Religious", client:"PELITA", year:2024, cost:"RM 27M", location:"Santubong, Kuching", status:"Ongoing", images:["images/bedaun.jpg"] },
+      { id:"cur04", title:"217 Double-Storey Detached Houses, Jln Sultan Tengah", type:"Residential", client:"PELITA", year:2024, cost:"RM 30M", location:"Kuching, Sarawak", status:"Ongoing", images:["images/detached.jpg"] },
+      { id:"cur05", title:"Mukah Waterfront Development", type:"Landscape", client:"DID Sarawak", year:2024, cost:"RM 64M", location:"Mukah, Sarawak", status:"Ongoing", images:["images/mukahwf.jpg"] },
+      { id:"cur06", title:"Mukah Integrated Market (New)", type:"Commercial", client:"MDDM", year:2024, cost:"RM 40M", location:"Mukah, Sarawak", status:"Ongoing", images:["images/mukahmarket.jpeg"] },
+      { id:"cur07", title:"HIKMAH Islamic Tech College, KG & Tahfiz Secondary", type:"Education", client:"UDA", year:2024, cost:"RM 40M", location:"Kuching, Sarawak", status:"Ongoing", images:["images/hikmahtahfiz.jpg"] },
+      { id:"cur08", title:"SMK Tinjar: 14 Teachers’ Quarters", type:"Education", client:"JKR", year:2024, cost:"RM 14M", location:"Miri, Sarawak", status:"Ongoing", images:["images/quarters.jpg"] },
+      { id:"cur09", title:"Simunjan Rural Roads (Lubuk Samsu, Sabang, Semanggal, Sg Labi, Tanjung)", type:"Civil", client:"JKR", year:2020, cost:"RM 64M", location:"Simunjan, Sarawak", status:"Ongoing", images:["images/ruralroads.jpeg"] },
+      { id:"cur10", title:"Belaga District Police HQ (IPD)", type:"Institutional", client:"JKR", year:2020, cost:"RM 80M", location:"Belaga, Sarawak", status:"Ongoing", images:["images/policedistrict.jpg"] },
+
+      // PREVIOUS
+      { id:"prev01", title:"Tahfiz Primary School (2-Storey), Kuching", type:"Education", client:"HIKMAH", year:2021, cost:"RM 17M", location:"Kuching, Sarawak", status:"Completed", images:["images/tahfizprimary.jpg"] },
+      { id:"prev02", title:"Tambirat Hawker Centre", type:"Commercial", client:"MPKS", year:2020, cost:"RM 5M", location:"Kota Samarahan, Sarawak", status:"Completed", images:["images/tambirathawker.jpg"] },
+      { id:"prev03", title:"Serian Division Mosque Upgrade", type:"Religious", client:"MIS", year:2019, cost:"RM 10M", location:"Serian, Sarawak", status:"Completed", images:["images/masjid serian.jpeg"] },
+      { id:"prev04", title:"Kampung Bakam Mosque (Design & Build)", type:"Religious", client:"MIS", year:2018, cost:"RM 5M", location:"Miri, Sarawak", status:"Completed", images:["images/masjid bakam.jpeg"] },
+      { id:"prev05", title:"Fairy & Wind Caves Nature Reserves Upgrade", type:"Landscape", client:"SFC", year:2017, cost:"RM 12M", location:"Bau, Sarawak", status:"Completed", images:["images/fairy cave.jpeg"] },
+      { id:"prev06", title:"Cocoa & Chocolate Processing Centre Refurbishment", type:"Industrial", client:"Lembaga Koko Malaysia", year:2017, cost:"RM 5M", location:"Kota Samarahan, Sarawak", status:"Completed", images:["images/projek koko.jpeg"] },
+      { id:"prev07", title:"Pan Borneo Highway WPC03: Serian–Pantu Junction", type:"Infrastructure", client:"JKR", year:2016, cost:"RM 90M", location:"Serian–Pantu, Sarawak", status:"Completed", images:["images/PB SPJ.jpeg"] },
+      { id:"prev08", title:"Fort Lily Conservation & Upgrade", type:"Heritage", client:"JKR", year:2016, cost:"RM 5M", location:"Betong, Sarawak", status:"Completed", images:["images/kubu lili.jpeg"] },
+      { id:"prev09", title:"Pan Borneo Highway: Telok Melano–Sematan", type:"Infrastructure", client:"JKR", year:2015, cost:"RM 70M", location:"Telok Melano–Sematan, Sarawak", status:"Completed", images:["images/PB teluk melano.jpeg"] },
+      { id:"prev10", title:"UNIMAS Sports & Recreation Complex", type:"Institutional", client:"UNIMAS", year:2007, cost:"RM 40M", location:"Kota Samarahan, Sarawak", status:"Completed", images:["images/unimas.jpg"] },
+      { id:"prev11", title:"Kpg Patrikan–SMK Merapok Road: Detailed Design & Supervision", type:"Civil", client:"DID", year:2007, cost:"RM 20M", location:"Lawas, Sarawak", status:"Completed", images:["images/merapokroad.jpg"] },
+      { id:"prev12", title:"Sarawak Schools & Hostels (Package A) — Build/Upgrade/Repair", type:"Education", client:"KPM", year:2007, cost:"RM 69M", location:"Sarawak (statewide)", status:"Completed", images:["images/school.jpg"] }
+    ];
+
+    /* ===== Extra items you provided ===== */
+    const extras = [
+      // current
+      { title:'Rumah Wakaf Miri', year:'2025', client:'', cost:'', location:'Miri, Sarawak', status:'Ongoing', type:'Residential', images:[] },
+      { title:'Rumah Wakaf Kuching', year:'2025', client:'', cost:'', location:'Kuching, Sarawak', status:'Ongoing', type:'Residential', images:[] },
+      { title:'Masjid An-Naim, Lutong Miri', year:'2025', client:'', cost:'', location:'Lutong, Miri', status:'Ongoing', type:'Religious', images:[] },
+      { title:'Cadangan Pembangunan Masjid Terapung Kampung Limpaku Pinang', year:'2025', client:'', cost:'6 Mil', location:'', status:'Ongoing', type:'Religious', images:[] },
+      { title:'Permanent Raise Up at Durin Bridge', year:'', client:'', cost:'', location:'Durin, Sarawak', status:'Ongoing', type:'Infrastructure', images:[] },
+      { title:'Cadangan kerja-kerja penambahbaikan landskap dan infrastruktur, Sibu Town District', year:'2025', client:'', cost:'9 Mil', location:'Sibu, Sarawak', status:'Ongoing', type:'Landscape', images:[] },
+
+      // previous
+      { title:'Projek peningkatan kemudahan pelancongan – Taman Negara Niah, Miri', year:'2016', client:'', cost:'3.4M', location:'Miri, Sarawak', status:'Completed', type:'Landscape', images:[] },
+      { title:'Cadangan membangunkan & membina kolam – LKIM Telaga Air', year:'2010', client:'LKIM', cost:'6.2M', location:'Telaga Air, Sarawak', status:'Completed', type:'Civil', images:[] },
+    ];
+
+    /* ===== Filter mapping =====
+       Infrastructure: infrastructure, civil, road, highway
+       Institutional : education, institutional, school, police, ipd
+       Buildings     : residential, commercial, industrial, heritage, market, landscape (fallback here)
+       Religious     : religious, mosque
+    ===================================== */
+    function mapCategory(type){
+      const t = String(type||'').toLowerCase();
+      if (/(infrastructure|civil|road|highway)/.test(t)) return 'infrastructure';
+      if (/(education|institutional|school|police|ipd)/.test(t)) return 'institutional';
+      if (/(religious|mosque)/.test(t)) return 'religious';
+      if (/(residential|commercial|industrial|heritage|market|landscape|waterfront|park|caves|nature)/.test(t)) return 'buildings';
+      return 'buildings';
+    }
+
+    // Merge & normalize to ALL (keep all fields, including cost)
+    const ALL = [...authoritative, ...extras].map(p => ({
+      title: p.title || '',
+      year: p.year || '',
+      client: p.client || '',
+      cost: p.cost || '',
+      location: p.location || '',
+      status: (p.status || '').toLowerCase() === 'completed' ? 'completed' : 'ongoing',
+      category: mapCategory(p.type),
+      images: p.images || []
+    }));
+
+    // UI elements
+    const $filters = document.getElementById('filters');
+    const $ongoing = document.getElementById('gridOngoing');
+    const $completed = document.getElementById('gridCompleted');
+    const $countO = document.getElementById('countOngoing');
+    const $countC = document.getElementById('countCompleted');
+
+    // Filters UI
+    let activeFilter = 'all';
+    FILTERS.forEach(f=>{
+      const btn = document.createElement('button');
+      btn.className = 'chip' + (f.key===activeFilter ? ' active':'' );
+      btn.textContent = f.label;
+      btn.dataset.key = f.key;
+      btn.addEventListener('click', ()=>{
+        activeFilter = f.key;
+        [...$filters.children].forEach(c=>c.classList.toggle('active', c.dataset.key===activeFilter));
+        render();
+      });
+      $filters.appendChild(btn);
+    });
+
+    // ---- Modal navigation state ----
+    let visibleList = [];   // current on-page order
+    let currentIndex = -1;  // index into visibleList
+
+    function projectCard(p){
+      const el = document.createElement('article');
+      el.className = 'card';
+
+      // Image only for COMPLETED; ongoing shows description only
+      const media = (p.status==='completed' && p.images && p.images[0])
+        ? `<img src="${p.images[0]}" alt="${p.title}">`
+        : '';
+
+      el.innerHTML = `
+        ${media}
+        <div class="body">
+          <h4 class="title">${p.title}</h4>
+          <div class="tags">
+            ${p.client ? `<span>Client: ${p.client}</span>`:''}
+            ${p.year ? `<span>Year: ${p.year}</span>`:''}
+            ${p.cost ? `<span>Cost: ${p.cost}</span>`:''}
+            ${p.location ? `<span>Location: ${p.location}</span>`:''}
+          </div>
         </div>
+      `;
 
-        <div class="project-list" id="previousList">
-          <article class="project-card" data-side="previous" data-category="schools" data-year="2021">
-            <h4>Cadangan Pembangunan 2-Tingkat Sekolah Rendah Tahfiz, Kuching</h4>
-            <p><strong>Client:</strong> HIKMAH</p><p><strong>Year:</strong> 2021</p><p><strong>Cost:</strong> RM17 Mil.</p>
-          </article>
+      // (removed chocolate-coloured cost badge)
 
-          <article class="project-card" data-side="previous" data-category="buildings" data-year="2020">
-            <h4>Cadangan Pusat Penjaja Tambirat, Kota Samarahan</h4>
-            <p><strong>Client:</strong> MPKS</p><p><strong>Year:</strong> 2020</p><p><strong>Cost:</strong> RM5 Mil.</p>
-          </article>
+      // clicking the card opens modal at this project index (set in render)
+      el.addEventListener('click', ()=>{
+        const idx = Number(el.dataset.idx);
+        openModalByIndex(idx);
+      });
 
-          <article class="project-card" data-side="previous" data-category="religious" data-year="2019">
-            <h4>Cadangan Ubahsuai & Menaiktaraf Masjid Bahagian Serian</h4>
-            <p><strong>Client:</strong> MIS</p><p><strong>Year:</strong> 2019</p><p><strong>Cost:</strong> RM10 Mil.</p>
-          </article>
+      return el;
+    }
 
-          <article class="project-card" data-side="previous" data-category="religious" data-year="2018">
-            <h4>Merekabentuk & Membina Masjid Kpg Bakam, Miri</h4>
-            <p><strong>Client:</strong> MIS</p><p><strong>Year:</strong> 2018</p><p><strong>Cost:</strong> RM5 Mil.</p>
-          </article>
+    function render(){
+      $ongoing.innerHTML = '';
+      $completed.innerHTML = '';
+      const filtered = ALL.filter(p => activeFilter==='all' ? true : p.category === activeFilter);
+      const listO = filtered.filter(p => p.status==='ongoing');
+      const listC = filtered.filter(p => p.status==='completed');
 
-          <article class="project-card" data-side="previous" data-category="buildings" data-year="2017">
-            <h4>Proposed Upgrading of Fairy & Wind Cave Nature Reserves, Bau</h4>
-            <p><strong>Client:</strong> SFC</p><p><strong>Year:</strong> 2017</p><p><strong>Cost:</strong> RM12 Mil.</p>
-          </article>
+      // Build DOM and a single ordered list for navigation
+      const order = [];
+      listO.forEach(p => {
+        const card = projectCard(p);
+        card.dataset.idx = order.length;
+        order.push(p);
+        $ongoing.appendChild(card);
+      });
+      listC.forEach(p => {
+        const card = projectCard(p);
+        card.dataset.idx = order.length;
+        order.push(p);
+        $completed.appendChild(card);
+      });
 
-          <article class="project-card" data-side="previous" data-category="buildings" data-year="2017">
-            <h4>Projek Pengubahsuaian Pusat Pemprosesan Biji Koko & Coklat, Kota Samarahan</h4>
-            <p><strong>Client:</strong> Lembaga Koko Malaysia</p><p><strong>Year:</strong> 2017</p><p><strong>Cost:</strong> RM5 Mil.</p>
-          </article>
+      visibleList = order;
+      $countO.textContent = listO.length ? `(${listO.length})` : '';
+      $countC.textContent = listC.length ? `(${listC.length})` : '';
+    }
+    render();
 
-          <article class="project-card" data-side="previous" data-category="transport" data-year="2016">
-            <h4>Pan Borneo Highway — WPC03 Serian to Pantu Junction</h4>
-            <p><strong>Client:</strong> JKR</p><p><strong>Year:</strong> 2016</p><p><strong>Cost:</strong> RM90 Mil.</p>
-          </article>
+    // Modal logic with prev/next
+    const $modal = document.getElementById('modal');
+    const $modalTitle = document.getElementById('modalTitle');
+    const $slideImg = document.getElementById('slideImg');
+    const $sliderBox = document.getElementById('sliderBox');
+    const $sliderNav = document.getElementById('sliderNav');
+    document.getElementById('closeModal').addEventListener('click', ()=>$modal.setAttribute('aria-hidden','true'));
 
-          <article class="project-card" data-side="previous" data-category="buildings" data-year="2016">
-            <h4>Cadangan Pemuliharaan & Menaiktaraf Kubu Lili, Betong</h4>
-            <p><strong>Client:</strong> JKR</p><p><strong>Year:</strong> 2016</p><p><strong>Cost:</strong> RM5 Mil.</p>
-          </article>
+    function updateModal(p){
+      $modalTitle.textContent = p.title || 'Project';
 
-          <article class="project-card" data-side="previous" data-category="transport" data-year="2015">
-            <h4>Pan Borneo Highway — Telok Melano to Sematan</h4>
-            <p><strong>Client:</strong> JKR</p><p><strong>Year:</strong> 2015</p><p><strong>Cost:</strong> RM70 Mil.</p>
-          </article>
+      const showImage = (p.status==='completed' && p.images && p.images[0]);
+      if (showImage){
+        $slideImg.src = p.images[0];
+        $slideImg.style.display = '';
+        $sliderNav.style.display = '';
+        $sliderBox.style.background = '#000';
+      } else {
+        $slideImg.removeAttribute('src');
+        $slideImg.style.display = 'none';
+        $sliderNav.style.display = 'none';
+        $sliderBox.style.background = '#f7ede4';
+      }
 
-          <article class="project-card" data-side="previous" data-category="schools" data-year="2007">
-            <h4>Kompleks Kemudahan Sukan & Rekreasi — UNIMAS</h4>
-            <p><strong>Client:</strong> UNIMAS</p><p><strong>Year:</strong> 2007</p><p><strong>Cost:</strong> RM40 Mil.</p>
-          </article>
+      document.getElementById('clientTag').textContent   = `Client: ${p.client || '–'}`;
+      document.getElementById('yearTag').textContent     = `Year: ${p.year || '–'}`;
+      document.getElementById('costTag').textContent     = `Cost: ${p.cost || '–'}`;
+      document.getElementById('locationTag').textContent = `Location: ${p.location || '–'}`;
+      document.getElementById('statusTag').textContent   = `Status: ${p.status || '–'}`;
+    }
 
-          <article class="project-card" data-side="previous" data-category="transport" data-year="2007">
-            <h4>Detailed Design & Supervision Jalan Kpg Patrikan – SMK Merapok, Lawas</h4>
-            <p><strong>Client:</strong> DID</p><p><strong>Year:</strong> 2007</p><p><strong>Cost:</strong> RM20 Mil.</p>
-          </article>
+    function openModalByIndex(idx){
+      if (!visibleList.length) return;
+      currentIndex = (idx + visibleList.length) % visibleList.length;
+      updateModal(visibleList[currentIndex]);
+      $modal.setAttribute('aria-hidden','false');
+    }
 
-          <article class="project-card" data-side="previous" data-category="schools" data-year="2007">
-            <h4>Pembinaan, Penaiktarafan & Pembaikpulihan Sekolah & Asrama — Sarawak (Pakej A)</h4>
-            <p><strong>Client:</strong> KPM</p><p><strong>Year:</strong> 2007</p><p><strong>Cost:</strong> RM69 Mil.</p>
-          </article>
-        </div>
-      </div>
+    document.getElementById('prevBtn').addEventListener('click', ()=>{
+      if (!visibleList.length) return;
+      openModalByIndex(currentIndex - 1);
+    });
+    document.getElementById('nextBtn').addEventListener('click', ()=>{
+      if (!visibleList.length) return;
+      openModalByIndex(currentIndex + 1);
+    });
 
-      <!-- CURRENT -->
-      <div class="project-panel">
-        <h2>Current Projects</h2>
-        <div class="filter-bar" data-side="current">
-          <button class="filter active" data-category="all">All</button>
-          <button class="filter" data-category="schools">Schools & Institutions</button>
-          <button class="filter" data-category="transport">Airports / Roads / Bridges</button>
-          <button class="filter" data-category="buildings">Buildings & Infrastructure</button>
-          <button class="filter" data-category="religious">Religious Buildings</button>
-        </div>
-
-        <div class="project-list" id="currentList">
-          <article class="project-card" data-side="current" data-category="religious" data-year="2025">
-            <h4>Pembinaan Masjid Darul Ittihad, Kuching</h4>
-            <p><strong>Client:</strong> JAIS</p><p><strong>Year:</strong> 2025</p><p><strong>Cost:</strong> RM51 Mil.</p>
-          </article>
-
-          <article class="project-card" data-side="current" data-category="schools" data-year="2024">
-            <h4>Cadangan Pembangunan Projek Pendidikan Sekolah Menengah Islam Sarawak</h4>
-            <p><strong>Client:</strong> Yayasan Sarawak</p><p><strong>Year:</strong> 2024</p><p><strong>Cost:</strong> RM80 Mil.</p>
-          </article>
-
-          <article class="project-card" data-side="current" data-category="religious" data-year="2024">
-            <h4>Cadangan Pembangunan Masjid Sg. Bedaun, Jalan Santubong, Kuching</h4>
-            <p><strong>Client:</strong> PELITA</p><p><strong>Year:</strong> 2024</p><p><strong>Cost:</strong> RM27 Mil.</p>
-          </article>
-
-          <article class="project-card" data-side="current" data-category="buildings" data-year="2024">
-            <h4>Proposed 217 Units Double Storey Detached House, Jalan Sultan Tengah, Kuching</h4>
-            <p><strong>Client:</strong> PELITA</p><p><strong>Year:</strong> 2024</p><p><strong>Cost:</strong> RM30 Mil.</p>
-          </article>
-
-          <article class="project-card" data-side="current" data-category="buildings" data-year="2024">
-            <h4>Development of Mukah Waterfront, Mukah</h4>
-            <p><strong>Client:</strong> DID Sarawak</p><p><strong>Year:</strong> 2024</p><p><strong>Cost:</strong> RM64 Mil.</p>
-          </article>
-
-          <article class="project-card" data-side="current" data-category="buildings" data-year="2024">
-            <h4>Proposed New Mukah Integrated Market, Mukah</h4>
-            <p><strong>Client:</strong> MDDM</p><p><strong>Year:</strong> 2024</p><p><strong>Cost:</strong> RM40 Mil.</p>
-          </article>
-
-          <article class="project-card" data-side="current" data-category="schools" data-year="2024">
-            <h4>Kolej Teknologi Islam Hikmah, Tadika Hikmah & Sekolah Menengah Tahfiz Hikmah — Kuching</h4>
-            <p><strong>Client:</strong> UDA</p><p><strong>Year:</strong> 2024</p><p><strong>Cost:</strong> RM40 Mil.</p>
-          </article>
-
-          <article class="project-card" data-side="current" data-category="schools" data-year="2024">
-            <h4>Pembinaan Tambahan 14 Unit Rumah Guru, SMK Tinjar, Miri</h4>
-            <p><strong>Client:</strong> JKR</p><p><strong>Year:</strong> 2024</p><p><strong>Cost:</strong> RM14 Mil.</p>
-          </article>
-
-          <article class="project-card" data-side="current" data-category="transport" data-year="2020">
-            <h4>Projek Jalan Kpg. Lubuk Samsu, Kpg. Sabang, Kpg. Semanggal, Kpg. Sg. Labi & Kpg. Tanjung — Simunjan</h4>
-            <p><strong>Client:</strong> JKR</p><p><strong>Year:</strong> 2020</p><p><strong>Cost:</strong> RM64 Mil.</p>
-          </article>
-
-          <article class="project-card" data-side="current" data-category="buildings" data-year="2020">
-            <h4>Projek Pembangunan Ibu Pejabat Polis Daerah (IPD) Belaga</h4>
-            <p><strong>Client:</strong> JKR</p><p><strong>Year:</strong> 2020</p><p><strong>Cost:</strong> RM80 Mil.</p>
-          </article>
-        </div>
-      </div>
-    </div>
-  </section>
+    window.addEventListener('keydown', e=>{
+      if ($modal.getAttribute('aria-hidden') === 'true') return;
+      if (e.key === 'ArrowLeft')  { e.preventDefault(); openModalByIndex(currentIndex - 1); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); openModalByIndex(currentIndex + 1); }
+      if (e.key === 'Escape')     { e.preventDefault(); $modal.setAttribute('aria-hidden','true'); }
+    });
+  </script>
 </body>
 </html>

@@ -1,94 +1,141 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contact — Zadra Ingénieurs</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css"/><script defer src="main.js"></script>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    :root{
+      --bg:#f7f4f1; --ink:#2a1e1a;
+      --primary:#7b4b2a; --primary-2:#9b6944;
+      --card:#fff; --muted:#7a6a61;
+      --line:#eee2da; --ring:rgba(123,75,42,.25);
+      --shadow:0 10px 30px rgba(0,0,0,.07), 0 4px 10px rgba(0,0,0,.05);
+      --radius:20px;
+      --cream-1:#efe3d7; --cream-2:#f7f4f1;
+    }
+    *{box-sizing:border-box}
+    html,body{
+      margin:0; background:var(--bg); color:var(--ink);
+      font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Noto Sans,Ubuntu,Cantarell,Helvetica Neue,Arial;
+    }
+    body{padding-top:72px}
+
+    .container{max-width:1200px;margin:0 auto;padding:0 20px}
+
+    /* Hero to match other pages */
+    .page-hero{
+      background:linear-gradient(180deg,var(--cream-1) 0%, var(--cream-2) 100%);
+      border-bottom:1px solid #ecdccc;
+      padding:clamp(48px,6vw,96px) 0;
+      margin-bottom:18px;
+    }
+    .eyebrow{
+      display:inline-block;font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+      color:var(--primary);background:#f3e7de;border-radius:999px;padding:6px 12px;font-weight:700
+    }
+    h1{margin:14px 0 6px;font-weight:800;line-height:1.1;font-size:clamp(28px,3.4vw,44px)}
+    .muted{color:var(--muted)}
+    .section-title{margin:0 0 8px;font-size:22px}
+
+    /* Cards & grid */
+    .grid{display:grid;grid-template-columns:1.1fr 1fr;gap:18px}
+    @media (max-width:900px){.grid{grid-template-columns:1fr}}
+    .card{
+      background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+      box-shadow:var(--shadow);padding:18px
+    }
+    .card h3{margin:2px 0 12px}
+
+    /* Form controls */
+    label{font-weight:700;font-size:14px}
+    .input{
+      width:100%;margin-top:6px;appearance:none;
+      background:#fff;border:1px solid #e6ddd6;border-radius:12px;
+      padding:12px 14px;font:inherit;color:inherit;
+      box-shadow:inset 0 1px 0 rgba(0,0,0,.02);
+    }
+    .input:focus{outline:2px solid var(--ring);outline-offset:2px;border-color:#e3d6cc}
+    textarea.input{resize:vertical;min-height:120px}
+
+    .btn{
+      appearance:none;border:0;border-radius:12px;
+      background:var(--primary);color:#fff;padding:12px 16px;
+      font-weight:800;cursor:pointer
+    }
+    .btn:hover{transform:translateY(-1px)}
+    .btn:focus-visible{outline:2px solid var(--ring);outline-offset:2px}
+
+    /* Map */
+    .mapwrap{border:1px solid #f0e8e2;border-radius:16px;overflow:hidden;box-shadow:var(--shadow)}
+    .map{width:100%;height:320px;border:0}
+
+    /* Footer */
+    .site-footer{text-align:center;color:var(--muted);margin:40px 0 20px}
+  </style>
 </head>
 <body>
-<nav>
-  <a href="index.html" class="nav-logo" aria-label="Zadra Home">
-    <img src="images/logo.png" alt="Zadra Ingénieurs Logo">
-  </a>
+  <!-- NAV -->
+  <div data-include="nav.html"></div>
+  <script type="module">import './importer.js';</script>
+  <script type="module">import './main.js';</script>
 
-  <div class="nav-toggle" onclick="toggleMenu()" aria-label="Toggle menu">&#9776;</div>
-
-  <div class="nav-links" id="navLinks">
-    <!-- About + dropdown -->
-    <div class="nav-item has-submenu">
-      <a href="about.html" class="submenu-toggle" aria-haspopup="true" aria-expanded="false">
-        About
-        <span class="caret" aria-hidden="true">▾</span>
-      </a>
-      <div class="submenu" role="menu">
-        <a href="about.html" role="menuitem">Overview</a> 
-        <a href="vision-mission.html" role="menuitem">Vision & Mission</a>
-        <a href="services.html" role="menuitem">Services</a>
-      </div>
-    </div>
-
-    <a href="projects.html">Projects</a>
-    <a href="director.html">Director</a>
-    <a href="team.html">Team</a>
-    <a href="careers.html">Careers</a>
-    <a href="contact.html" class="nav-btn">Contact</a>
-  </div>
-</nav>
-
-<section class="fade-in" style="background:#fff; padding:4rem 1rem;">
-  <div style="max-width:1200px; margin:auto; display:flex; flex-wrap:wrap; gap:2rem;">
-    <div style="flex:1 1 500px;">
-      <h2 style="color:var(--primary-color); margin-bottom:1rem;">Get in Touch</h2>
-
-<!-- CONTACT FORM (Formspree) -->
-<form id="contactForm"
-      action="https://formspree.io/f/xnnzwkaj"  
-      method="POST"
-      class="contact-form"
-      novalidate>
-
-  <input type="text" name="name" placeholder="Your Name" required autocomplete="name">
-  <input type="email" name="email" placeholder="Your Email" required autocomplete="email">
-  <textarea rows="5" name="message" placeholder="Your Message" required></textarea>
-
-  <!-- optional meta -->
-  <input type="hidden" name="_subject" value="Website Contact — Zadra Ingénieurs">
-  <!-- spam honeypot (kept visually hidden) -->
-  <input type="text" name="website" autocomplete="off" tabindex="-1" style="position:absolute; left:-9999px;">
-
-  <button type="submit" id="contactSubmit">Send Message</button>
-
-  <!-- inline status message -->
-  <p id="formStatus" class="form-status" aria-live="polite"></p>
-</form>
-
-    
-    </div>
-    <div style="flex:1 1 500px;">
-    <iframe
-      src="https://www.google.com/maps?q=1.5198988160193154, 110.37823809110937&z=18&output=embed"
-      style="width: 100%; height: 380px; border: 0; border-radius: 8px;"
-      allowfullscreen=""
-      loading="lazy"
-      referrerpolicy="no-referrer-when-downgrade">
-    </iframe>
-      </div>
+  <!-- HERO -->
+  <section class="page-hero">
+    <div class="container">
+      <p class="eyebrow">Contact</p>
+      <h1>We’d love to hear from you</h1>
+      <p class="muted">Send us a message or find us on the map below.</p>
     </div>
   </section>
+
+  <main class="container">
+    <h2 class="section-title" style="display:none">Contact</h2>
+    <div class="grid">
+      <!-- Form -->
+      <div class="card">
+        <h3>Send us a message</h3>
+        <form id="contactForm" action="https://formspree.io/f/xnnzwkaj" method="POST">
+          <label>Name
+            <input name="name" required placeholder="Your name" class="input" />
+          </label>
+          <br><br>
+          <label>Email
+            <input name="email" type="email" required placeholder="you@email.com" class="input" />
+          </label>
+          <br><br>
+          <label>Message
+            <textarea name="message" rows="4" required placeholder="How can we help?" class="input"></textarea>
+          </label>
+          <br><br>
+          <!-- optional: subject for easier inbox sorting -->
+          <input type="hidden" name="_subject" value="Website Contact — Zadra Ingénieurs" />
+          <button class="btn" type="submit">Send</button>
+        </form>
+      </div>
+
+      <!-- Map -->
+      <div class="card">
+        <h3>Location</h3>
+        <div class="mapwrap">
+          <iframe
+            title="Map"
+            src="https://www.openstreetmap.org/export/embed.html?bbox=110.33%2C1.52%2C110.37%2C1.56&layer=mapnik"
+            class="map"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+        <p class="muted">Kuching, Sarawak · Asia/Kuching (GMT+8)</p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">© <span id="year"></span> Zadra Ingénieurs Sdn. Bhd. All rights reserved.</footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
-<section class="contact-info">
-  <h2>Contact Us</h2>
-  <p>
-    Sublot 16, Parcel 10419-4-3, 3rd Floor,<br>
-    Tabuan Stutong Commercial Centre,<br>
-    Jalan Setia Raja, 93350 Kuching, Sarawak
-  </p>
-  <p>
-    <strong>T:</strong> <a href="tel:+6082362002">082-36 2002</a><br>
-    <strong>F:</strong> 082-36 4004<br>
-    <strong>E:</strong> <a href="mailto:zadrac007@gmail.com">zadraingenieurs@gmail.com</a>
-  </p>
-</section>
-
