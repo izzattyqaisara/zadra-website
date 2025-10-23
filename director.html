@@ -119,6 +119,68 @@
   <script type="module">import './importer.js';</script>
   <script type="module">import './main.js';</script>
 
+  <script>
+(function () {
+  function init() {
+    const nav = document.querySelector('.site-nav');
+    if (!nav) return false;
+
+    // Ensure main <ul> has a class for our CSS
+    const menu = nav.querySelector('ul');
+    if (!menu) return false;
+    menu.classList.add('menu');
+
+    // Create a hamburger if not present
+    let toggle = nav.querySelector('.menu-toggle');
+    if (!toggle) {
+      toggle = document.createElement('button');
+      toggle.className = 'menu-toggle';
+      toggle.setAttribute('aria-label', 'Menu');
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.innerHTML = '&#9776;'; // hamburger icon
+      const logo = nav.querySelector('.logo');
+      (logo && logo.parentNode)
+        ? logo.parentNode.insertBefore(toggle, logo.nextSibling)
+        : nav.insertBefore(toggle, nav.firstChild);
+    }
+
+    // Open/close the drawer on mobile
+    toggle.addEventListener('click', () => {
+      const open = nav.classList.toggle('is-open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+
+    // Expand/collapse "About" submenu on mobile
+    nav.querySelectorAll('li.has-sub > a').forEach(a => {
+      a.addEventListener('click', (e) => {
+        if (window.matchMedia('(max-width: 820px)').matches) {
+          e.preventDefault();
+          a.parentElement.classList.toggle('open');
+        }
+      });
+    });
+
+    // Close drawer when tapping outside
+    document.addEventListener('click', (e) => {
+      if (!nav.contains(e.target)) nav.classList.remove('is-open');
+    });
+
+    return true;
+  }
+
+  // Run after nav.html is injected by importer.js
+  function tryInitOnce() { if (!init()) setTimeout(tryInitOnce, 50); }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', tryInitOnce);
+  } else {
+    tryInitOnce();
+  }
+  // If your importer dispatches a custom event
+  document.addEventListener('include:loaded', tryInitOnce);
+})();
+</script>
+
   <!-- HERO -->
   <header class="hero">
     <div class="hero-inner">
