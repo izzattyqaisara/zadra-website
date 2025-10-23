@@ -378,3 +378,48 @@ const projects = [
   buildFilters();
   render();
 })();
+
+/* === Mobile Hamburger Navigation === */
+(function () {
+  function init() {
+    const nav = document.querySelector('.site-nav');
+    if (!nav) return;
+
+    const toggle = nav.querySelector('.nav-toggle');
+    const menu   = nav.querySelector('.menu');
+    if (!toggle || !menu) return;
+
+    // Toggle main drawer open/close
+    toggle.addEventListener('click', () => {
+      const open = nav.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+
+    // Toggle "About" dropdown on mobile
+    nav.querySelectorAll('li.has-sub > a').forEach(a => {
+      a.addEventListener('click', (e) => {
+        if (window.matchMedia('(max-width: 820px)').matches) {
+          e.preventDefault();
+          const li = a.parentElement;
+          li.classList.toggle('open');
+          a.setAttribute('aria-expanded', li.classList.contains('open'));
+        }
+      });
+    });
+
+    // Close nav when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!nav.contains(e.target)) nav.classList.remove('open');
+    });
+  }
+
+  // Wait until nav is injected by importer.js
+  const start = () => setTimeout(init, 0);
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', start);
+  } else {
+    start();
+  }
+  document.addEventListener('include:loaded', start);
+})();
+
