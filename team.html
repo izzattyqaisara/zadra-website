@@ -241,6 +241,14 @@
           </div>
         </article>
 
+         <article class="person">
+          <div class="ph"><img src="images/Rozain.jpeg" alt="Rozain" loading="lazy" onerror="this.style.display='none'"></div>
+          <div class="info">
+            <div class="name">Rozain</div>
+            <div class="role">Design Engineer (Hydrology)</div>
+          </div>
+        </article>
+
         <article class="person">
           <div class="ph"><img src="images/rachel.jpeg" alt="Rachel Honeychurch" loading="lazy" onerror="this.style.display='none'"></div>
           <div class="info">
@@ -285,7 +293,7 @@
           <div class="ph"><img src="images/zety.jpeg" alt="Izzaty Qaisara" loading="lazy" onerror="this.style.display='none'"></div>
           <div class="info">
             <div class="name">Izzatty Qaisara</div>
-            <div class="role">IT Specialist</div>
+            <div class="role">Software Engineer</div>
           </div>
         </article>
 
@@ -297,22 +305,21 @@
             <div class="role">Admin Exec.</div>
           </div>
         </article>
-      </div>
-
-      <!-- staff rail -->
-      <div class="row staff">
-        <article class="person">
+       <article class="person">
           <div class="ph"><img src="images/dyg.jpeg" alt="Dyg Nur Mardhiah" loading="lazy" onerror="this.style.display='none'"></div>
           <div class="info">
             <div class="name">Dyg Nur Mardhiah</div>
             <div class="role">Admin Exec.</div>
           </div>
         </article>
+      </div>
 
+      <!-- staff rail -->
+      <div class="row staff">
         <article class="person">
-          <div class="ph"><img src="images/Najihah .jpg" alt="Najihah Azzahira" loading="lazy" onerror="this.style.display='none'"></div>
+          <div class="ph"><img src="images/farah.jpeg" alt="Farah" loading="lazy" onerror="this.style.display='none'"></div>
           <div class="info">
-            <div class="name">Najihah Azzahira</div>
+            <div class="name">Farah</div>
             <div class="role">Admin Exec.</div>
           </div>
         </article>
@@ -343,67 +350,184 @@
       </div>
       <div class="thumbs" id="thumbs"></div>
     </section>
+
+      <!-- ===== Professional Moments (seminars / conferences / trainings) ===== -->
+<section class="gallery">
+  <h3 class="section-title" style="margin-top:0">Professional Moments</h3>
+
+  <div class="viewer">
+    <div class="stage" id="pro-stage"></div>
+  </div>
+
+  <div class="controls">
+    <button class="btn" id="pro-prev" aria-label="Previous">← Prev</button>
+    <div class="dots" id="pro-dots"></div>
+    <div style="display:flex;gap:8px;align-items:center">
+      <button class="btn" id="pro-play" aria-label="Autoplay">▶︎ Play</button>
+      <button class="btn" id="pro-next" aria-label="Next">Next →</button>
+    </div>
+  </div>
+
+  <div class="thumbs" id="pro-thumbs"></div>
+</section>
+
   </main>
 
-  <script>
-    /* ===== Simple gallery using only Team-gallery-*.jpeg ===== */
-    const TEAM_IMAGES = [
-      'Team-gallery-1.jpeg',
-      'Team-gallery-2.jpeg',
-      'Team-gallery-3.jpeg',
-      'Team-gallery-4.jpeg',
-      'Team-gallery-5.jpeg'
-    ];
-    const stage  = document.getElementById('stage');
-    const dots   = document.getElementById('dots');
-    const thumbs = document.getElementById('thumbs');
-    const prevBtn= document.getElementById('prevBtn');
-    const nextBtn= document.getElementById('nextBtn');
-    const playBtn= document.getElementById('playBtn');
+<script>
+/* ---------- Ensure Lightbox HTML exists ---------- */
+(function ensureLightbox(){
+  if (document.getElementById('lightbox')) return;
+  const wrap = document.createElement('div');
+  wrap.innerHTML = `
+  <div class="lb" id="lightbox" aria-hidden="true" style="display:none">
+    <div class="lb__frame">
+      <div class="lb__top">
+        <span class="lb__btn" id="lbCounter">1 / 1</span>
+        <button class="lb__btn" id="lbClose" aria-label="Close">Close ✕</button>
+      </div>
+      <img id="lbImg" class="lb__img" alt="">
+      <div class="lb__nav">
+        <button id="lbPrev" aria-label="Previous">‹</button>
+        <button id="lbNext" aria-label="Next">›</button>
+      </div>
+      <div class="lb__caption" id="lbCaption"></div>
+    </div>
+  </div>`;
+  document.body.appendChild(wrap.firstElementChild);
+})();
 
-    let current = 0, timer = null;
+/* ---------- Shared Lightbox ---------- */
+const Lightbox = (function(){
+  const el  = document.getElementById('lightbox');
+  const img = document.getElementById('lbImg');
+  const cap = document.getElementById('lbCaption');
+  const ctr = document.getElementById('lbCounter');
+  const btnPrev = document.getElementById('lbPrev');
+  const btnNext = document.getElementById('lbNext');
+  const btnClose= document.getElementById('lbClose');
 
-    TEAM_IMAGES.forEach((name, i) => {
-      const img = document.createElement('img');
-      img.src = `images/${name}`; img.alt = `Team photo ${i+1}`; img.loading='lazy';
-      if(i===0) img.classList.add('active');
-      stage.appendChild(img);
+  let list = [];  // [{src, caption}]
+  let idx  = 0;
 
-      const dot = document.createElement('div');
-      dot.className = 'dot' + (i===0?' active':'');
-      dot.addEventListener('click', ()=>go(i,true));
-      dots.appendChild(dot);
+  function render(){
+    if (!list.length) return;
+    const item = list[idx];
+    img.src = item.src;
+    img.alt = item.caption || '';
+    cap.textContent = item.caption || '';
+    ctr.textContent = `${idx+1} / ${list.length}`;
+    el.style.display = 'grid';
+  }
+  function open(newList, startIndex=0){
+    list = newList || [];
+    idx  = Math.max(0, Math.min(startIndex, list.length-1));
+    el.setAttribute('aria-hidden','false');
+    render();
+    document.addEventListener('keydown', onKey);
+  }
+  function close(){
+    el.setAttribute('aria-hidden','true');
+    el.style.display = 'none';
+    document.removeEventListener('keydown', onKey);
+  }
+  function next(){ idx = (idx+1) % list.length; render(); }
+  function prev(){ idx = (idx-1+list.length) % list.length; render(); }
+  function onKey(e){
+    if (e.key === 'Escape') close();
+    if (e.key === 'ArrowRight') next();
+    if (e.key === 'ArrowLeft')  prev();
+  }
+  btnClose.addEventListener('click', close);
+  btnNext.addEventListener('click', next);
+  btnPrev.addEventListener('click', prev);
+  el.addEventListener('click', (e)=>{ if(e.target === el) close(); });
 
-      const th = document.createElement('div');
-      th.className='thumb' + (i===0?' active':'');
-      th.innerHTML = `<img src="images/${name}" alt="Thumb ${i+1}" loading="lazy">`;
-      th.addEventListener('click', ()=>go(i,true));
-      thumbs.appendChild(th);
+  return { open };
+})();
+
+/* ---------- Helper: get element by prefixed OR legacy id ---------- */
+function getId(prefix, base, legacyId){
+  return document.getElementById(`${prefix}-${base}`) || document.getElementById(legacyId);
+}
+
+/* ---------- Reusable gallery (supports prefixed OR legacy IDs) ---------- */
+function createGallery(prefix, images, label){
+  const stage   = getId(prefix,'stage','stage');
+  const dots    = getId(prefix,'dots','dots');
+  const thumbs  = getId(prefix,'thumbs','thumbs');
+  const prevBtn = getId(prefix,'prev','prevBtn');
+  const nextBtn = getId(prefix,'next','nextBtn');
+  const playBtn = getId(prefix,'play','playBtn');
+  if (!stage || !dots || !thumbs || !prevBtn || !nextBtn || !playBtn) return;
+
+  let current = 0, timer = null;
+
+  const LB_ITEMS = images.map((name,i)=>({
+    src: `images/${name}`,
+    caption: `${label} ${i+1}`
+  }));
+
+  // Build DOM
+  images.forEach((name, i) => {
+    const img = document.createElement('img');
+    img.src = `images/${name}`;
+    img.alt = `${label} ${i+1}`;
+    img.loading = 'lazy';
+    if (i === 0) img.classList.add('active');
+    img.style.cursor = 'zoom-in';
+    img.addEventListener('click', ()=> Lightbox.open(LB_ITEMS, i));
+    stage.appendChild(img);
+
+    const dot = document.createElement('div');
+    dot.className = 'dot' + (i===0 ? ' active' : '');
+    dot.addEventListener('click', () => go(i, true));
+    dots.appendChild(dot);
+
+    const th = document.createElement('div');
+    th.className = 'thumb' + (i===0 ? ' active' : '');
+    th.innerHTML = `<img src="images/${name}" alt="Thumb ${i+1}" loading="lazy">`;
+    th.addEventListener('click', () => { go(i, true); Lightbox.open(LB_ITEMS, i); });
+    thumbs.appendChild(th);
+  });
+
+  const imgs = Array.from(stage.querySelectorAll('img'));
+
+  function setActive(idx){
+    imgs.forEach((im,i)=>im.classList.toggle('active', i===idx));
+    dots.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active', i===idx));
+    thumbs.querySelectorAll('.thumb').forEach((t,i)=>{
+      t.classList.toggle('active', i===idx);
+      if(i===idx) t.scrollIntoView({inline:'center',behavior:'smooth',block:'nearest'});
     });
+  }
+  function go(idx, pause=false){ current=(idx+imgs.length)%imgs.length; setActive(current); if(pause) stop(); }
+  function next(){ go(current+1); }
+  function prev(){ go(current-1); }
+  function play(){ if(timer) return; playBtn.textContent='⏸ Pause'; timer=setInterval(next,3500); }
+  function stop(){ if(timer){clearInterval(timer); timer=null;} playBtn.textContent='▶︎ Play'; }
 
-    const imgs = Array.from(stage.querySelectorAll('img'));
-    function setActive(idx){
-      imgs.forEach((im,i)=>im.classList.toggle('active', i===idx));
-      dots.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active', i===idx));
-      thumbs.querySelectorAll('.thumb').forEach((t,i)=>{
-        t.classList.toggle('active', i===idx);
-        if(i===idx) t.scrollIntoView({inline:'center',behavior:'smooth',block:'nearest'});
-      });
-    }
-    function go(idx, pause=false){ current=(idx+imgs.length)%imgs.length; setActive(current); if(pause) stop(); }
-    function next(){ go(current+1); }
-    function prev(){ go(current-1); }
-    function play(){ if(timer) return; playBtn.textContent='⏸ Pause'; timer=setInterval(next,3500); }
-    function stop(){ if(timer){clearInterval(timer); timer=null;} playBtn.textContent='▶︎ Play'; }
+  prevBtn.addEventListener('click',()=>{prev();stop();});
+  nextBtn.addEventListener('click',()=>{next();stop();});
+  playBtn.addEventListener('click',()=>timer?stop():play());
 
-    prevBtn.addEventListener('click',()=>{prev();stop();});
-    nextBtn.addEventListener('click',()=>{next();stop();});
-    playBtn.addEventListener('click',()=>timer?stop():play());
-    window.addEventListener('keydown',e=>{
-      if(e.key==='ArrowRight'){next();stop();}
-      if(e.key==='ArrowLeft'){prev();stop();}
-      if(e.key===' '){e.preventDefault(); timer?stop():play();}
-    });
-  </script>
-</body>
-</html>
+  return { next, prev, play, stop, go };
+}
+
+/* ---- Instantiate both galleries ---- */
+/* Team: uses your existing legacy IDs (stage/dots/thumbs/prevBtn/nextBtn/playBtn) */
+const TEAM_IMAGES = [
+  'Team-1.jpeg',
+  'Team-2.jpeg',
+  'Team-3.jpeg',
+  'Team-4.jpeg',
+  'Team-5.jpeg'
+];
+const team = createGallery('team', TEAM_IMAGES, 'Team photo');
+
+/* Professional: expects prefixed IDs (pro-stage, pro-dots, ...) from the new section */
+const PRO_IMAGES = [
+  'pro-1.jpeg','pro-2.jpeg','pro-3.jpeg','pro-4.jpeg','pro-5.jpeg','pro-6.jpeg'
+];
+const pro = createGallery('pro', PRO_IMAGES, 'Professional photo');
+</script>
+
