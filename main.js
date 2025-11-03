@@ -423,3 +423,33 @@ const projects = [
   document.addEventListener('include:loaded', start);
 })();
 
+(function () {
+  const header = document.querySelector('.site-header');
+  const toggle = document.querySelector('.nav-toggle');
+  const menu = document.querySelector('.menu');
+  if (!header || !toggle || !menu) return;
+
+  // Toggle open
+  toggle.addEventListener('click', () => {
+    const open = header.classList.toggle('is-open');
+    toggle.setAttribute('aria-expanded', open);
+  });
+
+  // Handle mobile dropdown open/close
+  header.querySelectorAll('.dropdown > .dropbtn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      if (window.matchMedia('(max-width:860px)').matches) {
+        e.preventDefault();
+        btn.parentElement.classList.toggle('open');
+      }
+    });
+  });
+
+  // Close when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!header.contains(e.target)) header.classList.remove('is-open');
+  });
+})();
+
+
+
