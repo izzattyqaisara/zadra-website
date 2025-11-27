@@ -1232,3 +1232,42 @@ body { padding-top: var(--nav-h); }
   }
 }
 
+/* ============================
+   MOBILE NAV FIX (OVERRIDE)
+   ============================ */
+@media (max-width: 860px){
+
+  /* Hide the desktop menu layout on mobile */
+  .nav-row .menu {
+    display: none !important;
+    flex-direction: column !important;
+    background: #fff;
+    border-radius: 18px;
+    padding: 14px 16px;
+    position: absolute;
+    top: 72px;
+    left: 16px;
+    right: 16px;
+    z-index: 999;
+    box-shadow: 0 8px 20px rgba(0,0,0,.12);
+  }
+
+  /* When header has .is-open → show menu */
+  .site-header.is-open .menu {
+    display: flex !important;
+  }
+
+  /* Dropdown menu (About) should NOT hover-open on mobile */
+  .dropdown:hover .dropmenu {
+    display: none !important;
+  }
+
+  /* Mobile dropdown: tap to open */
+  .dropdown.open .dropmenu {
+    display: block !important;
+    position: static !important;
+    background: transparent;
+    border: 0;
+    padding-left: 12px;
+  }
+}
