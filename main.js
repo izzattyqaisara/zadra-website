@@ -297,7 +297,7 @@ const projects = [
 document.addEventListener("DOMContentLoaded", () => {
   const header = document.querySelector(".site-header");
   const menu = document.querySelector(".menu");
-  const toggle = document.querySelector(".hamburger");
+  const toggle = document.querySelector(".nav-toggle");
   const dropdownButtons = document.querySelectorAll(".dropdown > .dropbtn");
 
   if (!header || !menu || !toggle) return;
