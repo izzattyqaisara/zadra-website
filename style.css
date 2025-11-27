@@ -9,22 +9,223 @@ img{max-width:100%;display:block}
 a{text-decoration:none;color:inherit}
 .container{max-width:1200px;margin:auto;padding:0 16px}
 
-/* Header */
-.site-header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-filter:blur(10px);border-bottom:1px solid #eee}
-.nav{display:flex;align-items:center;justify-content:space-between;padding:12px 16px}
-.brand{display:flex;align-items:center;gap:12px}
-.brand img{width:36px;height:36px;border-radius:8px;border:2px solid var(--accent)}
-.brandtext small{display:block;color:var(--muted);margin-top:2px}
-.menu{display:flex;align-items:center;gap:8px}
-.menu a{padding:10px 14px;border-radius:999px}
-.menu a.active,.menu a:hover{background:var(--accent);color:#262211}
-.hamburger{display:none;flex-direction:column;gap:4px;border:0;background:transparent;cursor:pointer}
-.hamburger span{width:24px;height:2px;background:var(--ink)}
-@media (max-width:860px){
-  .menu{display:none;position:absolute;top:64px;right:16px;left:16px;flex-direction:column;background:var(--card);border:1px solid #eee;border-radius:var(--radius);box-shadow:var(--shadow);padding:8px}
-  .menu.open{display:flex}
-  .hamburger{display:flex}
-  .brand img{width:30px;height:30px}
+/* ===== ZADRA NAVIGATION (Option A, clean) ===== */
+
+:root {
+  --nav-bg: #fff;
+  --nav-ink: #2a1e1a;
+  --nav-primary: #7b4b2a;
+  --nav-accent: #9b6944;
+  --nav-shadow: 0 2px 12px rgba(0,0,0,.05);
+  --nav-height: 72px;
+}
+
+/* Header base */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: var(--nav-bg);
+  border-bottom: 1px solid #eee2da;
+  box-shadow: var(--nav-shadow);
+  transition: background .3s ease, box-shadow .3s ease, border-color .3s ease;
+}
+
+/* Hero overlay variant (for body.hero-page) */
+.hero-page .site-header {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,.45), rgba(0,0,0,.15) 60%, transparent);
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  box-shadow: none;
+  backdrop-filter: blur(4px);
+}
+
+/* Layout row */
+.site-header .nav-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 10px 20px;
+}
+
+/* Logo */
+.brand-only .brand-logo {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  border: 2px solid var(--nav-accent);
+  box-shadow: 0 4px 10px rgba(0,0,0,.05);
+  background: #fff;
+  object-fit: contain;
+}
+
+/* Menu (desktop base) */
+.menu {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Navigation text color to match your screenshot */
+.menu a,
+.menu .dropbtn {
+  color: #3a332c; 
+  font-weight: 800;
+  letter-spacing: -0.3px;
+}
+
+.menu a:hover,
+.menu .dropbtn:hover {
+  color: #ffffff;
+}
+
+/* active tab */
+.menu a.active {
+  background: #7b4b2a;
+  color: #130909;
+  font-weight: 900;
+}
+
+/* Hero variant: light text on banner */
+.hero-page .menu a,
+.hero-page .menu .dropbtn {
+  color: #241d1d;
+}
+
+.hero-page .menu a.active {
+  color: #0a0701;
+}
+
+/* Dropdown (About) */
+.dropdown {
+  position: relative;
+}
+
+.dropbtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.dropbtn::after {
+  content: "▾";
+  font-size: 12px;
+  opacity: .8;
+}
+
+/* Dropdown panel */
+.dropmenu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  min-width: 220px;
+  background: #fff;
+  border: 1px solid #eee2da;
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(0,0,0,.12);
+  padding: 8px 0;
+  display: none;
+  z-index: 1200;
+}
+
+.dropmenu a {
+  display: block;
+  padding: 10px 16px;
+  border-radius: 8px;
+  white-space: nowrap;
+  color: var(--nav-ink);
+}
+
+.dropmenu a:hover {
+  background: #f7ede4;
+  color: var(--nav-primary);
+}
+
+/* Show dropdown on hover (desktop) */
+@media (hover:hover) {
+  .dropdown:hover .dropmenu {
+    display: block;
+  }
+}
+
+/* Hamburger toggle */
+.nav-toggle {
+  display: none;
+  width: 44px;
+  height: 44px;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+.nav-toggle .bar {
+  display: block;
+  width: 22px;
+  height: 2px;
+  margin: 4px 0;
+  border-radius: 2px;
+  background: var(--nav-ink);
+}
+
+/* Desktop */
+@media (min-width: 820px) {
+  .menu {
+    position: static;
+    flex-direction: row;
+  }
+}
+
+/* Mobile behaviour */
+@media (max-width: 819.98px) {
+  .site-header {
+    position: fixed;
+  }
+
+  body {
+    padding-top: var(--nav-height, 72px);
+  }
+
+  .nav-toggle {
+    display: block;
+  }
+
+  .menu {
+    position: absolute;
+    top: var(--nav-height, 72px);
+    right: 16px;
+    left: 16px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    padding: 8px 0;
+    background: #fff;
+    border-radius: 16px;
+    border: 1px solid #eee2da;
+    box-shadow: 0 18px 40px rgba(0,0,0,.18);
+    display: none;
+  }
+
+  .site-header.is-open .menu {
+    display: flex;
+  }
+
+  /* Mobile dropdown: tap to open */
+  .dropdown .dropmenu {
+    position: static;
+    margin-top: 0;
+    box-shadow: none;
+    border-radius: 0;
+    border: 0;
+    padding: 4px 0 4px 18px;
+  }
+
+  .dropdown.open .dropmenu {
+    display: block;
+  }
 }
 
 /* Layout + cards */
@@ -236,16 +437,6 @@ main{margin:24px 0}
 /* Show on hover (desktop) */
 @media (hover:hover){
   .dropdown:hover .dropdown-menu{ opacity:1; visibility:visible; transform:translateY(0); }
-}
-
-/* Mobile behavior: dropdown opens only when .open is set via JS */
-@media (max-width:860px){
-  .dropdown-menu{
-    position:static; transform:none; opacity:1; visibility:visible;
-    border:none; box-shadow:none; padding:6px 0 10px; display:none;
-    background:transparent;
-  }
-  .dropdown.open .dropdown-menu{ display:block; }
 }
 
 /* Rotate caret when open */
@@ -612,12 +803,6 @@ main{margin:24px 0}
   .hero-page main, .hero-page .hero{ margin-top:56px; }
 }
 
-/* ==== NAV like reference (logo + tabs in one row) ==== */
-.site-header .nav-row{ display:flex; align-items:center; gap:18px; }
-.site-header .brand-only .brand-logo{ width:52px; height:52px; border-radius:12px; background:#fff; border:1px solid #eee; padding:6px; box-shadow:0 8px 24px rgba(0,0,0,.08); }
-.brandtext{ display:none; }              /* hide company text in header */
-.menu{ display:flex; align-items:center; gap:28px; }
-
 /* Header overlays the hero (like reference) */
 .hero-page .site-header{
   position:fixed; left:0; right:0; top:0; z-index:50;
@@ -643,8 +828,6 @@ html, body{ height:100%; }               /* safety for 100vh */
 /* (optional) make arrows a touch bigger/whiter on light images */
 .hnav{ background:rgba(0,0,0,.38); border-color:rgba(255,255,255,.6); }
 .hnav:hover{ background:rgba(0,0,0,.55); }
-
-/* ===== NAV FIX: align tabs + place dropdown correctly ===== */
 
 /* keep header above the hero & slides */
 .site-header{ z-index: 1000; }
@@ -801,55 +984,6 @@ html, body{ height:100%; }               /* safety for 100vh */
 .svc[open] .bullets{ columns:2; column-gap:24px; }
 @media (max-width:880px){ .svc[open] .bullets{ columns:1; } }
 
-/* --- Mobile hamburger nav --- */
-:root { --nav-h: 72px; }
-
-.site-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background:#fff; border-bottom:1px solid var(--line); }
-body { padding-top: var(--nav-h); }
-
-/* Hamburger button (hidden on desktop) */
-.nav-toggle {
-  display: none;
-  width: 44px; height: 44px;
-  align-items: center; justify-content: center;
-  background: transparent; border: 0; cursor: pointer;
-  margin-left: 8px;
-}
-.nav-toggle .bar {
-  display:block; width:22px; height:2px; background:#2a1e1a; margin:3px 0; border-radius:2px;
-}
-
-/* Desktop keeps your existing layout */
-.site-nav .menu { display:flex; align-items:center; gap:24px; }
-
-/* Mobile layout */
-@media (max-width: 820px) {
-  .nav-toggle { display:inline-flex; }
-
-  /* Stack menu as a dropdown panel */
-  .site-nav .menu {
-    position: fixed; top: var(--nav-h); left: 0; right: 0;
-    display: none; flex-direction: column; gap: 0;
-    background: #fff; border-bottom:1px solid var(--line);
-    padding: 8px 16px 16px;
-  }
-  .site-nav.open .menu { display:flex; }
-
-  .site-nav .menu > li { width:100%; }
-  .site-nav .menu > li > a {
-    display:block; padding:14px 10px; border-radius:12px;
-  }
-
-  /* Submenu inline on mobile (no absolute positioning) */
-  .site-nav li.has-sub { position: static; }
-  .site-nav li.has-sub .sub {
-    display:none; position: static; background: transparent; border: 0; box-shadow: none;
-    padding:0; margin: 0 0 6px 12px;
-  }
-  .site-nav li.has-sub.open .sub { display:block; }
-  .site-nav li.has-sub .sub a { display:block; padding:10px 12px; border-radius:10px; }
-}
-
 /* --- Lightbox (shared by both galleries) --- */
 .lb {
   position: fixed; inset: 0; display: none; z-index: 2000;
@@ -938,8 +1072,6 @@ body { padding-top: var(--nav-h); }
 /* (Already present) keep the active thumb highlight consistent */
 .gallery .thumb.active{ border-color: var(--primary); }
 
-/* ========== SAFE NAV PATCH (scoped) ========== */
-
 /* keep header height consistent and above everything */
 :root { --nav-h: 72px; }
 .site-nav { position:fixed; top:0; left:0; right:0; z-index:1000; background:#fff; border-bottom:1px solid #eee; }
@@ -980,98 +1112,6 @@ body { padding-top: var(--nav-h); }
   background:transparent; border:0; cursor:pointer;
 }
 .site-nav .menu-toggle .bar{ display:block; width:22px; height:2px; margin:4px 0; background:#2a1e1a; border-radius:2px; }
-
-/* ------- Mobile behavior only (<=820px) ------- */
-@media (max-width:820px){
-  /* show burger, hide menu by default */
-  .site-nav .menu-toggle{ display:inline-flex; align-items:center; justify-content:center; }
-  .site-nav .menu{
-    position:fixed; top:var(--nav-h); left:0; right:0;
-    display:none !important;              /* default hidden */
-    flex-direction:column; gap:6px;
-    background:#fff; border-bottom:1px solid #eee;
-    padding:10px 14px 16px;
-  }
-  /* open panel when nav has .open */
-  .site-nav.open .menu{ display:flex !important; }
-
-  /* dropdowns become inline lists */
-  .site-nav .dropdown-menu{ position:static; margin:6px 0 0; border:0; box-shadow:none; padding:6px 0; display:none; }
-  .site-nav .dropdown.open .dropdown-menu{ display:block; }
-  .site-nav .menu > li{ width:100%; }
-  .site-nav .menu > li > a,
-  .site-nav .menu > .dropdown > .dropbtn{ height:auto; padding:12px; border-radius:12px; }
-}
-
-/* ===== NAV: scoped to your current markup ===== */
-:root { --nav-h: 72px; }
-
-.site-header{
-  position:fixed; top:0; left:0; right:0; z-index:1000;
-  background:#fff; border-bottom:1px solid #eee;
-}
-body{ padding-top: var(--nav-h); }
-
-/* layout row */
-.site-header .nav-row{ display:flex; align-items:center; justify-content:space-between; gap:16px; padding-block:10px; }
-
-/* desktop menu */
-.site-header .menu{
-  display:flex; align-items:center; gap:24px;
-}
-.site-header .menu a,
-.site-header .menu .dropbtn{
-  display:inline-flex; align-items:center; height:64px; padding:0 12px;
-  font-weight:600; text-decoration:none; color:inherit; background:transparent; border:0; cursor:pointer;
-}
-
-/* desktop dropdown */
-.site-header .dropdown{ position:relative; }
-.site-header .dropmenu{
-  position:absolute; top:100%; left:0; margin-top:10px; min-width:220px;
-  background:#fff; border:1px solid #eee; border-radius:14px; box-shadow:0 18px 40px rgba(0,0,0,.12);
-  padding:8px 0; display:none;
-}
-.site-header .dropmenu a{ display:block; padding:10px 14px; border-radius:10px; }
-@media (hover:hover){
-  .site-header .dropdown:hover .dropmenu{ display:block; }
-}
-
-/* hamburger (hidden on desktop) */
-.nav-toggle{ display:none; width:44px; height:44px; border:0; background:transparent; cursor:pointer; }
-.nav-toggle .bar{ display:block; width:22px; height:2px; margin:4px 0; background:#2a1e1a; border-radius:2px; }
-
-/* ------- Mobile behavior ------- */
-@media (max-width:860px){
-  .nav-toggle{ display:inline-flex; align-items:center; justify-content:center; }
-
-  /* turn the menu into a dropdown panel */
-  .site-header .menu{
-    position:fixed; top:var(--nav-h); left:0; right:0;
-    display:none; flex-direction:column; gap:6px;
-    background:#fff; border-bottom:1px solid #eee; padding:10px 14px 16px;
-  }
-  .site-header.is-open .menu{ display:flex; }
-
-  .site-header .menu a,
-  .site-header .menu .dropbtn{ height:auto; padding:12px; border-radius:12px; }
-
-  /* dropdowns become inline lists on mobile; open via JS toggle */
-  .site-header .dropmenu{
-    position:static; margin:6px 0 0; border:0; box-shadow:none; padding:6px 0; display:none;
-  }
-  .site-header .dropdown.open .dropmenu{ display:block; }
-}
-
-/* ===== RESTORED ZADRA NAV BAR STYLE ===== */
-:root {
-  --nav-bg: #fff;
-  --nav-ink: #2a1e1a;
-  --nav-primary: #7b4b2a;
-  --nav-accent: #9b6944;
-  --nav-shadow: 0 2px 12px rgba(0,0,0,.05);
-  --nav-height: 72px;
-}
 
 /* Header base */
 .site-header {
@@ -1176,54 +1216,19 @@ body{ padding-top: var(--nav-h); }
   transition: transform .2s ease;
 }
 
-/* --- Mobile --- */
-@media (max-width: 860px) {
-  .nav-toggle {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-  }
-
+/* Desktop */
+@media(min-width: 820px){
   .menu {
-    position: absolute;
-    top: var(--nav-height);
-    left: 0;
-    right: 0;
-    background: #fff;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 10px 16px 18px;
-    gap: 4px;
-    border-bottom: 1px solid #eee2da;
-    box-shadow: var(--nav-shadow);
-    display: none;
-  }
-  .site-header.is-open .menu {
-    display: flex;
-  }
-
-  .menu a,
-  .menu .dropbtn {
-    display: block;
-    width: 100%;
-    padding: 12px;
-    border-radius: 10px;
-  }
-
-  /* Dropdown inside mobile */
-  .dropdown:hover .dropmenu { display: none; } /* disable hover on mobile */
-  .dropdown.open .dropmenu {
-    display: block;
+    display: flex !important;
     position: static;
-    border: none;
-    box-shadow: none;
-    background: transparent;
-    padding: 0;
-    margin-top: 0;
+    flex-direction: row;
+    box-shadow:none;
+    width:auto;
+    padding:0;
   }
-  .dropmenu a {
-    padding: 10px 18px;
-    font-size: 15px;
+
+  .nav-toggle {
+    display:none;
   }
 }
 

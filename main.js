@@ -1,8 +1,9 @@
 /* ===========================
-   main.js (full file)
+   main.js (full file, cleaned nav)
    ===========================
    - Auto year in footer
-   - Mobile burger + active nav link
+   - Active nav link
+   - Modern mobile nav (Option A)
    - Projects page:
      • Uses local JPG/PNG (images/…)
      • Filters by Type
@@ -11,24 +12,18 @@
      • Prev/Next navigate ACROSS PROJECTS in current filter order
      • Click image: left half = prev project, right half = next project
      • Esc closes; robust image fallback
-   Requirements in projects.html:
-     #filters, #gridOngoing, #gridCompleted
-     #modal #slideImg #modalTitle
-     #clientTag #yearTag #costTag #locationTag #statusTag
-     #prevBtn #nextBtn #closeModal
-     images/placeholder.jpg
 =========================== */
 
-// ------- Global: nav wiring (called after nav.html loads) -------
+// ------- Global: nav wiring (highlight active link) -------
 window.__wireNav = function () {
-  const burger = document.querySelector(".hamburger");
-  const menu = document.getElementById("menu");
-  if (burger && menu) burger.addEventListener("click", () => menu.classList.toggle("open"));
-
   const path = (location.pathname.split("/").pop() || "index.html").toLowerCase();
-  document.querySelectorAll(".menu a").forEach((a) => {
+
+  document.querySelectorAll("nav.menu a[href]").forEach((a) => {
     const href = (a.getAttribute("href") || "").toLowerCase();
-    const isHome = href === "index.html" && (path === "" || path === "/" || path === "index.html");
+    const isHome =
+      href === "index.html" &&
+      (path === "" || path === "/" || path === "index.html");
+
     a.classList.toggle("active", href === path || isHome);
   });
 };
@@ -100,25 +95,25 @@ const servicesData = [
   if (!wrap) return; // only on services.html
 
   const palette = {
-    design:             "#8AA6FF",
-    "contract-admin":   "#6FC2B0",
-    "contract-mgmt":    "#F0B86E",
-    "post-construction":"#A88BD5",
+    design: "#8AA6FF",
+    "contract-admin": "#6FC2B0",
+    "contract-mgmt": "#F0B86E",
+    "post-construction": "#A88BD5",
   };
   const singleOpen = true;
 
-  function sectionHTML(s, idx, opened = false){
+  function sectionHTML(s, idx, opened = false) {
     const color = palette[s.id] || "var(--accent, #e9dfd2)";
     return `
       <details class="svc" id="${s.id}" ${opened ? "open" : ""} style="--accent:${color}">
         <summary>
           <span class="chip-index">${idx + 1}.</span>
-          <span class="title">${s.title.replace(/^\d+\.\s*/, "")}</span>
+          <span class="title">${s.title.replace(/^\d+\.\\s*/, "")}</span>
           <span class="caret" aria-hidden="true">▾</span>
         </summary>
         <div class="content">
           <ul class="bullets">
-            ${s.items.map(it => `<li>${it}</li>`).join("")}
+            ${s.items.map((it) => `<li>${it}</li>`).join("")}
           </ul>
         </div>
       </details>`;
@@ -127,7 +122,7 @@ const servicesData = [
   wrap.classList.add("acc-grid");
 
   const hashId = (location.hash || "").replace("#", "");
-  const initialIndex = servicesData.findIndex(s => s.id === hashId);
+  const initialIndex = servicesData.findIndex((s) => s.id === hashId);
 
   wrap.innerHTML = servicesData
     .map((s, i) => sectionHTML(s, i, i === initialIndex))
@@ -135,14 +130,14 @@ const servicesData = [
 
   const all = Array.from(wrap.querySelectorAll("details.svc"));
 
-  all.forEach(d => {
+  all.forEach((d) => {
     d.addEventListener("toggle", () => {
       if (d.open) {
-        if (singleOpen) all.forEach(o => { if (o !== d) o.removeAttribute("open"); });
+        if (singleOpen) all.forEach((o) => { if (o !== d) o.removeAttribute("open"); });
         history.replaceState(null, "", `services.html#${d.id}`);
         d.scrollIntoView({ behavior: "smooth", block: "start" });
       } else {
-        const anyOpen = all.some(o => o.open);
+        const anyOpen = all.some((o) => o.open);
         if (!anyOpen) history.replaceState(null, "", "services.html");
       }
     });
@@ -153,7 +148,7 @@ const servicesData = [
     const id = (location.hash || "").replace("#", "");
     const target = id && wrap.querySelector(`details#${CSS.escape(id)}`);
     if (!target) return;
-    if (singleOpen) all.forEach(o => { if (o !== target) o.removeAttribute("open"); });
+    if (singleOpen) all.forEach((o) => { if (o !== target) o.removeAttribute("open"); });
     target.setAttribute("open", "");
     target.scrollIntoView({ behavior: "smooth", block: "start" });
   });
@@ -189,30 +184,28 @@ const projects = [
 ];
 
 /* ===== Projects page logic ===== */
-(function(){
-  const gridOngoing   = document.getElementById('gridOngoing');
-  const gridCompleted = document.getElementById('gridCompleted');
-  const filtersEl     = document.getElementById('filters');
+(function () {
+  const gridOngoing   = document.getElementById("gridOngoing");
+  const gridCompleted = document.getElementById("gridCompleted");
+  const filtersEl     = document.getElementById("filters");
   if (!gridOngoing || !gridCompleted || !filtersEl) return; // Only run on projects.html
 
-  // ---- Filters: by Type (plus "All") ----
-  const types = ['All', ...Array.from(new Set(projects.map(p => p.type)))];
-  let activeType = 'All';
+  const types = ["All", ...Array.from(new Set(projects.map((p) => p.type)))];
+  let activeType = "All";
 
-  // This will hold the CURRENT ordered list of projects visible in the modal navigation
   let modalList = [];
   let modalIndex = -1;
 
-  function buildFilters(){
-    filtersEl.innerHTML = '';
-    types.forEach(t => {
-      const b = document.createElement('button');
-      b.className = 'chip' + (t===activeType ? ' active' : '');
+  function buildFilters() {
+    filtersEl.innerHTML = "";
+    types.forEach((t) => {
+      const b = document.createElement("button");
+      b.className = "chip" + (t === activeType ? " active" : "");
       b.textContent = t;
-      b.addEventListener('click', () => {
+      b.addEventListener("click", () => {
         activeType = t;
-        Array.from(filtersEl.querySelectorAll('.chip')).forEach(c =>
-          c.classList.toggle('active', c.textContent===t)
+        Array.from(filtersEl.querySelectorAll(".chip")).forEach((c) =>
+          c.classList.toggle("active", c.textContent === t)
         );
         render();
       });
@@ -220,67 +213,64 @@ const projects = [
     });
   }
 
-  // ---- Card template + behavior ----
-  function cardHTML(p){
-    const thumb = (p.images && p.images[0]) ? p.images[0] : 'images/placeholder.jpg';
-    const statusClass = (p.status || '').toLowerCase(); // 'ongoing' | 'completed'
+  function cardHTML(p) {
+    const thumb = p.images && p.images[0] ? p.images[0] : "images/placeholder.jpg";
+    const statusClass = (p.status || "").toLowerCase();
     return `
       <img src="${thumb}" alt="${p.title}" onerror="this.onerror=null;this.src='images/placeholder.jpg'">
       <div class="meta">
         <strong>${p.title}</strong>
-        <span class="badge ${statusClass}">${p.status || ''}</span>
+        <span class="badge ${statusClass}">${p.status || ""}</span>
       </div>
       <div class="meta lower">
-        <span>${p.type || ''}</span>
-        <span>${p.year || ''}</span>
+        <span>${p.type || ""}</span>
+        <span>${p.year || ""}</span>
       </div>`;
   }
 
-  function attachCardBehavior(card, p){
-    card.addEventListener('click', () => openModal(p));
+  function attachCardBehavior(card, p) {
+    card.addEventListener("click", () => openModal(p));
   }
 
-  // ---- Render both groups ----
-  function render(){
-    gridOngoing.innerHTML = '';
-    gridCompleted.innerHTML = '';
+  function render() {
+    gridOngoing.innerHTML = "";
+    gridCompleted.innerHTML = "";
 
-    const filtered = projects.filter(p => activeType==='All' || p.type===activeType);
+    const filtered = projects.filter((p) => activeType === "All" || p.type === activeType);
 
     const ongoing = filtered
-      .filter(p => (p.status||'').toLowerCase()==='ongoing')
-      .sort((a,b)=> (b.year||0)-(a.year||0));
+      .filter((p) => (p.status || "").toLowerCase() === "ongoing")
+      .sort((a, b) => (b.year || 0) - (a.year || 0));
 
     const completed = filtered
-      .filter(p => (p.status||'').toLowerCase()==='completed')
-      .sort((a,b)=> (b.year||0)-(a.year||0));
+      .filter((p) => (p.status || "").toLowerCase() === "completed")
+      .sort((a, b) => (b.year || 0) - (a.year || 0));
 
-    // The sequence used by the modal: ongoing first (new→old), then completed (new→old)
     modalList = [...ongoing, ...completed];
 
-    const countO = document.getElementById('countOngoing');
-    const countC = document.getElementById('countCompleted');
+    const countO = document.getElementById("countOngoing");
+    const countC = document.getElementById("countCompleted");
     if (countO) countO.textContent = `(${ongoing.length})`;
     if (countC) countC.textContent = `(${completed.length})`;
 
-    if (ongoing.length===0) {
+    if (ongoing.length === 0) {
       gridOngoing.innerHTML = `<div class="empty">No ongoing projects for “${activeType}”.</div>`;
     } else {
-      ongoing.forEach(p => {
-        const card = document.createElement('div');
-        card.className = 'card project';
+      ongoing.forEach((p) => {
+        const card = document.createElement("div");
+        card.className = "card project";
         card.innerHTML = cardHTML(p);
         attachCardBehavior(card, p);
         gridOngoing.appendChild(card);
       });
     }
 
-    if (completed.length===0) {
+    if (completed.length === 0) {
       gridCompleted.innerHTML = `<div class="empty">No completed projects for “${activeType}”.</div>`;
     } else {
-      completed.forEach(p => {
-        const card = document.createElement('div');
-        card.className = 'card project';
+      completed.forEach((p) => {
+        const card = document.createElement("div");
+        card.className = "card project";
         card.innerHTML = cardHTML(p);
         attachCardBehavior(card, p);
         gridCompleted.appendChild(card);
@@ -288,168 +278,177 @@ const projects = [
     }
   }
 
-  /* ===== Modal / Lightbox: navigate across projects ===== */
-  const modal       = document.getElementById('modal');
-  const slideImg    = document.getElementById('slideImg');
-  const modalTitle  = document.getElementById('modalTitle');
-  const clientTag   = document.getElementById('clientTag');
-  const yearTag     = document.getElementById('yearTag');
-  const costTag     = document.getElementById('costTag');
-  const locationTag = document.getElementById('locationTag');
-  const statusTag   = document.getElementById('statusTag');
-  const prevBtn     = document.getElementById('prevBtn');
-  const nextBtn     = document.getElementById('nextBtn');
-  const closeBtn    = document.getElementById('closeModal');
+  const modal       = document.getElementById("modal");
+  const slideImg    = document.getElementById("slideImg");
+  const modalTitle  = document.getElementById("modalTitle");
+  const clientTag   = document.getElementById("clientTag");
+  const yearTag     = document.getElementById("yearTag");
+  const costTag     = document.getElementById("costTag");
+  const locationTag = document.getElementById("locationTag");
+  const statusTag   = document.getElementById("statusTag");
+  const prevBtn     = document.getElementById("prevBtn");
+  const nextBtn     = document.getElementById("nextBtn");
+  const closeBtn    = document.getElementById("closeModal");
 
-  function fallback(imgEl){
+  function fallback(imgEl) {
     imgEl.onerror = null;
-    imgEl.src = 'images/placeholder.jpg';
+    imgEl.src = "images/placeholder.jpg";
   }
 
-  function setPanel(p){
+  function setPanel(p) {
     modalTitle.textContent   = p.title || "";
     clientTag.textContent    = `Client: ${p.client || "-"}`;
     yearTag.textContent      = `Year: ${p.year || "-"}`;
     costTag.textContent      = `Cost: ${p.cost || "-"}`;
     locationTag.textContent  = `Location: ${p.location || "-"}`;
     statusTag.textContent    = `Status: ${p.status || "-"}`;
-    slideImg.src = (p.images && p.images[0]) ? p.images[0] : 'images/placeholder.jpg';
+    slideImg.src             = p.images && p.images[0] ? p.images[0] : "images/placeholder.jpg";
   }
 
-  function openModal(p){
-    // find index of this project in current modalList
-    modalIndex = modalList.findIndex(x => x.id === p.id);
-    if (modalIndex < 0) { modalList.push(p); modalIndex = modalList.length - 1; }
+  function openModal(p) {
+    modalIndex = modalList.findIndex((x) => x.id === p.id);
+    if (modalIndex < 0) {
+      modalList.push(p);
+      modalIndex = modalList.length - 1;
+    }
 
     setPanel(modalList[modalIndex]);
-    modal.classList.add('open');
-    modal.setAttribute('aria-hidden','false');
-    document.body.style.overflow = 'hidden';
+    modal.classList.add("open");
+    modal.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
 
     updateNavState();
   }
 
-  function closeModal(){
-    modal.classList.remove('open');
-    modal.setAttribute('aria-hidden','true');
-    document.body.style.overflow = '';
+  function closeModal() {
+    modal.classList.remove("open");
+    modal.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
   }
 
-  function updateNavState(){
+  function updateNavState() {
     const n = modalList.length;
     if (prevBtn) prevBtn.disabled = n <= 1;
     if (nextBtn) nextBtn.disabled = n <= 1;
   }
 
-  function navProject(delta){
+  function navProject(delta) {
     if (!modalList || modalList.length <= 1) return;
     modalIndex = (modalIndex + delta + modalList.length) % modalList.length;
     setPanel(modalList[modalIndex]);
     updateNavState();
   }
 
-  // Buttons
-  if (prevBtn)  prevBtn.addEventListener('click', () => navProject(-1));
-  if (nextBtn)  nextBtn.addEventListener('click', () => navProject(1));
-  if (closeBtn) closeBtn.addEventListener('click', closeModal);
+  if (prevBtn)  prevBtn.addEventListener("click", () => navProject(-1));
+  if (nextBtn)  nextBtn.addEventListener("click", () => navProject(1));
+  if (closeBtn) closeBtn.addEventListener("click", closeModal);
 
-  // Click backdrop to close
-  if (modal) modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
-
-  // Keyboard: Esc / ← / →
-  document.addEventListener('keydown', (e)=>{
-    if (!modal || !modal.classList.contains('open')) return;
-    if (e.key === 'Escape')    { e.preventDefault(); closeModal(); }
-    if (e.key === 'ArrowLeft') { e.preventDefault(); navProject(-1); }
-    if (e.key === 'ArrowRight'){ e.preventDefault(); navProject(1); }
-  });
-
-  // Click image left/right halves to navigate projects
-  if (slideImg){
-    slideImg.addEventListener('click', (e)=>{
-      const rect = slideImg.getBoundingClientRect();
-      const mid  = rect.left + rect.width/2;
-      if (e.clientX < mid) navProject(-1); else navProject(1);
+  if (modal) {
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) closeModal();
     });
-    slideImg.onerror = function(){ fallback(this); };
   }
 
-  // Init
+  document.addEventListener("keydown", (e) => {
+    if (!modal || !modal.classList.contains("open")) return;
+    if (e.key === "Escape") {
+      e.preventDefault();
+      closeModal();
+    }
+    if (e.key === "ArrowLeft") {
+      e.preventDefault();
+      navProject(-1);
+    }
+    if (e.key === "ArrowRight") {
+      e.preventDefault();
+      navProject(1);
+    }
+  });
+
+  if (slideImg) {
+    slideImg.addEventListener("click", (e) => {
+      const rect = slideImg.getBoundingClientRect();
+      const mid  = rect.left + rect.width / 2;
+      if (e.clientX < mid) navProject(-1);
+      else navProject(1);
+    });
+    slideImg.onerror = function () { fallback(this); };
+  }
+
   buildFilters();
   render();
 })();
 
-/* === Mobile Hamburger Navigation === */
+/* === Mobile Navigation (Option A, matches nav.html) === */
 (function () {
-  function init() {
-    const nav = document.querySelector('.site-nav');
-    if (!nav) return;
+  function initNav() {
+    const header = document.querySelector(".site-header");
+    if (!header) return;
 
-    const toggle = nav.querySelector('.nav-toggle');
-    const menu   = nav.querySelector('.menu');
+    const toggle = header.querySelector(".nav-toggle");
+    const menu   = header.querySelector(".menu");
     if (!toggle || !menu) return;
 
-    // Toggle main drawer open/close
-    toggle.addEventListener('click', () => {
-      const open = nav.classList.toggle('open');
-      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    // open / close main drawer
+    toggle.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const open = header.classList.toggle("is-open");
+      toggle.setAttribute("aria-expanded", open ? "true" : "false");
     });
 
-    // Toggle "About" dropdown on mobile
-    nav.querySelectorAll('li.has-sub > a').forEach(a => {
-      a.addEventListener('click', (e) => {
-        if (window.matchMedia('(max-width: 820px)').matches) {
+    // close on link click
+    menu.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        header.classList.remove("is-open");
+        toggle.setAttribute("aria-expanded", "false");
+      });
+    });
+
+    // mobile dropdown tap behaviour
+    header.querySelectorAll(".dropdown > .dropbtn").forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        if (window.matchMedia("(max-width: 819.98px)").matches) {
           e.preventDefault();
-          const li = a.parentElement;
-          li.classList.toggle('open');
-          a.setAttribute('aria-expanded', li.classList.contains('open'));
+          const dd = btn.parentElement;
+          dd.classList.toggle("open");
         }
       });
     });
 
-    // Close nav when clicking outside
-    document.addEventListener('click', (e) => {
-      if (!nav.contains(e.target)) nav.classList.remove('open');
+    // click outside closes everything
+    document.addEventListener("click", (e) => {
+      if (!header.contains(e.target)) {
+        header.classList.remove("is-open");
+        toggle.setAttribute("aria-expanded", "false");
+        header.querySelectorAll(".dropdown.open").forEach((dd) =>
+          dd.classList.remove("open")
+        );
+      }
+    });
+
+    // ESC also closes
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        header.classList.remove("is-open");
+        toggle.setAttribute("aria-expanded", "false");
+        header.querySelectorAll(".dropdown.open").forEach((dd) =>
+          dd.classList.remove("open")
+        );
+      }
     });
   }
 
-  // Wait until nav is injected by importer.js
-  const start = () => setTimeout(init, 0);
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', start);
+  const start = () => setTimeout(() => {
+    initNav();
+    if (window.__wireNav) window.__wireNav();
+  }, 0);
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", start);
   } else {
     start();
   }
-  document.addEventListener('include:loaded', start);
+
+  // when nav.html is injected
+  document.addEventListener("include:loaded", start);
 })();
-
-(function () {
-  const header = document.querySelector('.site-header');
-  const toggle = document.querySelector('.nav-toggle');
-  const menu = document.querySelector('.menu');
-  if (!header || !toggle || !menu) return;
-
-  // Toggle open
-  toggle.addEventListener('click', () => {
-    const open = header.classList.toggle('is-open');
-    toggle.setAttribute('aria-expanded', open);
-  });
-
-  // Handle mobile dropdown open/close
-  header.querySelectorAll('.dropdown > .dropbtn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      if (window.matchMedia('(max-width:860px)').matches) {
-        e.preventDefault();
-        btn.parentElement.classList.toggle('open');
-      }
-    });
-  });
-
-  // Close when clicking outside
-  document.addEventListener('click', (e) => {
-    if (!header.contains(e.target)) header.classList.remove('is-open');
-  });
-})();
-
-
-
