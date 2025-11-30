@@ -467,7 +467,28 @@ a{ text-decoration:none; color:inherit; }
   border: 1px solid #eee2da;
 }
 
+/* === FORCE SHOW HAMBURGER ON MOBILE === */
+@media (max-width: 860px) {
 
-/* ============================================================
-   END OF CLEAN STYLE.CSS
-   ============================================================ */
+  .nav-toggle {
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    padding: 6px;
+    background: transparent;
+    border: none;
+    z-index: 2001;
+  }
+
+  .nav-toggle .bar {
+    width: 24px;
+    height: 3px;
+    background: #3a332c;
+    border-radius: 3px;
+  }
+}
+
