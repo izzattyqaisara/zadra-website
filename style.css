@@ -492,3 +492,16 @@ a{ text-decoration:none; color:inherit; }
   }
 }
 
+/* When mobile menu opens on hero-page, force readable text */
+@media (max-width: 860px){
+  .hero-page .menu.open a,
+  .hero-page .menu.open .dropbtn{
+    color:#3a332c !important;
+  }
+}
+/* Hamburger bars visible on dark hero overlay */
+.hero-page .nav-toggle .bar{
+  background:#fff !important;
+}
+
+
