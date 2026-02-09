@@ -291,16 +291,20 @@ const projects = [
 
 /* ===========================================================
    CLEAN WORKING MOBILE NAV
-   (Option A: Rounded White Tab Bar)
    =========================================================== */
 
-document.addEventListener("DOMContentLoaded", () => {
+window.__initMobileNav = function () {
   const header = document.querySelector(".site-header");
   const menu = document.querySelector(".menu");
   const toggle = document.querySelector(".nav-toggle");
   const dropdownButtons = document.querySelectorAll(".dropdown > .dropbtn");
 
+  // If nav not injected yet, just exit. importer.js will call this again.
   if (!header || !menu || !toggle) return;
+
+  // Prevent double-binding if called multiple times
+  if (toggle.dataset.bound === "1") return;
+  toggle.dataset.bound = "1";
 
   // open/close hamburger
   toggle.addEventListener("click", (e) => {
@@ -314,6 +318,7 @@ document.addEventListener("DOMContentLoaded", () => {
     a.addEventListener("click", () => {
       menu.classList.remove("open");
       toggle.setAttribute("aria-expanded", "false");
+      header.querySelectorAll(".dropdown.open").forEach((dd) => dd.classList.remove("open"));
     });
   });
 
@@ -338,4 +343,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // highlight active nav
   if (window.__wireNav) window.__wireNav();
+};
+
+document.addEventListener("DOMContentLoaded", () => {
+  window.__initMobileNav && window.__initMobileNav();
 });
