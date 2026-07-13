@@ -173,11 +173,19 @@ a{ text-decoration:none; color:inherit; }
 }
 
 .nav-toggle .bar{
+  display:none;
+}
+
+.nav-toggle::before{
+  content:"";
   display:block;
   width:24px;
   height:3px;
   background:var(--nav-ink);
   border-radius:3px;
+  box-shadow:
+    0 -7px 0 var(--nav-ink),
+    0 7px 0 var(--nav-ink);
 }
 
 /* Mobile */
@@ -192,10 +200,12 @@ a{ text-decoration:none; color:inherit; }
     display:flex;
   }
 
-  /* White bars on homepage hero */
-  .hero-page .nav-toggle .bar{
-    background:#fff;
-  }
+.hero-page .nav-toggle::before{
+  background:#fff;
+  box-shadow:
+    0 -7px 0 #fff,
+    0 7px 0 #fff;
+}
 
   .menu{
     display:none;
